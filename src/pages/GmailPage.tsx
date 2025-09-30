@@ -1,0 +1,226 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Mail, CheckCircle2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
+
+const GmailPage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate("/")}
+          className="mb-6"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3 space-y-8">
+            {/* Header */}
+            <div className="flex items-center gap-4">
+              <Mail className="h-12 w-12 text-primary" />
+              <div>
+                <h1 className="text-4xl font-bold text-foreground">Gmail</h1>
+                <p className="text-xl text-muted-foreground">Outlook → Gmail</p>
+              </div>
+            </div>
+
+            {/* Introduction */}
+            <Card>
+              <CardHeader>
+                <CardTitle>What is Gmail?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Gmail is Google's email service that offers a clean, powerful interface with advanced search capabilities, 
+                  conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder 
+                  structure, Gmail uses labels that can be applied to multiple emails, making organization more flexible.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Video Tutorials */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Video Tutorials</CardTitle>
+                <CardDescription>Watch these videos to learn Gmail basics</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Composing and Sending Emails in Gmail</p>
+                </div>
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Creating Labels and Filters</p>
+                </div>
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Gmail Search Operators</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Step-by-Step Instructions */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Step-by-Step Instructions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Compose and Send an Email
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click the "Compose" button in the top-left corner</li>
+                    <li>Enter recipient email address in the "To" field</li>
+                    <li>Add a subject line</li>
+                    <li>Type your message in the composition area</li>
+                    <li>Click "Send" or press Ctrl+Enter (Cmd+Enter on Mac)</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Create Labels (Similar to Outlook Folders)
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click on "More" in the left sidebar</li>
+                    <li>Select "Create new label"</li>
+                    <li>Name your label and click "Create"</li>
+                    <li>Drag emails to labels or use the label icon to tag emails</li>
+                    <li>One email can have multiple labels (unlike folders)</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Set Up Filters (Similar to Outlook Rules)
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click the search options icon in the search bar</li>
+                    <li>Enter your filter criteria (from, subject, keywords, etc.)</li>
+                    <li>Click "Create filter"</li>
+                    <li>Choose actions (apply label, mark as read, star, etc.)</li>
+                    <li>Click "Create filter" to save</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Add a Signature
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click the gear icon and select "See all settings"</li>
+                    <li>Scroll down to the "Signature" section</li>
+                    <li>Click "Create new" to add a signature</li>
+                    <li>Format your signature with text, links, and images</li>
+                    <li>Scroll down and click "Save Changes"</li>
+                  </ol>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Switch Guide */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Switch Guide: Outlook vs Gmail</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-3 px-4 font-semibold">Microsoft Outlook</th>
+                        <th className="text-left py-3 px-4 font-semibold">Google Gmail</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-muted-foreground">
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Folders</td>
+                        <td className="py-3 px-4">Labels (emails can have multiple labels)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Rules</td>
+                        <td className="py-3 px-4">Filters</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Categories</td>
+                        <td className="py-3 px-4">Primary/Social/Promotions tabs</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Search folders</td>
+                        <td className="py-3 px-4">Search operators (from:, has:attachment)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Quick Steps</td>
+                        <td className="py-3 px-4">Keyboard shortcuts ('c' for compose)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Focused Inbox</td>
+                        <td className="py-3 px-4">Priority Inbox</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-8">
+              <CardHeader>
+                <CardTitle>Tips & Tricks</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Keyboard Shortcuts</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• 'c' - Compose new email</li>
+                    <li>• 'r' - Reply to email</li>
+                    <li>• 'a' - Reply all</li>
+                    <li>• 'f' - Forward email</li>
+                    <li>• '/' - Search emails</li>
+                    <li>• 'e' - Archive email</li>
+                    <li>• '#' - Delete email</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Search Operators</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• from:name - Find emails from someone</li>
+                    <li>• to:name - Find emails to someone</li>
+                    <li>• has:attachment - Find emails with attachments</li>
+                    <li>• is:unread - Find unread emails</li>
+                    <li>• after:2024/01/01 - Find emails after a date</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Best Practices</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• Enable "Undo Send" (5-30 seconds)</li>
+                    <li>• Use filters to auto-organize</li>
+                    <li>• Archive instead of delete</li>
+                    <li>• Use templates for common replies</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default GmailPage;

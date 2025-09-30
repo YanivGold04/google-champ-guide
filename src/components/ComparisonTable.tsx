@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const tools = [
   {
@@ -8,6 +9,7 @@ const tools = [
     icon: Mail,
     description: "Email & Communication",
     color: "text-red-500",
+    path: "/gmail",
   },
   {
     microsoft: "OneDrive",
@@ -15,6 +17,7 @@ const tools = [
     icon: HardDrive,
     description: "Cloud Storage",
     color: "text-blue-500",
+    path: "/drive",
   },
   {
     microsoft: "Teams",
@@ -22,6 +25,7 @@ const tools = [
     icon: Video,
     description: "Video Conferencing",
     color: "text-purple-500",
+    path: "/meet",
   },
   {
     microsoft: "Word",
@@ -29,6 +33,7 @@ const tools = [
     icon: FileText,
     description: "Document Creation",
     color: "text-blue-600",
+    path: "/docs",
   },
   {
     microsoft: "Excel",
@@ -36,6 +41,7 @@ const tools = [
     icon: Table,
     description: "Spreadsheets",
     color: "text-green-600",
+    path: "/sheets",
   },
   {
     microsoft: "PowerPoint",
@@ -43,6 +49,7 @@ const tools = [
     icon: Presentation,
     description: "Presentations",
     color: "text-yellow-600",
+    path: "/slides",
   },
   {
     microsoft: "Outlook Calendar",
@@ -50,10 +57,13 @@ const tools = [
     icon: Calendar,
     description: "Scheduling",
     color: "text-blue-500",
+    path: "/calendar",
   },
 ];
 
 const ComparisonTable = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="comparison" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -71,7 +81,8 @@ const ComparisonTable = () => {
             {tools.map((tool, index) => (
               <Card 
                 key={index} 
-                className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-border"
+                className="overflow-hidden hover:shadow-lg transition-all duration-300 border-border cursor-pointer hover:border-primary"
+                onClick={() => navigate(tool.path)}
               >
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">

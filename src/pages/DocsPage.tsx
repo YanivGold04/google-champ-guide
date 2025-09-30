@@ -1,0 +1,234 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, FileText, CheckCircle2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
+
+const DocsPage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate("/")}
+          className="mb-6"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3 space-y-8">
+            <div className="flex items-center gap-4">
+              <FileText className="h-12 w-12 text-primary" />
+              <div>
+                <h1 className="text-4xl font-bold text-foreground">Google Docs</h1>
+                <p className="text-xl text-muted-foreground">Word → Google Docs</p>
+              </div>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>What is Google Docs?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Google Docs is a cloud-based word processor that enables real-time collaboration. Multiple users can edit 
+                  the same document simultaneously, with changes appearing instantly. Documents are auto-saved, and version 
+                  history tracks all changes. Google Docs works in any browser and integrates seamlessly with Google Drive.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Video Tutorials</CardTitle>
+                <CardDescription>Master Google Docs with these videos</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Creating and Formatting Documents in Google Docs</p>
+                </div>
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Real-Time Collaboration and Commenting</p>
+                </div>
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Video: Using Suggesting Mode and Version History</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Step-by-Step Instructions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Create a New Document
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Go to docs.google.com or open Google Drive</li>
+                    <li>Click the "+ " button or "Blank" template</li>
+                    <li>A new untitled document opens automatically</li>
+                    <li>Click "Untitled document" at the top to rename</li>
+                    <li>Start typing - changes are saved automatically</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Share and Collaborate
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click the "Share" button in the top-right corner</li>
+                    <li>Enter email addresses of collaborators</li>
+                    <li>Choose permission level: Viewer, Commenter, or Editor</li>
+                    <li>Add a message (optional) and click "Send"</li>
+                    <li>Collaborators receive an email with a link to the document</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Use Suggesting Mode (Like Track Changes)
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click the pencil icon in the top-right (Edit mode)</li>
+                    <li>Select "Suggesting" from the dropdown</li>
+                    <li>Any edits you make appear as suggestions</li>
+                    <li>Others can accept or reject your suggestions</li>
+                    <li>Comments and suggestions are preserved in version history</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to Add Comments
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Highlight the text you want to comment on</li>
+                    <li>Click the "+" (Add comment) icon or press Ctrl+Alt+M</li>
+                    <li>Type your comment in the box</li>
+                    <li>Use '@' to mention specific people</li>
+                    <li>Click "Comment" to post - mentioned people get notified</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    How to View Version History
+                  </h3>
+                  <ol className="space-y-2 ml-7 list-decimal text-muted-foreground">
+                    <li>Click "File" in the menu</li>
+                    <li>Select "Version history" → "See version history"</li>
+                    <li>A timeline appears on the right showing all changes</li>
+                    <li>Click on any version to preview it</li>
+                    <li>Click "Restore this version" if you want to revert</li>
+                  </ol>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Switch Guide: Word vs Google Docs</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-3 px-4 font-semibold">Microsoft Word</th>
+                        <th className="text-left py-3 px-4 font-semibold">Google Docs</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-muted-foreground">
+                      <tr className="border-b">
+                        <td className="py-3 px-4">File → Save As</td>
+                        <td className="py-3 px-4">Auto-saved (no manual saving needed)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Track Changes</td>
+                        <td className="py-3 px-4">Suggesting mode</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Comments (Review tab)</td>
+                        <td className="py-3 px-4">Comments (Ctrl+Alt+M or "+" icon)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Version history (limited)</td>
+                        <td className="py-3 px-4">Complete version history (File → Version history)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Share via OneDrive</td>
+                        <td className="py-3 px-4">Share button (real-time collaboration)</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3 px-4">Styles gallery</td>
+                        <td className="py-3 px-4">Format menu → Paragraph styles</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="lg:col-span-1">
+            <Card className="sticky top-8">
+              <CardHeader>
+                <CardTitle>Tips & Tricks</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Keyboard Shortcuts</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• Ctrl+Alt+M - Add comment</li>
+                    <li>• Ctrl+Alt+Shift+H - See revision history</li>
+                    <li>• Ctrl+K - Insert link</li>
+                    <li>• Ctrl+/ - Show all shortcuts</li>
+                    <li>• Ctrl+Alt+C - Word count</li>
+                    <li>• Ctrl+Alt+X - Strikethrough</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Collaboration Features</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• Use @ to mention people in comments</li>
+                    <li>• Assign action items with comments</li>
+                    <li>• See who's editing in real-time</li>
+                    <li>• Use Suggesting mode for feedback</li>
+                    <li>• Version history never loses work</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">Best Practices</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>• Use templates for consistency</li>
+                    <li>• Explore add-ons for extra features</li>
+                    <li>• Set appropriate sharing permissions</li>
+                    <li>• Name documents clearly</li>
+                    <li>• Use outline view for long docs</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default DocsPage;
