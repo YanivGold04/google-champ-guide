@@ -72,7 +72,7 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/compose/compose_lab.html"
-                        className="w-full h-[650px]"  // ✅ fixed height for iframe
+                        className="w-full h-[500px]"  // ✅ fixed height for iframe
                         title="Gmail Compose Lab"
                         style={{ border: "none" }}
                       />
