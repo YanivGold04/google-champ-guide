@@ -11,7 +11,7 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
-      background: #000;
+      background: #fff;
     }
 
     body, #simulator {
@@ -19,7 +19,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: #000;
+      background: #fff;
     }
 
     #simulator {
@@ -48,6 +48,7 @@
       user-select: none;
       -webkit-user-drag: none;
       display: block;
+      background: #fff;
     }
 
     .hotspot {
@@ -80,39 +81,39 @@
   <div id="simulator">
     <div id="hint" class="hint"></div>
 
-    <!-- Screen 1: Inbox (Compose) -->
+    <!-- Step 1: Inbox (Compose) -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
       <img class="stage-img" src="Compose.png" alt="Inbox">
       <div class="hotspot" style="top:13%; left:3%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Screen 2: New mail (click To field) -->
+    <!-- Step 2: New mail (click To field) -->
     <div id="screen2" class="screen" onclick="wrong(2)">
       <img class="stage-img" src="New mail.png" alt="New mail">
       <div class="hotspot" style="top:33%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
-    <!-- Screen 3: To filled (click Subject field) -->
+    <!-- Step 3: To filled (click Subject field) -->
     <div id="screen3" class="screen" onclick="wrong(3)">
       <img class="stage-img" src="example@immunai.com.png" alt="To filled">
       <div class="hotspot" style="top:41.5%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Screen 4: Subject filled (click Body area) -->
+    <!-- Step 4: Subject filled (click Body area) -->
     <div id="screen4" class="screen" onclick="wrong(4)">
       <img class="stage-img" src="Test.png" alt="Subject filled">
       <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
     </div>
 
-    <!-- Screen 5: Body filled (click Send) -->
+    <!-- Step 5: Body filled (click Send) -->
     <div id="screen5" class="screen" onclick="wrong(5)">
       <img class="stage-img" src="Hello World.png" alt="Body filled">
       <div class="hotspot" style="bottom:6%; left:58%; width:8%; height:8%;" onclick="evtStop(event); goTo(6)"></div>
     </div>
 
-    <!-- Screen 6: Success -->
+    <!-- Step 6: Success -->
     <div id="screen6" class="screen">
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.5rem;">
+      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.5rem; background:#fff;">
         <div style="font-size:1.6rem; color:green;">✅ Your email has been sent!</div>
         <div>To: example@immunai.com</div>
         <div>Subject: Test</div>
@@ -156,7 +157,7 @@
       e.stopPropagation();
     }
 
-    // Debug mode toggle with D
+    // Debug toggle (press D)
     const sim = document.getElementById('simulator');
     window.addEventListener('keydown', e => {
       if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
