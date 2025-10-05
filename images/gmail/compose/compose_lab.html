@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gmail Compose Simulation (Lovable Fit)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Compose Mission</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f5f5f5;
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       overflow: hidden;
+      background: #000;
+    }
+
+    body, #simulator {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
     }
 
     #simulator {
-      position: relative;
-      width: 100%;
-      max-width: 960px;
-      aspect-ratio: 5 / 3;
-      background: #fff;
-      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .screen {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
       display: none;
     }
 
@@ -43,6 +47,7 @@
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
+      display: block;
     }
 
     .hotspot {
@@ -54,76 +59,58 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: 12px;
-      background: rgba(0, 0, 0, 0.85);
+      bottom: 5%;
+      background: rgba(0, 0, 0, 0.8);
       color: #fff;
-      padding: 6px 12px;
+      padding: 8px 12px;
       border-radius: 6px;
       font-size: 13px;
+      opacity: 0.9;
       display: none;
-      z-index: 20;
     }
 
-    .toggle {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      font-size: 11px;
-      background: #eee;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 4px 8px;
-      cursor: pointer;
-      opacity: 0.7;
-      z-index: 30;
-    }
-
-    .toggle:hover {
-      opacity: 1;
-    }
-
+    /* Debug overlay (press D) */
     .debug .hotspot {
       background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #0863c8;
+      outline: 1px dashed #00aaff;
     }
   </style>
 </head>
 <body>
   <div id="simulator">
-    <button id="dbgBtn" class="toggle" title="Toggle hotspot outlines (d)">Debug: off</button>
     <div id="hint" class="hint"></div>
 
-    <!-- Step 1: Inbox -->
+    <!-- Screen 1: Inbox (Compose) -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="Compose.png" alt="Inbox" />
+      <img class="stage-img" src="Compose.png" alt="Inbox">
       <div class="hotspot" style="top:13%; left:3%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Step 2: New mail -->
+    <!-- Screen 2: New mail (click To field) -->
     <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="New mail.png" alt="New mail" />
+      <img class="stage-img" src="New mail.png" alt="New mail">
       <div class="hotspot" style="top:33%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
-    <!-- Step 3: To filled -->
+    <!-- Screen 3: To filled (click Subject field) -->
     <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="example@immunai.com.png" alt="To filled" />
+      <img class="stage-img" src="example@immunai.com.png" alt="To filled">
       <div class="hotspot" style="top:41.5%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Step 4: Subject -->
+    <!-- Screen 4: Subject filled (click Body area) -->
     <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="Test.png" alt="Subject filled" />
+      <img class="stage-img" src="Test.png" alt="Subject filled">
       <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
     </div>
 
-    <!-- Step 5: Send -->
+    <!-- Screen 5: Body filled (click Send) -->
     <div id="screen5" class="screen" onclick="wrong(5)">
-      <img class="stage-img" src="Hello World.png" alt="Body filled" />
+      <img class="stage-img" src="Hello World.png" alt="Body filled">
       <div class="hotspot" style="bottom:6%; left:58%; width:8%; height:8%;" onclick="evtStop(event); goTo(6)"></div>
     </div>
 
-    <!-- Step 6: Success -->
+    <!-- Screen 6: Success -->
     <div id="screen6" class="screen">
       <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.5rem;">
         <div style="font-size:1.6rem; color:green;">✅ Your email has been sent!</div>
@@ -137,9 +124,9 @@
   <script>
     const hints = {
       1: 'Hint: Click the Compose button on the left.',
-      2: 'Hint: Click the “To” field.',
-      3: 'Hint: Click the Subject line.',
-      4: 'Hint: Click in the message area.',
+      2: 'Hint: Click the "To" field in the new message panel.',
+      3: 'Hint: Click the Subject field.',
+      4: 'Hint: Click inside the large message box.',
       5: 'Hint: Click the blue Send button.'
     };
 
@@ -169,17 +156,10 @@
       e.stopPropagation();
     }
 
+    // Debug mode toggle with D
     const sim = document.getElementById('simulator');
-    const btn = document.getElementById('dbgBtn');
-
-    function toggleDebug() {
-      sim.classList.toggle('debug');
-      btn.textContent = 'Debug: ' + (sim.classList.contains('debug') ? 'on' : 'off');
-    }
-
-    btn.addEventListener('click', toggleDebug);
     window.addEventListener('keydown', e => {
-      if (e.key.toLowerCase() === 'd') toggleDebug();
+      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
     });
   </script>
 </body>
