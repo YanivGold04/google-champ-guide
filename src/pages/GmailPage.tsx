@@ -65,7 +65,7 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/compose/compose_lab.html"
-                        className="w-full h-[640px]"
+                        className="w-full h-[700px]"
                         title="Gmail Compose Lab"
                       />
                     </div>
@@ -92,7 +92,7 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/trash/trash_lab.html"
-                        className="w-full h-[640px]"
+                        className="w-full h-[700px]"
                         title="Gmail Trash Lab"
                       />
                     </div>
@@ -119,7 +119,7 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/search/search_lab.html"
-                        className="w-full h-[640px]"
+                        className="w-full h-[700px]"
                         title="Gmail Search Lab"
                       />
                     </div>
