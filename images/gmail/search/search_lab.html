@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gmail Search Mission</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #000;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
-    #simulator {
       width: 100%;
-      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    body, #simulator {
       position: fixed;
       inset: 0;
+      width: 100vw;
+      height: 100vh;
       background: #000;
+    }
+
+    #simulator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
+
     .screen {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
       display: none;
     }
+
     .screen.active {
       display: block;
     }
+
     .stage-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
       display: block;
     }
+
     .hotspot {
       position: absolute;
       cursor: pointer;
     }
+
     .hint {
       position: absolute;
       left: 50%;
@@ -54,55 +68,56 @@
       opacity: 0.9;
       display: none;
     }
-    /* Debug highlight (hidden by default, toggle with "D") */
+
+    /* Debug toggle (press D key) */
     .debug .hotspot {
       background: rgba(0, 128, 255, 0.25);
       outline: 1px dashed #00aaff;
     }
   </style>
 </head>
+
 <body>
   <div id="simulator">
     <div id="hint" class="hint"></div>
 
-    <!-- Step 1: click inside the search bar -->
+    <!-- Screen 1: search_first -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="search_first.png" alt="Search bar">
-      <div class="hotspot" style="top:4%; left:22%; width:55%; height:9%;" onclick="evtStop(event); goTo(2)"></div>
+      <img class="stage-img" src="search_first.png" alt="Search start" />
+      <div class="hotspot" style="top:7%; left:17%; width:67%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Step 2: typing mode -->
-    <div id="screen2" class="screen">
-      <img class="stage-img" src="search_second.png" alt="Typing search">
+    <!-- Screen 2: search_second -->
+    <div id="screen2" class="screen" onclick="wrong(2)">
+      <img class="stage-img" src="search_second.png" alt="Search typing" />
+      <div class="hotspot" style="top:7%; left:17%; width:67%; height:8%;" onclick="evtStop(event); simulateTyping()"></div>
     </div>
 
-    <!-- Step 3: choose all search results -->
+    <!-- Screen 3: search_third -->
     <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="search_third.png" alt="Search results list">
-      <div class="hotspot" style="top:82%; left:22%; width:56%; height:10%;" onclick="evtStop(event); goTo(4)"></div>
+      <img class="stage-img" src="search_third.png" alt="Typing immunai" />
+      <div class="hotspot" style="top:83%; left:23%; width:55%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Step 4: show results -->
+    <!-- Screen 4: search_last -->
     <div id="screen4" class="screen" onclick="goTo(5)">
-      <img class="stage-img" src="search_last.png" alt="Search complete">
+      <img class="stage-img" src="search_last.png" alt="Search results" />
     </div>
 
-    <!-- Step 5: success -->
+    <!-- Screen 5: success -->
     <div id="screen5" class="screen">
-      <div style="position:absolute; inset:0; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <h2 style="color:green;">✅ Search completed successfully!</h2>
+      <div style="position:absolute; inset:0; background:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.5rem;">
+        <div style="font-size:1.6rem; color:green;">✅ Search completed successfully!</div>
       </div>
     </div>
   </div>
 
   <script>
     const hints = {
-      1: 'Hint: Click inside the search bar at the top.',
-      3: 'Hint: Select "All search results for immunai".'
+      1: 'Hint: Click the Gmail search bar at the top.',
+      2: 'Hint: Start typing "immunai".',
+      3: 'Hint: Press the search result suggestion at the bottom.'
     };
-
-    let typed = "";
-    const sim = document.getElementById('simulator');
 
     function goTo(n) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -110,30 +125,35 @@
       hideHint();
     }
 
-    function wrong(stage) { showHint(hints[stage]); }
+    function wrong(stage) {
+      showHint(hints[stage]);
+    }
+
     function showHint(msg) {
       const h = document.getElementById('hint');
       h.textContent = msg;
       h.style.display = 'block';
       clearTimeout(window.__hintT);
-      window.__hintT = setTimeout(() => h.style.display = 'none', 1800);
+      window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
     }
+
     function hideHint() {
-      document.getElementById('hint').style.display = 'none';
+      const h = document.getElementById('hint');
+      h.style.display = 'none';
     }
-    function evtStop(e) { e.stopPropagation(); }
 
-    // Typing simulation (progress when user types "i")
-    window.addEventListener('keydown', (e) => {
-      const active = document.querySelector('.screen.active');
-      if (active && active.id === "screen2") {
-        typed += e.key.toLowerCase();
-        if (typed.includes("i")) goTo(3);
-      }
-    });
+    function evtStop(e) {
+      e.stopPropagation();
+    }
 
-    // Hidden debug mode (press "D" to toggle)
-    window.addEventListener('keydown', (e) => {
+    // Simulate typing trigger
+    function simulateTyping() {
+      goTo(3);
+    }
+
+    // Debug toggle with D key
+    const sim = document.getElementById('simulator');
+    window.addEventListener('keydown', e => {
       if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
     });
   </script>
