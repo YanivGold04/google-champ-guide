@@ -65,8 +65,9 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/compose/compose_lab.html"
-                        className="w-full h-[500px]"
+                        className="w-full aspect-video"
                         title="Gmail Compose Lab"
+                        style={{ border: 'none' }}
                       />
                     </div>
                   </div>
@@ -92,8 +93,9 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/trash/trash_lab.html"
-                        className="w-full h-[500px]"
+                        className="w-full aspect-video"
                         title="Gmail Trash Lab"
+                        style={{ border: 'none' }}
                       />
                     </div>
                   </div>
@@ -119,8 +121,9 @@ const GmailPage = () => {
                     <div className="rounded-lg overflow-hidden border shadow-sm">
                       <iframe 
                         src="/images/gmail/search/search_lab.html"
-                        className="w-full h-[500px]"
+                        className="w-full aspect-video"
                         title="Gmail Search Lab"
+                        style={{ border: 'none' }}
                       />
                     </div>
                   </div>
