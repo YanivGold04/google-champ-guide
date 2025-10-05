@@ -44,24 +44,89 @@ const GmailPage = () => {
               </CardContent>
             </Card>
 
-            {/* Video Tutorials */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Video Tutorials</CardTitle>
-                <CardDescription>Watch these videos to learn Gmail basics</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Composing and Sending Emails in Gmail</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Creating Labels and Filters</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Gmail Search Operators</p>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Interactive Labs */}
+            <div className="space-y-8">
+              {/* Compose Email */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Composing and Sending Emails</CardTitle>
+                  <CardDescription>Learn how to compose and send an email in Gmail</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg overflow-hidden border">
+                    <img 
+                      src="/images/gmail/compose/compose.gif" 
+                      alt="Composing email in Gmail"
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                      <iframe 
+                        src="/images/gmail/compose/compose_lab.html"
+                        className="w-full h-[640px]"
+                        title="Gmail Compose Lab"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Trash Email */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Moving Emails to Trash</CardTitle>
+                  <CardDescription>Learn how to delete emails and manage your trash folder</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg overflow-hidden border">
+                    <img 
+                      src="/images/gmail/trash/trash.gif" 
+                      alt="Moving email to trash in Gmail"
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                      <iframe 
+                        src="/images/gmail/trash/trash_lab.html"
+                        className="w-full h-[640px]"
+                        title="Gmail Trash Lab"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Search Email */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Searching Emails</CardTitle>
+                  <CardDescription>Learn how to use Gmail's powerful search features</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg overflow-hidden border">
+                    <img 
+                      src="/images/gmail/search/search.gif" 
+                      alt="Searching emails in Gmail"
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                      <iframe 
+                        src="/images/gmail/search/search_lab.html"
+                        className="w-full h-[640px]"
+                        title="Gmail Search Lab"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Step-by-Step Instructions */}
             <Card>
