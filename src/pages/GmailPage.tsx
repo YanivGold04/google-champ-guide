@@ -71,7 +71,7 @@ const GmailPage = () => {
                         src="/images/gmail/compose/compose_lab.html"
                         className="w-full aspect-video"
                         title="Gmail Compose Lab"
-                        style={{ border: 'none' }}
+                        style={{ border: "none", backgroundColor: "transparent" }}
                       />
                     </div>
                   </div>
