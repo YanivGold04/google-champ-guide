@@ -53,16 +53,20 @@ const GmailPage = () => {
                   <CardDescription>Learn how to compose and send an email in Gmail</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border">
-                    <img 
-                      src="/images/gmail/compose/compose.gif" 
-                      alt="Composing email in Gmail"
-                      className="w-full"
+                  <div className="rounded-lg overflow-hidden border bg-white">
+                    <video
+                      src="/images/gmail/compose/compose.mp4"
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
                     />
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/compose/compose_lab.html"
                         className="w-full aspect-video"
@@ -81,16 +85,20 @@ const GmailPage = () => {
                   <CardDescription>Learn how to delete emails and manage your trash folder</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border">
-                    <img 
-                      src="/images/gmail/trash/trash.gif" 
-                      alt="Moving email to trash in Gmail"
-                      className="w-full"
+                  <div className="rounded-lg overflow-hidden border bg-white">
+                    <video
+                      src="/images/gmail/trash/trash.mp4"
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
                     />
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/trash/trash_lab.html"
                         className="w-full aspect-video"
@@ -109,16 +117,20 @@ const GmailPage = () => {
                   <CardDescription>Learn how to use Gmail's powerful search features</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border">
-                    <img 
-                      src="/images/gmail/search/search.gif" 
-                      alt="Searching emails in Gmail"
-                      className="w-full"
+                  <div className="rounded-lg overflow-hidden border bg-white">
+                    <video
+                      src="/images/gmail/search/search.mp4"
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
                     />
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm">
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/search/search_lab.html"
                         className="w-full aspect-video"
