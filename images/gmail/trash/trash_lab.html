@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Trash Mission (Refined)</title>
+  <style>
+    body { font-family: Arial, sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; background:#f5f5f5; }
+    #simulator { width:1000px; height:600px; border:2px solid #ccc; border-radius:8px; background:#fff; box-shadow:0 4px 10px rgba(0,0,0,.1); position:relative; overflow:hidden; }
+    .screen { position:absolute; inset:0; display:none; }
+    .screen.active { display:block; }
+    .stage-img { width:100%; height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; }
+    .hotspot { position:absolute; cursor:pointer; }
+    .hint { position:absolute; left:50%; transform:translateX(-50%); bottom:10px; background:#111; color:#fff; padding:6px 10px; border-radius:6px; font-size:12px; opacity:.9; display:none; }
+    .toggle { position:absolute; top:8px; right:8px; font-size:11px; background:#eee; border:1px solid #ccc; border-radius:6px; padding:4px 8px; cursor:pointer; opacity:.7; }
+    .toggle:hover { opacity:1; }
+    .debug .hotspot { background: rgba(0,128,255,.22); outline:1px dashed #0863c8; }
+  </style>
+</head>
+<body>
+  <div id="simulator">
+    <button id="dbgBtn" class="toggle" title="Toggle hotspot outlines (d)">Debug: off</button>
+    <div id="hint" class="hint"></div>
+
+    <!-- Screen 1: First.png (click checkbox near star of second mail) -->
+    <div id="screen1" class="screen active" onclick="wrong(1)">
+      <img class="stage-img" src="First.png" alt="Inbox">
+      <!-- From 'Select button.png' red circle -->
+      <div class="hotspot" style="top:23.86%; left:21.45%; width:4.74%; height:7.41%;" onclick="evtStop(event); goTo(2)"></div>
+    </div>
+
+    <!-- Screen 2: Select.png (click Trash icon under search bar) -->
+    <div id="screen2" class="screen" onclick="wrong(2)">
+      <img class="stage-img" src="Select.png" alt="Selected email">
+      <!-- From 'Trash button.png' red circle -->
+      <div class="hotspot" style="top:14.83%; left:31.70%; width:4.30%; height:6.76%;" onclick="evtStop(event); goTo(3)"></div>
+    </div>
+
+    <!-- Screen 3: More.png (click More in sidebar, a bit higher) -->
+    <div id="screen3" class="screen" onclick="wrong(3)">
+      <img class="stage-img" src="More.png" alt="Sidebar expanded">
+      <!-- From 'More button.png' red circle -->
+      <div class="hotspot" style="top:39.90%; left:6.01%; width:13.34%; height:9.04%;" onclick="evtStop(event); goTo(4)"></div>
+    </div>
+
+    <!-- Screen 4: Select_Trash.png (click Trash section in sidebar) -->
+    <div id="screen4" class="screen" onclick="wrong(4)">
+      <img class="stage-img" src="Select_Trash.png" alt="Trash section">
+      <!-- From 'Select Trash button.png' red circle -->
+      <div class="hotspot" style="top:57.82%; left:5.13%; width:11.48%; height:9.04%;" onclick="evtStop(event); goTo(5)"></div>
+    </div>
+
+    <!-- Screen 5: Last.png (click anywhere to success) -->
+    <div id="screen5" class="screen" onclick="goTo(6)">
+      <img class="stage-img" src="Last.png" alt="Last step">
+    </div>
+
+    <!-- Screen 6: White success screen -->
+    <div id="screen6" class="screen">
+      <div style="position:absolute; inset:0; background:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.5rem;">
+        <div style="font-size:1.6rem; color:green;">✅ Email successfully moved to Trash!</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hints = {
+      1: 'Hint: Select the checkbox near the star of the second email.',
+      2: 'Hint: Click the Trash icon under the search bar.',
+      3: 'Hint: Click the More section in the sidebar.',
+      4: 'Hint: Click the Trash label in the sidebar.'
+    };
+
+    function goTo(n){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('screen'+n).classList.add('active'); hideHint(); }
+    function wrong(stage){ showHint(hints[stage]); }
+    function showHint(msg){ const h=document.getElementById('hint'); h.textContent=msg; h.style.display='block'; clearTimeout(window.__hintT); window.__hintT=setTimeout(()=>h.style.display='none', 1800); }
+    function hideHint(){ const h=document.getElementById('hint'); h.style.display='none'; }
+    function evtStop(e){ e.stopPropagation(); }
+
+    const sim=document.getElementById('simulator');
+    const btn=document.getElementById('dbgBtn');
+    function toggleDebug(){ sim.classList.toggle('debug'); btn.textContent='Debug: '+(sim.classList.contains('debug')?'on':'off'); }
+    btn.addEventListener('click', toggleDebug);
+    window.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='d') toggleDebug(); });
+  </script>
+</body>
+</html>
+
