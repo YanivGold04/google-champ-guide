@@ -93,7 +93,12 @@
     <button id="dbgBtn" class="toggle" title="Toggle hotspot outlines (d)">Debug: off</button>
     <div id="hint" class="hint"></div>
 
-  
+    <!-- Step 1: Inbox -->
+    <div id="screen1" class="screen active" onclick="wrong(1)">
+      <img class="stage-img" src="Compose.png" alt="Inbox" />
+      <div class="hotspot" style="top:13%; left:3%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
+    </div>
+
     <!-- Step 2: New mail -->
     <div id="screen2" class="screen" onclick="wrong(2)">
       <img class="stage-img" src="New mail.png" alt="New mail" />
