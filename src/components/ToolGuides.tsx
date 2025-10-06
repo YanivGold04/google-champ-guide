@@ -1,6 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar } from "lucide-react";
+import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, CheckCircle2 } from "lucide-react";
+import { usePlatformCompletions } from "@/hooks/useLabCompletion";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const guides = [
   {
@@ -132,6 +135,13 @@ const guides = [
 ];
 
 const ToolGuides = () => {
+  const completions = usePlatformCompletions();
+  const navigate = useNavigate();
+
+  const navigateToPage = (id: string) => {
+    navigate(`/${id}`);
+  };
+
   return (
     <section id="guides" className="py-16 md:py-24 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -151,10 +161,13 @@ const ToolGuides = () => {
                 <TabsTrigger
                   key={guide.id}
                   value={guide.id}
-                  className="flex flex-col items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  className="flex flex-col items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground relative"
                 >
                   <guide.icon className="h-5 w-5" />
                   <span className="text-xs">{guide.title}</span>
+                  {completions[guide.id] && (
+                    <CheckCircle2 className="h-4 w-4 text-green-500 absolute -top-1 -right-1" />
+                  )}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -200,6 +213,15 @@ const ToolGuides = () => {
                           </li>
                         ))}
                       </ul>
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <Button 
+                        onClick={() => navigateToPage(guide.id)}
+                        className="w-full"
+                      >
+                        Go to {guide.title} Detailed Guide
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>

@@ -75,37 +75,86 @@ const Resources = () => {
     <section id="resources" className="py-16 md:py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto space-y-16">
-          {/* Migration Steps */}
+          {/* Keyboard Shortcuts Section */}
           <div>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Migration Steps
+                Keyboard Shortcuts
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Follow these steps to smoothly transition from Microsoft to Google Workspace
+                Boost your productivity with keyboard shortcuts
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {migrationSteps.map((step, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle className="text-xl">{step.title}</CardTitle>
-                    <CardDescription>{step.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-start gap-2">
-                          <span className="text-primary font-bold mt-1">•</span>
-                          <span className="text-sm text-muted-foreground">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>How to Enable Keyboard Shortcuts</CardTitle>
+                <CardDescription>
+                  To enable keyboard shortcuts, open any Google app (e.g., Gmail, Drive, Calendar), 
+                  go to Settings → Keyboard Shortcuts → Turn on → Save changes.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <h3 className="font-semibold text-lg text-foreground">Gmail Shortcuts</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Compose new email</span>
+                      <code className="bg-muted px-2 py-1 rounded">C</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Reply to email</span>
+                      <code className="bg-muted px-2 py-1 rounded">R</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Reply all</span>
+                      <code className="bg-muted px-2 py-1 rounded">A</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Forward</span>
+                      <code className="bg-muted px-2 py-1 rounded">F</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Search</span>
+                      <code className="bg-muted px-2 py-1 rounded">/</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Archive</span>
+                      <code className="bg-muted px-2 py-1 rounded">E</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Delete</span>
+                      <code className="bg-muted px-2 py-1 rounded">#</code>
+                    </li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="font-semibold text-lg text-foreground">Google Drive & Docs</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Search</span>
+                      <code className="bg-muted px-2 py-1 rounded">/</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Bold text (Docs)</span>
+                      <code className="bg-muted px-2 py-1 rounded">Ctrl+B</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Italic text (Docs)</span>
+                      <code className="bg-muted px-2 py-1 rounded">Ctrl+I</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Underline (Docs)</span>
+                      <code className="bg-muted px-2 py-1 rounded">Ctrl+U</code>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-muted-foreground">Find & Replace (Docs)</span>
+                      <code className="bg-muted px-2 py-1 rounded">Ctrl+H</code>
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* External Resources */}
