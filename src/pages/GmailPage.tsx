@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Mail, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Footer from "@/components/Footer";
 import LabCompletionCheck from "@/components/LabCompletionCheck";
 import { useLabCompletion } from "@/hooks/useLabCompletion";
@@ -9,6 +10,10 @@ import { useLabCompletion } from "@/hooks/useLabCompletion";
 const GmailPage = () => {
   const navigate = useNavigate();
   const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion('gmail');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleLabClick = (labId: string) => {
     markLabComplete(labId);
@@ -159,6 +164,14 @@ const GmailPage = () => {
               </Card>
             </div>
 
+            {/* Lab Completion Check */}
+            <LabCompletionCheck
+              platform="Gmail"
+              completedLabs={completedLabs}
+              isComplete={isComplete}
+              onComplete={markPlatformComplete}
+            />
+
             {/* Step-by-Step Instructions */}
             <Card>
               <CardHeader>
@@ -267,14 +280,6 @@ const GmailPage = () => {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Lab Completion Check */}
-            <LabCompletionCheck
-              platform="Gmail"
-              completedLabs={completedLabs}
-              isComplete={isComplete}
-              onComplete={markPlatformComplete}
-            />
           </div>
 
           {/* Sidebar */}
