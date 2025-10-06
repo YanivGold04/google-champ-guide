@@ -9,27 +9,32 @@ import { useLabCompletion } from "@/hooks/useLabCompletion";
 
 const GmailPage = () => {
   const navigate = useNavigate();
-  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion('gmail');
+  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion("gmail");
+
+  // ✅ Reset Gmail progress on every page load/refresh
+  useEffect(() => {
+    localStorage.removeItem("gmail-labs-completed");
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     // Listen for lab completion messages from iframes
     const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'lab-complete') {
+      if (event.data.type === "lab-complete") {
         markLabComplete(event.data.lab);
       }
     };
-    
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [markLabComplete]);
 
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           onClick={() => navigate("/")}
           className="mb-6"
         >
@@ -55,8 +60,8 @@ const GmailPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Gmail is Google's email service that offers a clean, powerful interface with advanced search capabilities, 
-                  conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder 
+                  Gmail is Google's email service that offers a clean, powerful interface with advanced search capabilities,
+                  conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder
                   structure, Gmail uses labels that can be applied to multiple emails, making organization more flexible.
                 </p>
               </CardContent>
@@ -64,6 +69,7 @@ const GmailPage = () => {
 
             {/* Interactive Labs */}
             <div className="space-y-8">
+
               {/* Compose Email */}
               <Card>
                 <CardHeader>
@@ -71,7 +77,7 @@ const GmailPage = () => {
                   <CardDescription>Learn how to compose and send an email in Gmail</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border bg-white">
+                  <div className="rounded-2xl overflow-hidden bg-white">
                     <video
                       src="/images/gmail/compose/compose.mp4"
                       className="w-full h-auto"
@@ -82,14 +88,19 @@ const GmailPage = () => {
                       preload="auto"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
-                      <iframe 
+                    <div className="rounded-2xl overflow-hidden bg-white">
+                      <iframe
                         src="/images/gmail/compose/compose_lab.html"
-                        className="w-full aspect-video"
+                        className="w-full h-[650px]"
                         title="Gmail Compose Lab"
-                        style={{ border: 'none' }}
+                        style={{
+                          border: "none",
+                          backgroundColor: "white",
+                          borderRadius: "1rem"
+                        }}
                       />
                     </div>
                   </div>
@@ -103,7 +114,7 @@ const GmailPage = () => {
                   <CardDescription>Learn how to delete emails and manage your trash folder</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border bg-white">
+                  <div className="rounded-2xl overflow-hidden bg-white">
                     <video
                       src="/images/gmail/trash/trash.mp4"
                       className="w-full h-auto"
@@ -114,14 +125,19 @@ const GmailPage = () => {
                       preload="auto"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
-                      <iframe 
+                    <div className="rounded-2xl overflow-hidden bg-white">
+                      <iframe
                         src="/images/gmail/trash/trash_lab.html"
-                        className="w-full aspect-video"
+                        className="w-full h-[650px]"
                         title="Gmail Trash Lab"
-                        style={{ border: 'none' }}
+                        style={{
+                          border: "none",
+                          backgroundColor: "white",
+                          borderRadius: "1rem"
+                        }}
                       />
                     </div>
                   </div>
@@ -135,7 +151,7 @@ const GmailPage = () => {
                   <CardDescription>Learn how to use Gmail's powerful search features</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-lg overflow-hidden border bg-white">
+                  <div className="rounded-2xl overflow-hidden bg-white">
                     <video
                       src="/images/gmail/search/search.mp4"
                       className="w-full h-auto"
@@ -146,14 +162,19 @@ const GmailPage = () => {
                       preload="auto"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
-                      <iframe 
+                    <div className="rounded-2xl overflow-hidden bg-white">
+                      <iframe
                         src="/images/gmail/search/search_lab.html"
-                        className="w-full aspect-video"
+                        className="w-full h-[650px]"
                         title="Gmail Search Lab"
-                        style={{ border: 'none' }}
+                        style={{
+                          border: "none",
+                          backgroundColor: "white",
+                          borderRadius: "1rem"
+                        }}
                       />
                     </div>
                   </div>
@@ -232,51 +253,6 @@ const GmailPage = () => {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Quick Switch Guide */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Switch Guide: Outlook vs Gmail</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left py-3 px-4 font-semibold">Microsoft Outlook</th>
-                        <th className="text-left py-3 px-4 font-semibold">Google Gmail</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-muted-foreground">
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Folders</td>
-                        <td className="py-3 px-4">Labels (emails can have multiple labels)</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Rules</td>
-                        <td className="py-3 px-4">Filters</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Categories</td>
-                        <td className="py-3 px-4">Primary/Social/Promotions tabs</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Search folders</td>
-                        <td className="py-3 px-4">Search operators (from:, has:attachment)</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Quick Steps</td>
-                        <td className="py-3 px-4">Keyboard shortcuts ('c' for compose)</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 px-4">Focused Inbox</td>
-                        <td className="py-3 px-4">Priority Inbox</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Sidebar */}
@@ -313,7 +289,7 @@ const GmailPage = () => {
                 <div>
                   <h4 className="font-semibold mb-2 text-foreground">Best Practices</h4>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• Enable "Undo Send" (5-30 seconds)</li>
+                    <li>• Enable "Undo Send" (5–30 seconds)</li>
                     <li>• Use filters to auto-organize</li>
                     <li>• Archive instead of delete</li>
                     <li>• Use templates for common replies</li>
