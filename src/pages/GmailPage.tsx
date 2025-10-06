@@ -13,11 +13,17 @@ const GmailPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Listen for lab completion messages from iframes
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.type === 'lab-complete') {
+        markLabComplete(event.data.lab);
+      }
+    };
+    
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
-
-  const handleLabClick = (labId: string) => {
-    markLabComplete(labId);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -78,13 +84,10 @@ const GmailPage = () => {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div 
-                      className="rounded-lg overflow-hidden border shadow-sm bg-white cursor-pointer"
-                      onClick={() => handleLabClick('compose')}
-                    >
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/compose/compose_lab.html"
-                        className="w-full aspect-video pointer-events-none"
+                        className="w-full aspect-video"
                         title="Gmail Compose Lab"
                         style={{ border: 'none' }}
                       />
@@ -113,13 +116,10 @@ const GmailPage = () => {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div 
-                      className="rounded-lg overflow-hidden border shadow-sm bg-white cursor-pointer"
-                      onClick={() => handleLabClick('trash')}
-                    >
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/trash/trash_lab.html"
-                        className="w-full aspect-video pointer-events-none"
+                        className="w-full aspect-video"
                         title="Gmail Trash Lab"
                         style={{ border: 'none' }}
                       />
@@ -148,13 +148,10 @@ const GmailPage = () => {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                    <div 
-                      className="rounded-lg overflow-hidden border shadow-sm bg-white cursor-pointer"
-                      onClick={() => handleLabClick('search')}
-                    >
+                    <div className="rounded-lg overflow-hidden border shadow-sm bg-white">
                       <iframe 
                         src="/images/gmail/search/search_lab.html"
-                        className="w-full aspect-video pointer-events-none"
+                        className="w-full aspect-video"
                         title="Gmail Search Lab"
                         style={{ border: 'none' }}
                       />

@@ -130,6 +130,11 @@
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + n).classList.add('active');
       hideHint();
+      
+      // Notify parent when reaching final success screen
+      if (n === 6) {
+        window.parent.postMessage({ type: 'lab-complete', lab: 'trash' }, '*');
+      }
     }
 
     function wrong(stage) { showHint(hints[stage]); }

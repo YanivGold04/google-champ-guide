@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, ArrowRight } from "lucide-react";
+import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { usePlatformCompletions } from "@/hooks/useLabCompletion";
 
 const tools = [
   {
@@ -63,6 +64,7 @@ const tools = [
 
 const ComparisonTable = () => {
   const navigate = useNavigate();
+  const completions = usePlatformCompletions();
 
   return (
     <section id="comparison" className="py-16 md:py-24 bg-background">
@@ -108,6 +110,12 @@ const ComparisonTable = () => {
                         <p className="text-sm text-muted-foreground">Google</p>
                         <p className="font-semibold text-primary">{tool.google}</p>
                       </div>
+                    </div>
+
+                    <div className="w-16 h-16 rounded-full border-2 border-muted flex items-center justify-center flex-shrink-0">
+                      {completions[tool.path.substring(1)] && (
+                        <CheckCircle2 className="h-8 w-8 text-green-500" />
+                      )}
                     </div>
                   </div>
                 </CardContent>
