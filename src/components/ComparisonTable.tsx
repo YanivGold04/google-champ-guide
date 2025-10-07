@@ -1,5 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  Mail,
+  HardDrive,
+  Video,
+  FileText,
+  Table,
+  Presentation,
+  Calendar,
+  ArrowRight,
+  CheckCircle2,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { usePlatformCompletions } from "@/hooks/useLabCompletion";
 
@@ -66,6 +76,16 @@ const ComparisonTable = () => {
   const navigate = useNavigate();
   const completions = usePlatformCompletions();
 
+  const handleNavigate = (path: string) => {
+    // ✅ Save current scroll position before leaving the page
+    sessionStorage.setItem("lastScrollPosition", String(window.scrollY));
+
+    // ✅ Save which tool was clicked (for smoother context restoration)
+    sessionStorage.setItem("lastClickedTool", path);
+
+    navigate(path);
+  };
+
   return (
     <section id="comparison" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -81,17 +101,17 @@ const ComparisonTable = () => {
 
           <div className="grid gap-4 md:gap-6">
             {tools.map((tool, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="overflow-hidden hover:shadow-lg transition-all duration-300 border-border cursor-pointer hover:border-primary"
-                onClick={() => navigate(tool.path)}
+                onClick={() => handleNavigate(tool.path)}
               >
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
                     <div className={`${tool.color} p-3 bg-muted rounded-lg`}>
                       <tool.icon className="h-8 w-8" />
                     </div>
-                    
+
                     <div className="flex-1 text-center md:text-left">
                       <h3 className="font-semibold text-lg text-foreground mb-1">
                         {tool.description}
@@ -101,14 +121,18 @@ const ComparisonTable = () => {
                     <div className="flex items-center gap-4 flex-1 justify-center">
                       <div className="text-right">
                         <p className="text-sm text-muted-foreground">Microsoft</p>
-                        <p className="font-semibold text-foreground">{tool.microsoft}</p>
+                        <p className="font-semibold text-foreground">
+                          {tool.microsoft}
+                        </p>
                       </div>
-                      
+
                       <ArrowRight className="h-6 w-6 text-primary flex-shrink-0" />
-                      
+
                       <div className="text-left">
                         <p className="text-sm text-muted-foreground">Google</p>
-                        <p className="font-semibold text-primary">{tool.google}</p>
+                        <p className="font-semibold text-primary">
+                          {tool.google}
+                        </p>
                       </div>
                     </div>
 
