@@ -16,20 +16,31 @@ const GmailPage = () => {
     localStorage.removeItem("gmail-labs-completed");
   }, []);
 
+  // ✅ Preserve scroll position when marking lab complete
   useEffect(() => {
-  window.scrollTo(0, 0);
+    let scrollY = 0;
 
-  // Listen for lab completion messages
-  const handleMessage = (event: MessageEvent) => {
-    if (event.data?.type === 'lab-complete' && event.data?.lab) {
-      markLabComplete(event.data.lab);
-    }
-  };
+    // Scroll to top on first load
+    window.scrollTo(0, 0);
 
-  window.addEventListener('message', handleMessage);
-  return () => window.removeEventListener('message', handleMessage);
-}, [markLabComplete]);
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === "lab-complete" && event.data?.lab) {
+        // Save scroll position before update
+        scrollY = window.scrollY;
 
+        // Mark the lab complete (this triggers a React re-render)
+        markLabComplete(event.data.lab);
+
+        // Restore scroll position after update
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+        }, 150);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [markLabComplete]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,7 +111,7 @@ const GmailPage = () => {
                         style={{
                           border: "none",
                           backgroundColor: "white",
-                          borderRadius: "1rem"
+                          borderRadius: "1rem",
                         }}
                       />
                     </div>
@@ -137,7 +148,7 @@ const GmailPage = () => {
                         style={{
                           border: "none",
                           backgroundColor: "white",
-                          borderRadius: "1rem"
+                          borderRadius: "1rem",
                         }}
                       />
                     </div>
@@ -174,7 +185,7 @@ const GmailPage = () => {
                         style={{
                           border: "none",
                           backgroundColor: "white",
-                          borderRadius: "1rem"
+                          borderRadius: "1rem",
                         }}
                       />
                     </div>
