@@ -25,15 +25,19 @@ const LabCompletionCheck = ({
       onComplete();
     }
 
-    // ✅ Navigate home and then scroll to the comparison section
+    // ✅ Retrieve saved scroll position from session storage
+    const lastScroll = Number(sessionStorage.getItem("lastScrollPosition")) || 0;
+
+    // ✅ Navigate back to home
     navigate("/", { replace: false });
 
+    // ✅ Wait for home page to render before restoring position
     setTimeout(() => {
-      const section = document.getElementById("comparison-table");
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 300);
+      window.scrollTo({
+        top: lastScroll,
+        behavior: "smooth", // Change to "auto" if you want instant jump instead of smooth scroll
+      });
+    }, 400);
   };
 
   return (
