@@ -18,13 +18,22 @@ const LabCompletionCheck = ({
 }: LabCompletionCheckProps) => {
   const navigate = useNavigate();
 
-  const labs = ['compose', 'trash', 'search'];
+  const labs = ["compose", "trash", "search"];
 
   const handleReturnHome = () => {
     if (isComplete) {
       onComplete();
     }
-    navigate('/#comparison-table');
+
+    // ✅ Navigate home and then scroll to the comparison section
+    navigate("/", { replace: false });
+
+    setTimeout(() => {
+      const section = document.getElementById("comparison-table");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 300);
   };
 
   return (
