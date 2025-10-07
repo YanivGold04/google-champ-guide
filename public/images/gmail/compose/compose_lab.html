@@ -161,6 +161,16 @@
     const sim = document.getElementById('simulator');
     window.addEventListener('keydown', e => {
       if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+    }
+                            // When lab is completed, send message to parent
+    function completeLab(labId) {
+    window.parent.postMessage({ type: 'lab-complete', lab: labId }, '*');
+    }
+
+    // Example usage:
+    // completeLab('compose');
+    // completeLab('trash');
+    // completeLab('search');
     });
   </script>
 </body>
