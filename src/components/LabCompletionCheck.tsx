@@ -25,19 +25,8 @@ const LabCompletionCheck = ({
       onComplete();
     }
 
-    // ✅ Retrieve saved scroll position from session storage
-    const lastScroll = Number(sessionStorage.getItem("lastScrollPosition")) || 0;
-
-    // ✅ Navigate back to home
+    // ✅ Navigate back to home - Index.tsx will handle scroll restoration
     navigate("/", { replace: false });
-
-    // ✅ Wait for home page to render before restoring position
-    setTimeout(() => {
-      window.scrollTo({
-        top: lastScroll,
-        behavior: "smooth", // Change to "auto" if you want instant jump instead of smooth scroll
-      });
-    }, 400);
   };
 
   return (

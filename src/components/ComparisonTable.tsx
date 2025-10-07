@@ -79,6 +79,7 @@ const ComparisonTable = () => {
   const handleNavigate = (path: string) => {
     // ✅ Save current scroll position before leaving the page
     sessionStorage.setItem("lastScrollPosition", String(window.scrollY));
+    sessionStorage.setItem("shouldRestoreScroll", "true");
 
     // ✅ Save which tool was clicked (for smoother context restoration)
     sessionStorage.setItem("lastClickedTool", path);
