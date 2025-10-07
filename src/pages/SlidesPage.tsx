@@ -2,10 +2,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Presentation, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Footer from "@/components/Footer";
+import LabCompletionCheck from "@/components/LabCompletionCheck";
+import { useLabCompletion } from "@/hooks/useLabCompletion";
 
 const SlidesPage = () => {
   const navigate = useNavigate();
+  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion("slides");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    let scrollY = 0;
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === "lab-complete" && event.data?.lab) {
+        scrollY = window.scrollY;
+        markLabComplete(event.data.lab);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+        }, 150);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [markLabComplete]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -42,23 +67,85 @@ const SlidesPage = () => {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Video Tutorials</CardTitle>
-                <CardDescription>Learn to create compelling presentations</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Creating Presentations and Adding Content</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Using Themes, Layouts, and Master Slides</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Presenting with Presenter View and Q&A</p>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Interactive Labs */}
+            <div className="space-y-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 1: Creating Presentations</CardTitle>
+                  <CardDescription>Learn how to create and format presentations in Google Slides</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 2: Themes and Layouts</CardTitle>
+                  <CardDescription>Learn how to apply themes and use master slides</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 3: Presenting</CardTitle>
+                  <CardDescription>Learn how to present with presenter view and Q&A</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Lab Completion Check */}
+            <LabCompletionCheck
+              platform="Slides"
+              completedLabs={completedLabs}
+              isComplete={isComplete}
+              onComplete={markPlatformComplete}
+            />
 
             <Card>
               <CardHeader>

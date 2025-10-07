@@ -2,10 +2,35 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Video, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Footer from "@/components/Footer";
+import LabCompletionCheck from "@/components/LabCompletionCheck";
+import { useLabCompletion } from "@/hooks/useLabCompletion";
 
 const MeetPage = () => {
   const navigate = useNavigate();
+  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion("meet");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    let scrollY = 0;
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === "lab-complete" && event.data?.lab) {
+        scrollY = window.scrollY;
+        markLabComplete(event.data.lab);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+        }, 150);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [markLabComplete]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,23 +71,85 @@ const MeetPage = () => {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Video Tutorials</CardTitle>
-                <CardDescription>Learn to use Google Meet and Zoom effectively</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Starting and Joining Google Meet Calls</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Scheduling Zoom Meetings from Google Calendar</p>
-                </div>
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Video: Screen Sharing and Presentation Mode</p>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Interactive Labs */}
+            <div className="space-y-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 1: Starting Meetings</CardTitle>
+                  <CardDescription>Learn how to start and join Google Meet calls</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 2: Scheduling with Zoom</CardTitle>
+                  <CardDescription>Learn how to schedule Zoom meetings from Google Calendar</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 3: Screen Sharing</CardTitle>
+                  <CardDescription>Learn how to share your screen and present</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <div className="w-full h-[300px] flex items-center justify-center">
+                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <div className="w-full h-[650px] flex items-center justify-center">
+                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Lab Completion Check */}
+            <LabCompletionCheck
+              platform="Meet"
+              completedLabs={completedLabs}
+              isComplete={isComplete}
+              onComplete={markPlatformComplete}
+            />
 
             <Card>
               <CardHeader>
