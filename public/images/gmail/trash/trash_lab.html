@@ -36,10 +36,7 @@
       height: 100%;
       display: none;
     }
-
-    .screen.active {
-      display: block;
-    }
+    .screen.active { display: block; }
 
     .stage-img {
       width: 100%;
@@ -47,14 +44,10 @@
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
-      display: block;
       background: #fff;
     }
 
-    .hotspot {
-      position: absolute;
-      cursor: pointer;
-    }
+    .hotspot { position: absolute; cursor: pointer; }
 
     .hint {
       position: absolute;
@@ -86,9 +79,19 @@
       cursor: pointer;
       font-size: 1rem;
       margin-top: 1rem;
+      transition: background 0.2s ease;
     }
-    #completion-button button:hover {
-      background: #1558b0;
+    #completion-button button:hover { background: #1558b0; }
+
+    /* ✅ Fade-in animation for success message */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -96,31 +99,31 @@
   <div id="simulator">
     <div id="hint" class="hint"></div>
 
-    <!-- Step 1: Inbox (click checkbox) -->
+    <!-- Step 1 -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
       <img class="stage-img" src="First.png" alt="Inbox">
       <div class="hotspot" style="top:23.9%; left:21.5%; width:4.8%; height:7.4%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Step 2: Select.png (click Trash icon) -->
+    <!-- Step 2 -->
     <div id="screen2" class="screen" onclick="wrong(2)">
       <img class="stage-img" src="Select.png" alt="Selected email">
       <div class="hotspot" style="top:14.8%; left:31.7%; width:4.3%; height:6.8%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
-    <!-- Step 3: More.png (click More in sidebar) -->
+    <!-- Step 3 -->
     <div id="screen3" class="screen" onclick="wrong(3)">
       <img class="stage-img" src="More.png" alt="Sidebar expanded">
       <div class="hotspot" style="top:39.9%; left:6%; width:13.3%; height:9%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Step 4: Select_Trash.png (click Trash label) -->
+    <!-- Step 4 -->
     <div id="screen4" class="screen" onclick="wrong(4)">
       <img class="stage-img" src="Select_Trash.png" alt="Trash section">
       <div class="hotspot" style="top:57.8%; left:5.1%; width:11.5%; height:9%;" onclick="evtStop(event); goTo(5)"></div>
     </div>
 
-    <!-- Step 5: Last.png -->
+    <!-- Step 5 -->
     <div id="screen5" class="screen" onclick="goTo(6)">
       <img class="stage-img" src="Last.png" alt="Last step">
     </div>
@@ -132,7 +135,7 @@
 
         <!-- Completion Button -->
         <div id="completion-button">
-          <button onclick="completeLab()">Mark as Complete</button>
+          <button onclick="completeLab(event)">Mark as Complete</button>
         </div>
       </div>
     </div>
@@ -162,16 +165,16 @@
       window.__hintT = setTimeout(() => h.style.display = 'none', 1800);
     }
 
-    function hideHint() {
-      document.getElementById('hint').style.display = 'none';
-    }
-
+    function hideHint() { document.getElementById('hint').style.display = 'none'; }
     function evtStop(e) { e.stopPropagation(); }
 
-    function completeLab() {
+    // ✅ Completion with fade-in + no scroll jump
+    function completeLab(event) {
+      event?.preventDefault();
+      event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'trash' }, '*');
       const btn = document.getElementById('completion-button');
-      btn.innerHTML = "<div style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
+      btn.innerHTML = "<div class='fade-in' style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
     }
 
     // Debug toggle (press D)
