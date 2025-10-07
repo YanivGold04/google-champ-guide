@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 interface PlatformCompletion {
   [platform: string]: boolean;
@@ -9,8 +9,8 @@ export const useLabCompletion = (platform: string) => {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Load completion status from localStorage
-    const stored = localStorage.getItem(`${platform}-labs-completed`);
+    // ✅ Load completion status from sessionStorage (resets on refresh)
+    const stored = sessionStorage.getItem(`${platform}-labs-completed`);
     if (stored) {
       setCompletedLabs(new Set(JSON.parse(stored)));
     }
@@ -21,22 +21,32 @@ export const useLabCompletion = (platform: string) => {
     setIsComplete(completedLabs.size >= 3);
   }, [completedLabs]);
 
-  const markLabComplete = useCallback((labId: string) => {
-    const updated = new Set(completedLabs);
-    updated.add(labId);
-    setCompletedLabs(updated);
-    localStorage.setItem(`${platform}-labs-completed`, JSON.stringify([...updated]));
-  }, [completedLabs, platform]);
+  const markLabComplete = useCallback(
+    (labId: string) => {
+      const updated = new Set(completedLabs);
+      updated.add(labId);
+      setCompletedLabs(updated);
+
+      // ✅ Save to sessionStorage (not localStorage)
+      sessionStorage.setItem(
+        `${platform}-labs-completed`,
+        JSON.stringify([...updated])
+      );
+    },
+    [completedLabs, platform]
+  );
 
   const markPlatformComplete = useCallback(() => {
     const completions: PlatformCompletion = JSON.parse(
-      localStorage.getItem('platform-completions') || '{}'
+      sessionStorage.getItem("platform-completions") || "{}"
     );
     completions[platform] = true;
-    localStorage.setItem('platform-completions', JSON.stringify(completions));
-    
-    // Dispatch custom event to notify other components
-    window.dispatchEvent(new CustomEvent('platform-completed', { detail: { platform } }));
+    sessionStorage.setItem("platform-completions", JSON.stringify(completions));
+
+    // Notify other components
+    window.dispatchEvent(
+      new CustomEvent("platform-completed", { detail: { platform } })
+    );
   }, [platform]);
 
   return {
@@ -52,7 +62,7 @@ export const usePlatformCompletions = () => {
 
   useEffect(() => {
     const loadCompletions = () => {
-      const stored = localStorage.getItem('platform-completions');
+      const stored = sessionStorage.getItem("platform-completions");
       if (stored) {
         setCompletions(JSON.parse(stored));
       }
@@ -61,14 +71,14 @@ export const usePlatformCompletions = () => {
     // Load initial completions
     loadCompletions();
 
-    // Listen for platform completion events
+    // Listen for updates
     const handlePlatformComplete = () => loadCompletions();
-    window.addEventListener('platform-completed', handlePlatformComplete);
-    window.addEventListener('focus', loadCompletions);
-    
+    window.addEventListener("platform-completed", handlePlatformComplete);
+    window.addEventListener("focus", loadCompletions);
+
     return () => {
-      window.removeEventListener('platform-completed', handlePlatformComplete);
-      window.removeEventListener('focus', loadCompletions);
+      window.removeEventListener("platform-completed", handlePlatformComplete);
+      window.removeEventListener("focus", loadCompletions);
     };
   }, []);
 
