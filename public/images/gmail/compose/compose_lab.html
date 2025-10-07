@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compose Email Lab</title>
   <style>
     body {
@@ -20,7 +20,7 @@
       border: 2px solid #ccc;
       border-radius: 16px;
       background: #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
     }
@@ -73,34 +73,36 @@
 <body>
   <div id="simulator">
     <div id="screen1" class="screen active">
-      <img class="stage-img" src="Compose.png" alt="Compose Button">
+      <img class="stage-img" src="Compose.png" alt="Compose Button" />
       <div class="hotspot" style="top:10%;left:3%;width:10%;height:8%;" onclick="next(2)"></div>
     </div>
 
     <div id="screen2" class="screen">
-      <img class="stage-img" src="New mail.png" alt="New Mail">
+      <img class="stage-img" src="New mail.png" alt="New Mail" />
       <div class="hotspot" style="top:25%;left:35%;width:30%;height:6%;" onclick="next(3)"></div>
     </div>
 
     <div id="screen3" class="screen">
-      <img class="stage-img" src="example@immunai.com.png" alt="To Field">
+      <img class="stage-img" src="example@immunai.com.png" alt="To Field" />
       <div class="hotspot" style="top:33%;left:12%;width:40%;height:5%;" onclick="next(4)"></div>
     </div>
 
     <div id="screen4" class="screen">
-      <img class="stage-img" src="Test.png" alt="Subject Field">
+      <img class="stage-img" src="Test.png" alt="Subject Field" />
       <div class="hotspot" style="top:42%;left:12%;width:40%;height:5%;" onclick="next(5)"></div>
     </div>
 
     <div id="screen5" class="screen">
-      <img class="stage-img" src="Hello World.png" alt="Body">
+      <img class="stage-img" src="Hello World.png" alt="Body" />
       <div class="hotspot" style="top:78%;left:65%;width:10%;height:7%;" onclick="next(6)"></div>
     </div>
 
     <div id="screen6" class="screen success">
-      <div class="success-message">✅ Email Sent Successfully!</div>
-      <div id="completion-button">
-        <button onclick="completeLab()">Mark as Complete</button>
+      <div>
+        <div class="success-message">✅ Email Sent Successfully!</div>
+        <div id="completion-button">
+          <button onclick="completeLab()">Mark as Complete</button>
+        </div>
       </div>
     </div>
   </div>
