@@ -175,13 +175,28 @@
       if(e.key.toLowerCase()==='d') sim.classList.toggle('debug');
     });
 
-    // ✅ Completion with fade-in + stay on position
+    // ✅ Strong completion fix (no scroll / re-render)
     function completeLab(event) {
-      event?.preventDefault();
-      event?.stopPropagation();
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+
+      // Send message to parent app
       window.parent.postMessage({ type: 'lab-complete', lab: 'search' }, '*');
+
+      // Replace button with fade-in success
       const btn = document.getElementById('completion-button');
-      btn.innerHTML = "<div class='fade-in' style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
+      btn.innerHTML = `
+        <div class="fade-in" style="color:green;font-weight:bold;margin-top:1rem;">
+          ✅ Progress saved!
+        </div>
+      `;
+
+      // Prevent focus or scroll jump
+      document.activeElement?.blur();
+      window.focus();
     }
   </script>
 </body>
