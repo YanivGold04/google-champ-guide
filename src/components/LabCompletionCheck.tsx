@@ -24,7 +24,7 @@ const LabCompletionCheck = ({
     if (isComplete) {
       onComplete();
     }
-    navigate('/');
+    navigate('/#comparison-table');
   };
 
   return (
