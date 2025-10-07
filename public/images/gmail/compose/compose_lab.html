@@ -36,10 +36,7 @@
       height: 100%;
       display: none;
     }
-
-    .screen.active {
-      display: block;
-    }
+    .screen.active { display: block; }
 
     .stage-img {
       width: 100%;
@@ -51,10 +48,7 @@
       background: #fff;
     }
 
-    .hotspot {
-      position: absolute;
-      cursor: pointer;
-    }
+    .hotspot { position: absolute; cursor: pointer; }
 
     .hint {
       position: absolute;
@@ -86,9 +80,19 @@
       cursor: pointer;
       font-size: 1rem;
       margin-top: 1rem;
+      transition: background 0.2s ease;
     }
-    #completion-button button:hover {
-      background: #1558b0;
+    #completion-button button:hover { background: #1558b0; }
+
+    /* ✅ Fade-in animation for success message */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -136,7 +140,7 @@
 
         <!-- Completion Button -->
         <div id="completion-button">
-          <button onclick="completeLab()">Mark as Complete</button>
+          <button onclick="completeLab(event)">Mark as Complete</button>
         </div>
       </div>
     </div>
@@ -157,9 +161,7 @@
       hideHint();
     }
 
-    function wrong(stage) {
-      showHint(hints[stage]);
-    }
+    function wrong(stage) { showHint(hints[stage]); }
 
     function showHint(msg) {
       const h = document.getElementById('hint');
@@ -169,18 +171,16 @@
       window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
     }
 
-    function hideHint() {
-      document.getElementById('hint').style.display = 'none';
-    }
+    function hideHint() { document.getElementById('hint').style.display = 'none'; }
+    function evtStop(e) { e.stopPropagation(); }
 
-    function evtStop(e) {
-      e.stopPropagation();
-    }
-
-    function completeLab() {
+    // ✅ Completion with fade-in + stay position
+    function completeLab(event) {
+      event?.preventDefault();
+      event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'compose' }, '*');
       const btn = document.getElementById('completion-button');
-      btn.innerHTML = "<div style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
+      btn.innerHTML = "<div class='fade-in' style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
     }
 
     // Debug toggle (press D)
