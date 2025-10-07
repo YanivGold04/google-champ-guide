@@ -17,18 +17,19 @@ const GmailPage = () => {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
 
-    // Listen for lab completion messages from iframes
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === "lab-complete") {
-        markLabComplete(event.data.lab);
-      }
-    };
+  // Listen for lab completion messages
+  const handleMessage = (event: MessageEvent) => {
+    if (event.data?.type === 'lab-complete' && event.data?.lab) {
+      markLabComplete(event.data.lab);
+    }
+  };
 
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [markLabComplete]);
+  window.addEventListener('message', handleMessage);
+  return () => window.removeEventListener('message', handleMessage);
+}, [markLabComplete]);
+
 
   return (
     <div className="min-h-screen bg-background">
