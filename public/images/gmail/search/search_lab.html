@@ -36,7 +36,6 @@
       height: 100%;
       display: none;
     }
-
     .screen.active { display: block; }
 
     .stage-img {
@@ -65,7 +64,6 @@
       display: none;
     }
 
-    /* Hidden debug toggle */
     .debug .hotspot {
       background: rgba(0, 128, 255, 0.25);
       outline: 1px dashed #00aaff;
@@ -81,9 +79,19 @@
       cursor: pointer;
       font-size: 1rem;
       margin-top: 1rem;
+      transition: background 0.2s ease;
     }
-    #completion-button button:hover {
-      background: #1558b0;
+    #completion-button button:hover { background: #1558b0; }
+
+    /* ✅ Fade-in animation for success message */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -120,7 +128,7 @@
 
         <!-- Completion Button -->
         <div id="completion-button">
-          <button onclick="completeLab()">Mark as Complete</button>
+          <button onclick="completeLab(event)">Mark as Complete</button>
         </div>
       </div>
     </div>
@@ -167,11 +175,13 @@
       if(e.key.toLowerCase()==='d') sim.classList.toggle('debug');
     });
 
-    // Completion
-    function completeLab() {
+    // ✅ Completion with fade-in + stay on position
+    function completeLab(event) {
+      event?.preventDefault();
+      event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'search' }, '*');
       const btn = document.getElementById('completion-button');
-      btn.innerHTML = "<div style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
+      btn.innerHTML = "<div class='fade-in' style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
     }
   </script>
 </body>
