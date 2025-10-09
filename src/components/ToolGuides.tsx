@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, CheckCircle2 } from "lucide-react";
+import { Mail, HardDrive, Video, FileText, Table, Presentation, Calendar, CheckCircle2, ArrowRight } from "lucide-react";
 import { usePlatformCompletions } from "@/hooks/useLabCompletion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -173,11 +173,13 @@ const ToolGuides = () => {
             </TabsList>
 
             {guides.map((guide) => (
-              <TabsContent key={guide.id} value={guide.id} className="mt-6">
-                <Card>
+              <TabsContent key={guide.id} value={guide.id} className="mt-6 animate-fade-in">
+                <Card className="border-2 hover-lift bg-gradient-to-br from-card to-card/50">
                   <CardHeader>
                     <div className="flex items-center gap-3 mb-2">
-                      <guide.icon className="h-8 w-8 text-primary" />
+                      <div className="p-3 bg-primary/10 rounded-xl">
+                        <guide.icon className="h-8 w-8 text-primary" />
+                      </div>
                       <div>
                         <CardTitle className="text-2xl">{guide.title}</CardTitle>
                         <CardDescription className="text-base mt-1">
@@ -218,9 +220,10 @@ const ToolGuides = () => {
                     <div className="pt-4 border-t">
                       <Button 
                         onClick={() => navigateToPage(guide.id)}
-                        className="w-full"
+                        className="w-full hover:-translate-y-0.5 transition-all group"
                       >
                         Go to {guide.title} Detailed Guide
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
                   </CardContent>

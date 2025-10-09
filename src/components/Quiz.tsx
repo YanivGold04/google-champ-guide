@@ -188,24 +188,24 @@ const Quiz = () => {
                     key={index}
                     onClick={() => handleAnswerClick(index)}
                     disabled={answered}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                    className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-300 ${
                       answered
                         ? index === questions[currentQuestion].correctAnswer
-                          ? "border-secondary bg-secondary/10"
+                          ? "border-secondary bg-secondary/10 scale-[1.02]"
                           : index === selectedAnswer
                           ? "border-destructive bg-destructive/10"
                           : "border-border"
-                        : "border-border hover:border-primary hover:bg-primary/5"
+                        : "border-border hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5"
                     } ${answered ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     <div className="flex items-center gap-3">
                       {answered && index === questions[currentQuestion].correctAnswer && (
-                        <CheckCircle2 className="h-5 w-5 text-secondary" />
+                        <CheckCircle2 className="h-5 w-5 text-secondary animate-scale-in" />
                       )}
                       {answered && index === selectedAnswer && index !== questions[currentQuestion].correctAnswer && (
-                        <XCircle className="h-5 w-5 text-destructive" />
+                        <XCircle className="h-5 w-5 text-destructive animate-scale-in" />
                       )}
-                      <span className="flex-1">{option}</span>
+                      <span className="flex-1 font-medium">{option}</span>
                     </div>
                   </button>
                 ))}
