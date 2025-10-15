@@ -102,7 +102,12 @@ const GmailPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("compose") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("compose") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-white">
                       <iframe
                         src="/images/gmail/compose/compose_lab.html"
@@ -139,7 +144,12 @@ const GmailPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("trash") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("trash") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-white">
                       <iframe
                         src="/images/gmail/trash/trash_lab.html"
@@ -176,7 +186,12 @@ const GmailPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("search") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("search") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-white">
                       <iframe
                         src="/images/gmail/search/search_lab.html"
