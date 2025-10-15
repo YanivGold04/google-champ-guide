@@ -21,7 +21,18 @@ const DrivePage = () => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "lab-complete" && event.data?.lab) {
         scrollY = window.scrollY;
-        markLabComplete(event.data.lab);
+        const labName = event.data.lab;
+        
+        // Map the incoming lab names to our internal format
+        const labMap: Record<string, string> = {
+          "drive-upload": "MyDrive",
+          "drive-move": "Move",
+          "drive-share": "Share"
+        };
+        
+        const mappedLab = labMap[labName] || labName;
+        markLabComplete(mappedLab);
+        
         setTimeout(() => {
           window.scrollTo(0, scrollY);
         }, 150);
@@ -89,7 +100,12 @@ const DrivePage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("MyDrive") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("MyDrive") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Drive/MyDrive/MyDrive_lab.html"
@@ -121,7 +137,12 @@ const DrivePage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Share") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Share") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Drive/Share/Share_lab.html"
@@ -153,7 +174,12 @@ const DrivePage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Move") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Move") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Drive/Move/Move_lab.html"
