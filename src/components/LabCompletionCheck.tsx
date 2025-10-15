@@ -8,6 +8,7 @@ interface LabCompletionCheckProps {
   completedLabs: Set<string>;
   isComplete: boolean;
   onComplete: () => void;
+  labNames?: string[];
 }
 
 const LabCompletionCheck = ({
@@ -15,10 +16,11 @@ const LabCompletionCheck = ({
   completedLabs,
   isComplete,
   onComplete,
+  labNames,
 }: LabCompletionCheckProps) => {
   const navigate = useNavigate();
 
-  const labs = ["compose", "trash", "search"];
+  const labs = labNames || ["compose", "trash", "search"];
 
   const handleReturnHome = () => {
     if (isComplete) {

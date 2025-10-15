@@ -78,7 +78,10 @@ const DrivePage = () => {
                   <div className="rounded-2xl overflow-hidden bg-muted">
                     <video 
                       className="w-full h-auto"
-                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       src="/images/Drive/MyDrive/Kapture2025-10-09at11.06.36-ezgif.com-gif-to-mp4-converter.mp4"
                     >
                       Your browser does not support the video tag.
@@ -107,7 +110,10 @@ const DrivePage = () => {
                   <div className="rounded-2xl overflow-hidden bg-muted">
                     <video 
                       className="w-full h-auto"
-                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       src="/images/Drive/Share/Kapture2025-10-09at11.24.45-ezgif.com-gif-to-mp4-converter.mp4"
                     >
                       Your browser does not support the video tag.
@@ -136,7 +142,10 @@ const DrivePage = () => {
                   <div className="rounded-2xl overflow-hidden bg-muted">
                     <video 
                       className="w-full h-auto"
-                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       src="/images/Drive/Move/Kapture2025-10-09at11.16.44-ezgif.com-gif-to-mp4-converter.mp4"
                     >
                       Your browser does not support the video tag.
@@ -163,6 +172,7 @@ const DrivePage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["MyDrive", "Share", "Move"]}
             />
 
             <Card>
