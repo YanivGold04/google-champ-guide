@@ -71,22 +71,28 @@ const DrivePage = () => {
             <div className="space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 1: Uploading Files</CardTitle>
-                  <CardDescription>Learn how to upload and organize files in Google Drive</CardDescription>
+                  <CardTitle>Lab 1: My Drive - Uploading Files</CardTitle>
+                  <CardDescription>Learn how to upload files and folders to Google Drive</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      controls
+                      src="/images/Drive/MyDrive/Kapture2025-10-09at11.06.36-ezgif.com-gif-to-mp4-converter.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Drive/MyDrive/MyDrive_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="My Drive Upload Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -99,17 +105,23 @@ const DrivePage = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      controls
+                      src="/images/Drive/Share/Kapture2025-10-09at11.24.45-ezgif.com-gif-to-mp4-converter.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Drive/Share/Share_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Share Files Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -117,22 +129,28 @@ const DrivePage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 3: Organizing with Folders</CardTitle>
-                  <CardDescription>Learn how to organize files with folders and colors</CardDescription>
+                  <CardTitle>Lab 3: Move - Organizing with Folders</CardTitle>
+                  <CardDescription>Learn how to move and organize files in folders</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      controls
+                      src="/images/Drive/Move/Kapture2025-10-09at11.16.44-ezgif.com-gif-to-mp4-converter.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Drive/Move/Move_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Move Files Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
