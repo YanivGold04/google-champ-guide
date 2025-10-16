@@ -13,7 +13,7 @@ const GmailPage = () => {
 
   // ✅ Reset Gmail progress on every page load/refresh
   useEffect(() => {
-    localStorage.removeItem("gmail-labs-completed");
+    sessionStorage.removeItem("gmail-labs-completed");
   }, []);
 
   // ✅ Preserve scroll position when marking lab complete
