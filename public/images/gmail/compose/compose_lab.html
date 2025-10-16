@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Drive Upload Lab</title>
+  <title>Gmail Compose Mission</title>
   <style>
     html, body {
       margin: 0;
@@ -69,19 +69,6 @@
       outline: 1px dashed #00aaff;
     }
 
-    #completion-button button {
-      background: #1a73e8;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-      transition: background 0.2s ease;
-    }
-    #completion-button button:hover { background: #1558b0; }
-
     .fade-in {
       opacity: 0;
       animation: fadeIn 0.6s ease forwards;
@@ -97,63 +84,44 @@
   <div id="simulator">
     <div id="hint" class="hint"></div>
 
-    <!-- Step 1 -->
+    <!-- Step 1: Inbox (Compose) -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="1.png" alt="Step 1 - My Drive">
-      <div class="hotspot" style="top:255px; left:17px; width:216px; height:29px;" onclick="evtStop(event); goTo(2)"></div>
+      <img class="stage-img" src="Compose.png" alt="Inbox">
+      <div class="hotspot" style="top:17%; left:5%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Step 2 -->
+    <!-- Step 2: New mail (click To field) -->
     <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="2.png" alt="Step 2 - Click New">
-      <div class="hotspot" style="top:71px; left:19px; width:96px; height:51px;" onclick="evtStop(event); goTo(3)"></div>
+      <img class="stage-img" src="mailbox.png" alt="mailbox">
+      <div class="hotspot" style="top:36%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
-    <!-- Step 3 -->
+    <!-- Step 3: To filled (click Subject field) -->
     <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="3.png" alt="Step 3 - Select File Upload">
-      <div class="hotspot" style="top:121px; left:19px; width:315px; height:33px;" onclick="evtStop(event); goTo(4)"></div>
+      <img class="stage-img" src="example@immunai.com.png" alt="To filled">
+      <div class="hotspot" style="top:40%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Step 4 -->
+    <!-- Step 4: Subject filled (click Body area) -->
     <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="4.png" alt="Step 4 - Choose File">
-      <div class="hotspot" style="top:214px; left:564px; width:217px; height:22px;" onclick="evtStop(event); goTo(5)"></div>
+      <img class="stage-img" src="Test.png" alt="Subject filled">
+      <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
     </div>
 
-    <!-- Step 5 -->
+    <!-- Step 5: Body filled (click Send) -->
     <div id="screen5" class="screen" onclick="wrong(5)">
-      <img class="stage-img" src="5.png" alt="Step 5 - Upload Complete">
-      <div class="hotspot" style="top:71px; left:19px; width:96px; height:51px;" onclick="evtStop(event); goTo(6)"></div>
-    </div>
-
-    <!-- Step 6 -->
-    <div id="screen6" class="screen" onclick="wrong(6)">
-      <img class="stage-img" src="6.png" alt="Step 6 - Folder Upload">
-      <div class="hotspot" style="top:155px; left:17px; width:313px; height:30px;" onclick="evtStop(event); goTo(7)"></div>
-    </div>
-
-    <!-- Step 7 -->
-    <div id="screen7" class="screen" onclick="wrong(7)">
-      <img class="stage-img" src="7.png" alt="Step 7 - Choose Folder">
-      <div class="hotspot" style="top:240px; left:565px; width:216px; height:17px;" onclick="evtStop(event); goTo(8)"></div>
-    </div>
-
-    <!-- Step 8 -->
-    <div id="screen8" class="screen" onclick="completeLab(event)">
-      <img class="stage-img" src="8.png" alt="Step 8 - Upload Complete">
+      <img class="stage-img" src="textbox.png" alt="Body filled">
+      <div class="hotspot" style="bottom:10%; left:56%; width:8%; height:8%;" onclick="evtStop(event); completeLab(event)"></div>
     </div>
   </div>
 
   <script>
     const hints = {
-      1: 'Hint: Click on "My Drive" in the left panel.',
-      2: 'Hint: Click the "+ New" button.',
-      3: 'Hint: Select "File upload" from the dropdown.',
-      4: 'Hint: Choose your file and click Open.',
-      5: 'Hint: Click "+ New" again to upload a folder.',
-      6: 'Hint: Select "Folder upload".',
-      7: 'Hint: Choose your test folder and click Upload.'
+      1: 'Hint: Click the Compose button on the left.',
+      2: 'Hint: Click the "To" field in the new message panel.',
+      3: 'Hint: Click the Subject field.',
+      4: 'Hint: Click inside the large message box.',
+      5: 'Hint: Click the blue Send button.'
     };
 
     function goTo(n) {
@@ -175,17 +143,19 @@
     function hideHint() { document.getElementById('hint').style.display = 'none'; }
     function evtStop(e) { e.stopPropagation(); }
 
-    // ✅ Completion message + tracking
+    // ✅ Auto-complete when final Send button is clicked
     function completeLab(event) {
       event?.preventDefault();
       event?.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'drive-upload' }, '*');
+      window.parent.postMessage({ type: 'lab-complete', lab: 'compose' }, '*');
 
       const sim = document.getElementById('simulator');
       sim.innerHTML = `
         <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Uploads Complete!</div>
-          <div style="margin-top:.5rem;">Your file and folder are now in Google Drive.</div>
+          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Your email has been sent!</div>
+          <div style="margin-top:.5rem;">To: example@immunai.com</div>
+          <div>Subject: Test</div>
+          <div>Message: Hello World</div>
           <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
         </div>
       `;
