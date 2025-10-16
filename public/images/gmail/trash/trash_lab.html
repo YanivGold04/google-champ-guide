@@ -124,20 +124,8 @@
     </div>
 
     <!-- Step 5 -->
-    <div id="screen5" class="screen" onclick="goTo(6)">
+    <div id="screen5" class="screen" onclick="completeLab(event)">
       <img class="stage-img" src="Last.png" alt="Last step">
-    </div>
-
-    <!-- Step 6: Success -->
-    <div id="screen6" class="screen">
-      <div style="position:absolute; inset:0; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <h2 style="color:green;">✅ Email successfully moved to Trash!</h2>
-
-        <!-- Completion Button -->
-        <div id="completion-button">
-          <button onclick="completeLab(event)">Mark as Complete</button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -168,13 +156,19 @@
     function hideHint() { document.getElementById('hint').style.display = 'none'; }
     function evtStop(e) { e.stopPropagation(); }
 
-    // ✅ Completion with fade-in + no scroll jump
+    // ✅ Auto-complete when reaching final screen
     function completeLab(event) {
       event?.preventDefault();
       event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'trash' }, '*');
-      const btn = document.getElementById('completion-button');
-      btn.innerHTML = "<div class='fade-in' style='color:green;font-weight:bold;margin-top:1rem;'>✅ Progress saved!</div>";
+      
+      const sim = document.getElementById('simulator');
+      sim.innerHTML = `
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Email successfully moved to Trash!</div>
+          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+        </div>
+      `;
     }
 
     // Debug toggle (press D)

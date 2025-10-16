@@ -117,20 +117,8 @@
     </div>
 
     <!-- Step 4 -->
-    <div id="screen4" class="screen" onclick="goTo(5)">
+    <div id="screen4" class="screen" onclick="completeLab(event)">
       <img class="stage-img" src="search_last.png" alt="Search done" />
-    </div>
-
-    <!-- Step 5: Success -->
-    <div id="screen5" class="screen">
-      <div style="position:absolute; inset:0; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <h2 style="color:green;">✅ Search completed successfully!</h2>
-
-        <!-- Completion Button -->
-        <div id="completion-button">
-          <button onclick="completeLab(event)">Mark as Complete</button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -175,28 +163,19 @@
       if(e.key.toLowerCase()==='d') sim.classList.toggle('debug');
     });
 
-    // ✅ Strong completion fix (no scroll / re-render)
+    // ✅ Auto-complete when reaching final screen
     function completeLab(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-      }
-
-      // Send message to parent app
+      event?.preventDefault();
+      event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'search' }, '*');
-
-      // Replace button with fade-in success
-      const btn = document.getElementById('completion-button');
-      btn.innerHTML = `
-        <div class="fade-in" style="color:green;font-weight:bold;margin-top:1rem;">
-          ✅ Progress saved!
+      
+      const sim = document.getElementById('simulator');
+      sim.innerHTML = `
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Search completed successfully!</div>
+          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
         </div>
       `;
-
-      // Prevent focus or scroll jump
-      document.activeElement?.blur();
-      window.focus();
     }
   </script>
 </body>
