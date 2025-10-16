@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gmail Compose Mission</title>
+  <title>Gmail Compose Lab (Re-structured)</title>
   <style>
     html, body {
       margin: 0;
@@ -69,6 +69,19 @@
       outline: 1px dashed #00aaff;
     }
 
+    #completion-button button {
+      background: #1a73e8;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+      transition: background 0.2s ease;
+    }
+    #completion-button button:hover { background: #1558b0; }
+
     .fade-in {
       opacity: 0;
       animation: fadeIn 0.6s ease forwards;
@@ -84,36 +97,32 @@
   <div id="simulator">
     <div id="hint" class="hint"></div>
 
-    <!-- Step 1: Inbox (Compose) -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
       <img class="stage-img" src="Compose.png" alt="Inbox">
       <div class="hotspot" style="top:17%; left:5%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
-    <!-- Step 2: New mail (click To field) -->
     <div id="screen2" class="screen" onclick="wrong(2)">
       <img class="stage-img" src="mailbox.png" alt="mailbox">
       <div class="hotspot" style="top:36%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
-    <!-- Step 3: To filled (click Subject field) -->
     <div id="screen3" class="screen" onclick="wrong(3)">
       <img class="stage-img" src="example@immunai.com.png" alt="To filled">
       <div class="hotspot" style="top:40%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
     </div>
 
-    <!-- Step 4: Subject filled (click Body area) -->
     <div id="screen4" class="screen" onclick="wrong(4)">
       <img class="stage-img" src="Test.png" alt="Subject filled">
       <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
     </div>
 
-    <!-- Step 5: Body filled (click Send) -->
     <div id="screen5" class="screen" onclick="wrong(5)">
       <img class="stage-img" src="textbox.png" alt="Body filled">
       <div class="hotspot" style="bottom:10%; left:56%; width:8%; height:8%;" onclick="evtStop(event); completeLab(event)"></div>
     </div>
-  </div>
+
+    </div>
 
   <script>
     const hints = {
@@ -143,12 +152,13 @@
     function hideHint() { document.getElementById('hint').style.display = 'none'; }
     function evtStop(e) { e.stopPropagation(); }
 
-    // ✅ Auto-complete when final Send button is clicked
+    // ✅ Final completion
     function completeLab(event) {
       event?.preventDefault();
       event?.stopPropagation();
       window.parent.postMessage({ type: 'lab-complete', lab: 'compose' }, '*');
 
+      // Replace image with "progress saved" message, using the message from compose_lab.html
       const sim = document.getElementById('simulator');
       sim.innerHTML = `
         <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
@@ -161,7 +171,7 @@
       `;
     }
 
-    // Debug overlay toggle (press D)
+    // Debug overlay toggle
     const sim = document.getElementById('simulator');
     window.addEventListener('keydown', e => {
       if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
