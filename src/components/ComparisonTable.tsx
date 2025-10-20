@@ -26,7 +26,7 @@ const tools = [
     microsoft: "OneDrive",
     google: "Google Drive",
     icon: HardDrive,
-    description: "Cloud Storage",
+    description: "Shared File Drive",
     color: "text-blue-500",
     path: "/drive",
   },
