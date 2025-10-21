@@ -11,27 +11,28 @@ const GmailPage = () => {
   const navigate = useNavigate();
   const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion("gmail");
 
-  // ✅ Reset Gmail progress on every page load/refresh
   useEffect(() => {
-    sessionStorage.removeItem("gmail-labs-completed");
+    window.scrollTo(0, 0);
   }, []);
 
-  // ✅ Preserve scroll position when marking lab complete
   useEffect(() => {
     let scrollY = 0;
 
-    // Scroll to top on first load
-    window.scrollTo(0, 0);
-
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "lab-complete" && event.data?.lab) {
-        // Save scroll position before update
         scrollY = window.scrollY;
-
-        // Mark the lab complete (this triggers a React re-render)
-        markLabComplete(event.data.lab);
-
-        // Restore scroll position after update
+        const labName = event.data.lab;
+        
+        // Map the incoming lab names to our internal format if needed
+        const labMap: Record<string, string> = {
+          "gmail-compose": "compose",
+          "gmail-trash": "trash",
+          "gmail-search": "search"
+        };
+        
+        const mappedLab = labMap[labName] || labName;
+        markLabComplete(mappedLab);
+        
         setTimeout(() => {
           window.scrollTo(0, scrollY);
         }, 150);

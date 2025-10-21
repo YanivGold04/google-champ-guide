@@ -10,9 +10,8 @@ import { useLabCompletion } from "@/hooks/useLabCompletion";
 const MeetPage = () => {
   const navigate = useNavigate();
   const [selectedPlatform, setSelectedPlatform] = useState<"zoom" | "meet" | null>(null);
-  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion(
-    selectedPlatform === "zoom" ? "zoom" : "meet"
-  );
+  // Always track completion under "meet" for the main page regardless of sub-platform
+  const { completedLabs, isComplete, markLabComplete, markPlatformComplete } = useLabCompletion("meet");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,7 +23,25 @@ const MeetPage = () => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "lab-complete" && event.data?.lab) {
         scrollY = window.scrollY;
-        markLabComplete(event.data.lab);
+        const labName = event.data.lab;
+        
+        // Map the incoming lab names to our internal format based on selected platform
+        const zoomLabMap: Record<string, string> = {
+          "zoom-new": "New_zoom",
+          "zoom-share": "Share_zoom",
+          "zoom-screen": "Screen_share"
+        };
+        
+        const meetLabMap: Record<string, string> = {
+          "meet-new": "New_meeting",
+          "meet-share": "Share_meet",
+          "meet-screen": "Screen_share"
+        };
+        
+        const labMap = selectedPlatform === "zoom" ? zoomLabMap : meetLabMap;
+        const mappedLab = labMap[labName] || labName;
+        markLabComplete(mappedLab);
+        
         setTimeout(() => {
           window.scrollTo(0, scrollY);
         }, 150);

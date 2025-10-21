@@ -21,7 +21,18 @@ const SlidesPage = () => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "lab-complete" && event.data?.lab) {
         scrollY = window.scrollY;
-        markLabComplete(event.data.lab);
+        const labName = event.data.lab;
+        
+        // Map the incoming lab names to our internal format if needed
+        const labMap: Record<string, string> = {
+          "slides-presentation": "Slides_presentation",
+          "slides-theme": "Theme",
+          "slides-transition": "Transition"
+        };
+        
+        const mappedLab = labMap[labName] || labName;
+        markLabComplete(mappedLab);
+        
         setTimeout(() => {
           window.scrollTo(0, scrollY);
         }, 150);
