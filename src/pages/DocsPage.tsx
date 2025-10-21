@@ -71,22 +71,31 @@ const DocsPage = () => {
             <div className="space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 1: Creating Documents</CardTitle>
+                  <CardTitle>Lab 1: Editing Text</CardTitle>
                   <CardDescription>Learn how to create and format documents in Google Docs</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Docs/Edit_text/edit_text.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Docs/Edit_text/Docs_Create_Lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Editing Text Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -94,22 +103,31 @@ const DocsPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 2: Collaboration</CardTitle>
-                  <CardDescription>Learn how to share and collaborate in real-time</CardDescription>
+                  <CardTitle>Lab 2: Creating New Docs</CardTitle>
+                  <CardDescription>Learn how to create new documents from templates</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Docs/New_docs/new_docs.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Docs/New_docs/New_Docs_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Creating New Docs Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -117,22 +135,31 @@ const DocsPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 3: Version History</CardTitle>
-                  <CardDescription>Learn how to use suggesting mode and version history</CardDescription>
+                  <CardTitle>Lab 3: Sharing and Commenting</CardTitle>
+                  <CardDescription>Learn how to share documents and add comments</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Docs/Share_comment/share_comment.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Docs/Share_comment/Share_comment_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Sharing and Commenting Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>

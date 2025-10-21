@@ -77,17 +77,26 @@ const CalendarPage = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Calander/Event/event.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Calander/Event/Event_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Creating Events Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -95,22 +104,31 @@ const CalendarPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 2: Sharing Calendars</CardTitle>
-                  <CardDescription>Learn how to share calendars and set permissions</CardDescription>
+                  <CardTitle>Lab 2: Inviting Attendees</CardTitle>
+                  <CardDescription>Learn how to invite people to calendar events</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Calander/Invite/invite.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Calander/Invite/Invite_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Inviting Attendees Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -118,22 +136,31 @@ const CalendarPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 3: Video Conferencing</CardTitle>
-                  <CardDescription>Learn how to integrate Google Meet and Zoom</CardDescription>
+                  <CardTitle>Lab 3: Setting Reminders</CardTitle>
+                  <CardDescription>Learn how to set up event reminders</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Calander/Reminder/reminder.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Calander/Reminder/Reminder_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Setting Reminders Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>

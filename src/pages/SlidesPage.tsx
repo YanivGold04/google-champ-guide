@@ -76,17 +76,26 @@ const SlidesPage = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Slides/Slides_presentation/slides_presentation.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Slides/Slides_presentation/Slides_Presentation_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Creating Presentations Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -94,22 +103,31 @@ const SlidesPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 2: Themes and Layouts</CardTitle>
-                  <CardDescription>Learn how to apply themes and use master slides</CardDescription>
+                  <CardTitle>Lab 2: Applying Themes</CardTitle>
+                  <CardDescription>Learn how to apply themes and customize slide layouts</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Slides/Theme/theme.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Slides/Theme/Theme_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Applying Themes Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -117,22 +135,31 @@ const SlidesPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 3: Presenting</CardTitle>
-                  <CardDescription>Learn how to present with presenter view and Q&A</CardDescription>
+                  <CardTitle>Lab 3: Adding Transitions</CardTitle>
+                  <CardDescription>Learn how to add slide transitions and animations</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Slides/Transition/transition.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Slides/Transition/Transition_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Adding Transitions Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>

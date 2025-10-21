@@ -163,24 +163,33 @@ const MeetPage = () => {
               <div className="space-y-8">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Lab 1: Starting Meetings</CardTitle>
+                    <CardTitle>Lab 1: Starting {selectedPlatform === "zoom" ? "Zoom" : "Meet"} Meetings</CardTitle>
                     <CardDescription>
                       Learn how to start and join {selectedPlatform === "zoom" ? "Zoom" : "Google Meet"} calls
                     </CardDescription>
                   </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src={selectedPlatform === "zoom" ? "/images/Zoom/New_zoom/new_zoom.mp4" : "/images/Meet/New_meeting/new_meeting.mp4"}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src={selectedPlatform === "zoom" ? "/images/Zoom/New_zoom/New_Zoom_lab.html" : "/images/Meet/New_meeting/New_Meeting_lab.html"}
+                        className="w-full h-[650px] border-0"
+                        title="Starting Meetings Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -188,24 +197,33 @@ const MeetPage = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Lab 2: Scheduling Meetings</CardTitle>
+                    <CardTitle>Lab 2: Sharing {selectedPlatform === "zoom" ? "Zoom" : "Meet"} Links</CardTitle>
                     <CardDescription>
-                      Learn how to schedule {selectedPlatform === "zoom" ? "Zoom" : "Google Meet"} meetings from Google Calendar
+                      Learn how to share {selectedPlatform === "zoom" ? "Zoom" : "Google Meet"} meeting links
                     </CardDescription>
                   </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src={selectedPlatform === "zoom" ? "/images/Zoom/Share_zoom/share_zoom.mp4" : "/images/Meet/Share_meet/share_meet.mp4"}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src={selectedPlatform === "zoom" ? "/images/Zoom/Share_zoom/Share_Zoom_lab.html" : "/images/Meet/Share_meet/Share_Meet_lab.html"}
+                        className="w-full h-[650px] border-0"
+                        title="Sharing Links Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -215,22 +233,31 @@ const MeetPage = () => {
                   <CardHeader>
                     <CardTitle>Lab 3: Screen Sharing</CardTitle>
                     <CardDescription>
-                      Learn how to share your screen and present in {selectedPlatform === "zoom" ? "Zoom" : "Google Meet"}
+                      Learn how to share your screen in {selectedPlatform === "zoom" ? "Zoom" : "Google Meet"}
                     </CardDescription>
                   </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src={selectedPlatform === "zoom" ? "/images/Zoom/Screen_share/screen_share.mp4" : "/images/Meet/Screen_share/screen_share.mp4"}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src={selectedPlatform === "zoom" ? "/images/Zoom/Screen_share/Screen_Share_lab.html" : "/images/Meet/Screen_share/Screen_Share_lab.html"}
+                        className="w-full h-[650px] border-0"
+                        title="Screen Sharing Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>

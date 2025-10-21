@@ -71,22 +71,31 @@ const SheetsPage = () => {
             <div className="space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 1: Creating Spreadsheets</CardTitle>
-                  <CardDescription>Learn how to create spreadsheets and use basic formulas</CardDescription>
+                  <CardTitle>Lab 1: Creating New Sheets</CardTitle>
+                  <CardDescription>Learn how to create spreadsheets and organize data</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Sheets/New_sheet/new_sheet.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 1 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Sheets/New_sheet/New_Sheet_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Creating New Sheets Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -94,22 +103,31 @@ const SheetsPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 2: Conditional Formatting</CardTitle>
-                  <CardDescription>Learn how to apply conditional formatting and data validation</CardDescription>
+                  <CardTitle>Lab 2: Using Formulas</CardTitle>
+                  <CardDescription>Learn how to use formulas like SUM and AVERAGE</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Sheets/Formula/formula.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 2 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Sheets/Formula/Formula_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Using Formulas Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -117,22 +135,31 @@ const SheetsPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 3: Charts and Pivot Tables</CardTitle>
-                  <CardDescription>Learn how to create charts and use pivot tables</CardDescription>
+                  <CardTitle>Lab 3: Creating Charts</CardTitle>
+                  <CardDescription>Learn how to create and customize charts</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="rounded-2xl overflow-hidden bg-muted">
-                    <div className="w-full h-[300px] flex items-center justify-center">
-                      <p className="text-muted-foreground">Video placeholder - Upload video/GIF here</p>
-                    </div>
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Sheets/New_chart/new_chart.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
                     <div className="rounded-2xl overflow-hidden bg-muted">
-                      <div className="w-full h-[650px] flex items-center justify-center">
-                        <p className="text-muted-foreground">Lab 3 iframe placeholder - Upload HTML lab here</p>
-                      </div>
+                      <iframe
+                        src="/images/Sheets/New_chart/New_Chart_lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Creating Charts Lab"
+                      />
                     </div>
                   </div>
                 </CardContent>
