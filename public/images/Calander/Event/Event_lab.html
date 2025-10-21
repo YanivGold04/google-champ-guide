@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Calendar Event Lab</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    body, #simulator {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+    }
+
+    #simulator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    .screen.active { display: block; }
+
+    .stage-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      display: block;
+      background: #fff;
+    }
+
+    .hotspot { position: absolute; cursor: pointer; }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 5%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0.9;
+      display: none;
+    }
+
+    .debug .hotspot {
+      background: rgba(0, 128, 255, 0.25);
+      outline: 1px dashed #00aaff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div id="simulator">
+    <div id="hint" class="hint"></div>
+
+    <!-- Step 1 -->
+    <div id="screen1" class="screen active" onclick="wrong(1)">
+      <img class="stage-img" src="1.png" alt="Calendar Home" />
+      <div class="hotspot" style="top:100px; left:40px; width:130px; height:50px;" onclick="evtStop(event); goTo(2)"></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="screen2" class="screen" onclick="wrong(2)">
+      <img class="stage-img" src="2.png" alt="Create Menu" />
+      <div class="hotspot" style="top:160px; left:70px; width:160px; height:40px;" onclick="evtStop(event); goTo(3)"></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="screen3" class="screen" onclick="wrong(3)">
+      <img class="stage-img" src="3.png" alt="New Event Form" />
+      <div class="hotspot" style="top:200px; left:500px; width:300px; height:60px;" onclick="evtStop(event); goTo(4)"></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div id="screen4" class="screen" onclick="wrong(4)">
+      <img class="stage-img" src="4.png" alt="Add Title" />
+      <div class="hotspot" style="top:200px; left:500px; width:300px; height:60px;" onclick="evtStop(event); goTo(5)"></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div id="screen5" class="screen" onclick="wrong(5)">
+      <img class="stage-img" src="5.png" alt="Adjust Time" />
+      <div class="hotspot" style="top:270px; left:660px; width:120px; height:40px;" onclick="evtStop(event); goTo(6)"></div>
+    </div>
+
+    <!-- Step 6 -->
+    <div id="screen6" class="screen" onclick="wrong(6)">
+      <img class="stage-img" src="6.png" alt="Select Start Time" />
+      <div class="hotspot" style="top:420px; left:710px; width:160px; height:60px;" onclick="evtStop(event); goTo(7)"></div>
+    </div>
+
+    <!-- Step 7 -->
+    <div id="screen7" class="screen" onclick="wrong(7)">
+      <img class="stage-img" src="7.png" alt="Event Details" />
+      <div class="hotspot" style="top:270px; left:600px; width:140px; height:40px;" onclick="evtStop(event); goTo(8)"></div>
+    </div>
+
+    <!-- Step 8 -->
+    <div id="screen8" class="screen" onclick="wrong(8)">
+      <img class="stage-img" src="8.png" alt="Saved Event" />
+      <div class="hotspot" style="top:690px; left:560px; width:250px; height:100px;" onclick="evtStop(event); goTo(9)"></div>
+    </div>
+
+    <!-- Step 9 -->
+    <div id="screen9" class="screen" onclick="completeLab(event)">
+      <img class="stage-img" src="9.png" alt="View Event" />
+    </div>
+  </div>
+
+  <script>
+    const hints = {
+      1: 'Hint: Click the “+ Create” button to start.',
+      2: 'Hint: Choose “Event” from the dropdown menu.',
+      3: 'Hint: Click on the title box to name your event.',
+      4: 'Hint: Enter a title for your meeting.',
+      5: 'Hint: Adjust the time for your event.',
+      6: 'Hint: Pick a new start time from the list.',
+      7: 'Hint: Review the event time and details.',
+      8: 'Hint: Save the event to confirm.',
+      9: 'Hint: Great job! Your event has been added.'
+    };
+
+    function goTo(n) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + n).classList.add('active');
+      hideHint();
+    }
+
+    function wrong(stage) { showHint(hints[stage]); }
+
+    function showHint(msg) {
+      const h = document.getElementById('hint');
+      h.textContent = msg;
+      h.style.display = 'block';
+      clearTimeout(window.__hintT);
+      window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
+    }
+
+    function hideHint() { document.getElementById('hint').style.display = 'none'; }
+    function evtStop(e) { e.stopPropagation(); }
+
+    function completeLab(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const sim = document.getElementById('simulator');
+      sim.innerHTML = `
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Event Created!</div>
+          <div style="margin-top:.5rem;">Your new meeting has been added to Google Calendar.</div>
+          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+        </div>
+      `;
+    }
+
+    const sim = document.getElementById('simulator');
+    window.addEventListener('keydown', e => {
+      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+    });
+  </script>
+</body>
+</html>
