@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share & Comment Lab</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    body, #simulator {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+    }
+
+    #simulator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    .screen.active { display: block; }
+
+    .stage-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      display: block;
+      background: #fff;
+    }
+
+    .hotspot { position: absolute; cursor: pointer; }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 5%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0.9;
+      display: none;
+    }
+
+    .debug .hotspot {
+      background: rgba(0, 128, 255, 0.25);
+      outline: 1px dashed #00aaff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div id="simulator">
+    <div id="hint" class="hint"></div>
+
+    <!-- Step 1 -->
+    <div id="screen1" class="screen active" onclick="wrong(1)">
+      <img class="stage-img" src="1.png" alt="Docs Home" />
+      <div class="hotspot" style="top:140px; left:120px; width:130px; height:150px;" onclick="evtStop(event); goTo(2)"></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="screen2" class="screen" onclick="wrong(2)">
+      <img class="stage-img" src="2.png" alt="Opened document" />
+      <div class="hotspot" style="top:60px; left:1150px; width:100px; height:40px;" onclick="evtStop(event); goTo(3)"></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="screen3" class="screen" onclick="wrong(3)">
+      <img class="stage-img" src="3.png" alt="File Menu" />
+      <div class="hotspot" style="top:40px; left:55px; width:70px; height:40px;" onclick="evtStop(event); goTo(4)"></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div id="screen4" class="screen" onclick="wrong(4)">
+      <img class="stage-img" src="4.png" alt="Share Menu" />
+      <div class="hotspot" style="top:115px; left:85px; width:230px; height:35px;" onclick="evtStop(event); goTo(5)"></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div id="screen5" class="screen" onclick="wrong(5)">
+      <img class="stage-img" src="5.png" alt="Share Dialog" />
+      <div class="hotspot" style="top:250px; left:470px; width:350px; height:40px;" onclick="evtStop(event); goTo(6)"></div>
+    </div>
+
+    <!-- Step 6 -->
+    <div id="screen6" class="screen" onclick="wrong(6)">
+      <img class="stage-img" src="6.png" alt="Add People" />
+      <div class="hotspot" style="top:250px; left:470px; width:350px; height:40px;" onclick="evtStop(event); goTo(7)"></div>
+    </div>
+
+    <!-- Step 7 -->
+    <div id="screen7" class="screen" onclick="wrong(7)">
+      <img class="stage-img" src="7.png" alt="Add Person" />
+      <div class="hotspot" style="top:330px; left:530px; width:260px; height:60px;" onclick="evtStop(event); goTo(8)"></div>
+    </div>
+
+    <!-- Step 8 -->
+    <div id="screen8" class="screen" onclick="wrong(8)">
+      <img class="stage-img" src="8.png" alt="Select Permission" />
+      <div class="hotspot" style="top:280px; left:780px; width:120px; height:60px;" onclick="evtStop(event); goTo(9)"></div>
+    </div>
+
+    <!-- Step 9 -->
+    <div id="screen9" class="screen" onclick="wrong(9)">
+      <img class="stage-img" src="9.png" alt="Add Message" />
+      <div class="hotspot" style="top:460px; left:480px; width:400px; height:100px;" onclick="evtStop(event); goTo(10)"></div>
+    </div>
+
+    <!-- Step 10 -->
+    <div id="screen10" class="screen" onclick="wrong(10)">
+      <img class="stage-img" src="10.png" alt="Send Share" />
+      <div class="hotspot" style="top:540px; left:830px; width:110px; height:50px;" onclick="evtStop(event); goTo(11)"></div>
+    </div>
+
+    <!-- Step 11: Confirmation -->
+    <div id="screen11" class="screen" onclick="completeLab(event)">
+      <img class="stage-img" src="11.png" alt="Access Updated Message" />
+    </div>
+  </div>
+
+  <script>
+    const hints = {
+      1: 'Hint: Click on “Blank document” to start.',
+      2: 'Hint: Click the “Share” button in the top-right.',
+      3: 'Hint: Open the “File” menu for sharing options.',
+      4: 'Hint: Choose “Share with others”.',
+      5: 'Hint: Type the person’s email to share with.',
+      6: 'Hint: Select the user from the list.',
+      7: 'Hint: Choose their permission level (Viewer, Commenter, Editor).',
+      8: 'Hint: Add a message to notify them.',
+      9: 'Hint: Click “Send” to share your file.',
+      10: 'Hint: Wait for confirmation that access is updated.'
+    };
+
+    function goTo(n) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + n).classList.add('active');
+      hideHint();
+    }
+
+    function wrong(stage) { showHint(hints[stage]); }
+
+    function showHint(msg) {
+      const h = document.getElementById('hint');
+      h.textContent = msg;
+      h.style.display = 'block';
+      clearTimeout(window.__hintT);
+      window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
+    }
+
+    function hideHint() { document.getElementById('hint').style.display = 'none'; }
+    function evtStop(e) { e.stopPropagation(); }
+
+    function completeLab(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const sim = document.getElementById('simulator');
+      sim.innerHTML = `
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ File Shared Successfully!</div>
+          <div style="margin-top:.5rem;">Access has been updated and your document is shared.</div>
+          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+        </div>
+      `;
+    }
+
+    const sim = document.getElementById('simulator');
+    window.addEventListener('keydown', e => {
+      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+    });
+  </script>
+</body>
+</html>
