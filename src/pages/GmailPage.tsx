@@ -215,6 +215,7 @@ const GmailPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["compose", "trash", "search"]}
             />
 
             {/* Step-by-Step Instructions */}

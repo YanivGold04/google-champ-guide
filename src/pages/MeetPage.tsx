@@ -183,7 +183,12 @@ const MeetPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has(selectedPlatform === "zoom" ? "New_zoom" : "New_meeting") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has(selectedPlatform === "zoom" ? "New_zoom" : "New_meeting") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src={selectedPlatform === "zoom" ? "/images/Zoom/New_zoom/New_Zoom_lab.html" : "/images/Meet/New_meeting/New_Meeting_lab.html"}
@@ -217,7 +222,12 @@ const MeetPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has(selectedPlatform === "zoom" ? "Share_zoom" : "Share_meet") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has(selectedPlatform === "zoom" ? "Share_zoom" : "Share_meet") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src={selectedPlatform === "zoom" ? "/images/Zoom/Share_zoom/Share_Zoom_lab.html" : "/images/Meet/Share_meet/Share_Meet_lab.html"}
@@ -251,7 +261,12 @@ const MeetPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has(selectedPlatform === "zoom" ? "Screen_share" : "Screen_share") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has(selectedPlatform === "zoom" ? "Screen_share" : "Screen_share") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src={selectedPlatform === "zoom" ? "/images/Zoom/Screen_share/Screen_Share_lab.html" : "/images/Meet/Screen_share/Screen_Share_lab.html"}
@@ -270,6 +285,7 @@ const MeetPage = () => {
                 completedLabs={completedLabs}
                 isComplete={isComplete}
                 onComplete={markPlatformComplete}
+                labNames={selectedPlatform === "zoom" ? ["New_zoom", "Share_zoom", "Screen_share"] : ["New_meeting", "Share_meet", "Screen_share"]}
               />
 
               <Card>

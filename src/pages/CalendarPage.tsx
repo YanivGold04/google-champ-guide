@@ -90,7 +90,12 @@ const CalendarPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Event") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Event") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Calander/Event/Event_lab.html"
@@ -122,7 +127,12 @@ const CalendarPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Invite") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Invite") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Calander/Invite/Invite_lab.html"
@@ -154,7 +164,12 @@ const CalendarPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Reminder") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Reminder") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Calander/Reminder/Reminder_lab.html"
@@ -173,6 +188,7 @@ const CalendarPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["Event", "Invite", "Reminder"]}
             />
 
             <Card>

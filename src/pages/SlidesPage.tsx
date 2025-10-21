@@ -89,7 +89,12 @@ const SlidesPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Slides_presentation") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Slides_presentation") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Slides/Slides_presentation/Slides_Presentation_lab.html"
@@ -121,7 +126,12 @@ const SlidesPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Theme") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Theme") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Slides/Theme/Theme_lab.html"
@@ -153,7 +163,12 @@ const SlidesPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Transition") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Transition") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Slides/Transition/Transition_lab.html"
@@ -172,6 +187,7 @@ const SlidesPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["Slides_presentation", "Theme", "Transition"]}
             />
 
             <Card>

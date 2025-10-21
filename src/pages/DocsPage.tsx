@@ -89,7 +89,12 @@ const DocsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Edit_text") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Edit_text") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Docs/Edit_text/Docs_Create_Lab.html"
@@ -121,7 +126,12 @@ const DocsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("New_docs") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("New_docs") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Docs/New_docs/New_Docs_lab.html"
@@ -153,7 +163,12 @@ const DocsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Share_comment") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Share_comment") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Docs/Share_comment/Share_comment_lab.html"
@@ -172,6 +187,7 @@ const DocsPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["Edit_text", "New_docs", "Share_comment"]}
             />
 
             <Card>

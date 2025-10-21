@@ -38,16 +38,21 @@ const LabCompletionCheck = ({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          {labs.map((lab) => (
-            <div key={lab} className="flex items-center gap-2">
-              {completedLabs.has(lab) ? (
-                <CheckCircle2 className="h-5 w-5 text-green-500" />
-              ) : (
-                <XCircle className="h-5 w-5 text-muted-foreground" />
-              )}
-              <span className="capitalize text-muted-foreground">{lab} Lab</span>
-            </div>
-          ))}
+          {labs.map((lab) => {
+            // Format lab name: replace underscores with spaces and capitalize
+            const formattedLabName = lab.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+            
+            return (
+              <div key={lab} className="flex items-center gap-2">
+                {completedLabs.has(lab) ? (
+                  <CheckCircle2 className="h-5 w-5 text-green-500" />
+                ) : (
+                  <XCircle className="h-5 w-5 text-muted-foreground" />
+                )}
+                <span className="text-muted-foreground">{formattedLabName} Lab</span>
+              </div>
+            );
+          })}
         </div>
 
         {isComplete && (

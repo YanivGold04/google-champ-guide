@@ -89,7 +89,12 @@ const SheetsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("New_sheet") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("New_sheet") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Sheets/New_sheet/New_Sheet_lab.html"
@@ -121,7 +126,12 @@ const SheetsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Formula") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Formula") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Sheets/Formula/Formula_lab.html"
@@ -153,7 +163,12 @@ const SheetsPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("New_chart") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("New_chart") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
                     <div className="rounded-2xl overflow-hidden bg-muted">
                       <iframe
                         src="/images/Sheets/New_chart/New_Chart_lab.html"
@@ -172,6 +187,7 @@ const SheetsPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
+              labNames={["New_sheet", "Formula", "New_chart"]}
             />
 
             <Card>
