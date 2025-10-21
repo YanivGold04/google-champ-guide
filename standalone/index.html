@@ -4,8 +4,334 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>From Microsoft to Google Workspace</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Reset and Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --background: #f9fafb;
+            --foreground: #111827;
+            --card: #ffffff;
+            --primary: #3b82f6;
+            --primary-glow: #60a5fa;
+            --secondary: #10b981;
+            --muted: #f3f4f6;
+            --muted-foreground: #6b7280;
+            --accent: #fbbf24;
+            --destructive: #ef4444;
+            --border: #e5e7eb;
+            --radius: 0.75rem;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05));
+            padding: 5rem 0;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--foreground);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background-color: rgba(59, 130, 246, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: left;
+        }
+        
+        .feature-icon { color: var(--secondary); width: 24px; height: 24px; flex-shrink: 0; }
+        .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .feature-card p { font-size: 0.875rem; color: var(--muted-foreground); }
+        
+        /* Comparison Section */
+        .comparison-section { padding: 5rem 0; background-color: var(--background); }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .section-header p { font-size: 1.125rem; color: var(--muted-foreground); max-width: 600px; margin: 0 auto; }
+        
+        .tools-grid { display: grid; gap: 1.5rem; }
+        
+        .tool-card {
+            background: linear-gradient(135deg, var(--card), rgba(255, 255, 255, 0.5));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .tool-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tool-icon {
+            padding: 1rem;
+            border-radius: var(--radius);
+            background-color: var(--muted);
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-card:hover .tool-icon { transform: scale(1.1); }
+        .tool-icon.red { color: #ef4444; }
+        .tool-icon.blue { color: #3b82f6; }
+        .tool-icon.purple { color: #8b5cf6; }
+        .tool-icon.blue-dark { color: #2563eb; }
+        .tool-icon.green { color: #10b981; }
+        .tool-icon.yellow { color: #f59e0b; }
+        
+        .tool-info { flex: 1; min-width: 200px; }
+        .tool-info h3 { font-size: 1.125rem; font-weight: 600; }
+        
+        .tool-comparison {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .from-tool, .to-tool {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .from-tool { text-align: right; }
+        .to-tool { text-align: left; }
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--muted-foreground);
+            letter-spacing: 0.05em;
+        }
+        .name { font-weight: 600; }
+        .to-tool .name { color: var(--primary); }
+        .arrow { color: var(--primary); transition: transform 0.3s ease; }
+        .tool-card:hover .arrow { transform: translateX(4px); }
+        
+        .completion-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s ease;
+        }
+        
+        .tool-card:hover .completion-badge { border-color: var(--primary); }
+        .completion-badge i { color: var(--secondary); width: 32px; height: 32px; }
+        .hidden { display: none !important; }
+        
+        /* Quiz Section */
+        .quiz-section { padding: 5rem 0; background-color: var(--background); }
+        .quiz-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .quiz-header { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+        .quiz-question { font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .quiz-options { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+        
+        .quiz-option {
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .quiz-option:hover:not(.disabled) {
+            border-color: var(--primary);
+            background-color: rgba(59, 130, 246, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .quiz-option.correct {
+            border-color: var(--secondary);
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: var(--destructive);
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        
+        .quiz-option.disabled { cursor: not-allowed; }
+        .quiz-result { text-align: center; }
+        .quiz-score { font-size: 4rem; font-weight: 700; color: var(--primary); margin: 2rem 0; }
+        
+        /* Resources Section */
+        .resources-section { padding: 5rem 0; background-color: rgba(243, 244, 246, 0.3); }
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        
+        .resource-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+        
+        .resource-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-icon i { color: var(--primary); width: 24px; height: 24px; }
+        .resource-content h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .resource-content p { color: var(--muted-foreground); margin-bottom: 1rem; }
+        
+        /* Footer */
+        .footer { background-color: var(--card); border-top: 1px solid var(--border); padding: 2rem 0; }
+        .footer-content { text-align: center; }
+        .footer-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+        }
+        .heart-icon { color: #ef4444; fill: #ef4444; width: 16px; height: 16px; }
+        .copyright { color: var(--muted-foreground); font-size: 0.875rem; margin-bottom: 1rem; }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary); text-decoration: none; font-size: 0.875rem; }
+        .footer-links a:hover { text-decoration: underline; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.125rem; }
+            .tool-comparison { flex-direction: column; gap: 0.5rem; }
+            .from-tool, .to-tool { text-align: center; }
+        }
+    </style>
 </head>
 <body>
     <!-- Hero Section -->
@@ -339,16 +665,243 @@
         </div>
     </footer>
 
-    <script src="shared.js"></script>
-    <script src="quiz.js"></script>
     <script>
-        // Initialize Lucide icons
+        // Shared JavaScript functions
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function navigateToTool(page) {
+            sessionStorage.setItem('lastScrollPosition', String(window.scrollY));
+            sessionStorage.setItem('shouldRestoreScroll', 'true');
+            window.location.href = page;
+        }
+        
+        function getPlatformCompletion(platform) {
+            const completions = JSON.parse(sessionStorage.getItem('platform-completions') || '{}');
+            return completions[platform] || false;
+        }
+        
+        function updateCompletionBadges() {
+            const platforms = ['gmail', 'drive', 'meet', 'docs', 'sheets', 'slides', 'calendar'];
+            
+            platforms.forEach(platform => {
+                const isComplete = getPlatformCompletion(platform);
+                const badge = document.getElementById(`badge-${platform}`);
+                
+                if (badge && isComplete) {
+                    const icon = badge.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('hidden');
+                    }
+                }
+            });
+        }
+        
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "You want to schedule a recurring weekly team meeting. Where do you do this in Google Workspace?",
+                options: [
+                    "Google Meet directly",
+                    "Google Calendar",
+                    "Gmail settings",
+                    "Google Drive"
+                ],
+                correctAnswer: 1,
+                explanation: "Google Calendar is where you schedule all meetings, including recurring ones. You can add Google Meet or Zoom links directly from Calendar."
+            },
+            {
+                question: "In Gmail, you want to organize emails from your manager. What's the best approach?",
+                options: [
+                    "Create a folder called 'Manager'",
+                    "Create a label called 'Manager' and set up a filter",
+                    "Move all emails to a separate inbox",
+                    "Archive them immediately"
+                ],
+                correctAnswer: 1,
+                explanation: "Gmail uses labels instead of folders. Labels are more flexible - an email can have multiple labels. You can also create filters to automatically apply labels."
+            },
+            {
+                question: "You need to collaborate on a document with your team in real-time. Which tool should you use?",
+                options: [
+                    "Email the document back and forth",
+                    "Google Docs with sharing enabled",
+                    "Download and use Microsoft Word offline",
+                    "Print and make handwritten edits"
+                ],
+                correctAnswer: 1,
+                explanation: "Google Docs allows multiple people to edit simultaneously with changes appearing in real-time. Share the document and set appropriate permissions."
+            },
+            {
+                question: "Where can you find files that other people have shared with you in Google Drive?",
+                options: [
+                    "My Drive folder",
+                    "Recent files",
+                    "Shared with me section",
+                    "Starred files"
+                ],
+                correctAnswer: 2,
+                explanation: "The 'Shared with me' section shows all files and folders that others have shared with you, making them easy to find and access."
+            },
+            {
+                question: "You want to prevent accidental edits to a specific range in Google Sheets. What should you use?",
+                options: [
+                    "Delete the range",
+                    "Hide the range",
+                    "Protect the range",
+                    "Copy it to a new sheet"
+                ],
+                correctAnswer: 2,
+                explanation: "You can protect specific ranges or entire sheets in Google Sheets. This allows you to set who can edit that range while others can only view."
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const container = document.getElementById('quiz-container');
+            const question = quizQuestions[currentQuestion];
+            
+            container.innerHTML = `
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <span style="color: var(--muted-foreground);">Question ${currentQuestion + 1} of ${quizQuestions.length}</span>
+                        <span style="font-weight: 600; color: var(--primary);">Score: ${score}</span>
+                    </div>
+                    <div class="quiz-question">${question.question}</div>
+                    <div class="quiz-options" id="quiz-options">
+                        ${question.options.map((option, index) => `
+                            <div class="quiz-option" onclick="selectAnswer(${index})">
+                                <span>${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="quiz-feedback" style="display: none; padding: 1rem; border-radius: var(--radius); margin-top: 1rem;"></div>
+                    <button id="next-button" class="btn btn-primary" style="width: 100%; display: none;" onclick="nextQuestion()">
+                        ${currentQuestion < quizQuestions.length - 1 ? 'Next Question' : 'See Results'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function selectAnswer(answerIndex) {
+            if (answered) return;
+            
+            answered = true;
+            const question = quizQuestions[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('quiz-feedback');
+            const nextButton = document.getElementById('next-button');
+            
+            options.forEach(opt => opt.classList.add('disabled'));
+            
+            options[question.correctAnswer].classList.add('correct');
+            const correctIcon = document.createElement('i');
+            correctIcon.setAttribute('data-lucide', 'check-circle-2');
+            correctIcon.style.color = 'var(--secondary)';
+            options[question.correctAnswer].insertBefore(correctIcon, options[question.correctAnswer].firstChild);
+            
+            if (answerIndex !== question.correctAnswer) {
+                options[answerIndex].classList.add('incorrect');
+                const incorrectIcon = document.createElement('i');
+                incorrectIcon.setAttribute('data-lucide', 'x-circle');
+                incorrectIcon.style.color = 'var(--destructive)';
+                options[answerIndex].insertBefore(incorrectIcon, options[answerIndex].firstChild);
+            }
+            
+            if (answerIndex === question.correctAnswer) {
+                score++;
+                feedback.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                feedback.style.color = 'var(--secondary)';
+                feedback.textContent = '✅ Correct! ' + question.explanation;
+            } else {
+                feedback.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                feedback.style.color = 'var(--destructive)';
+                feedback.textContent = '❌ ' + question.explanation;
+            }
+            feedback.style.display = 'block';
+            
+            nextButton.style.display = 'block';
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+        
+        function nextQuestion() {
+            answered = false;
+            currentQuestion++;
+            
+            if (currentQuestion < quizQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            const container = document.getElementById('quiz-container');
+            const percentage = (score / quizQuestions.length) * 100;
+            
+            let message = '';
+            if (percentage >= 80) {
+                message = "Excellent! You're ready to use Google Workspace! 🎉";
+            } else if (percentage >= 60) {
+                message = "Good job! Review the guides for areas you missed.";
+            } else {
+                message = "Keep learning! Go through the guides again.";
+            }
+            
+            container.innerHTML = `
+                <div class="quiz-card quiz-result">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Quiz Complete!</h3>
+                    <div class="quiz-score">${score}/${quizQuestions.length}</div>
+                    <p style="font-size: 1.25rem; color: var(--muted-foreground); margin-bottom: 1rem;">
+                        You scored ${percentage.toFixed(0)}%
+                    </p>
+                    <p style="font-size: 1.125rem; font-weight: 600; color: var(--primary); margin-bottom: 2rem;">
+                        ${message}
+                    </p>
+                    <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+                </div>
+            `;
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            showQuestion();
+        }
+        
+        // Restore scroll position on page load
+        window.addEventListener('load', function() {
+            const shouldRestore = sessionStorage.getItem('shouldRestoreScroll');
+            const savedScroll = Number(sessionStorage.getItem('lastScrollPosition')) || 0;
+            
+            if (shouldRestore === 'true') {
+                setTimeout(() => {
+                    window.scrollTo({ top: savedScroll, behavior: 'smooth' });
+                }, 300);
+                sessionStorage.removeItem('shouldRestoreScroll');
+            }
+        });
+        
+        // Initialize
         lucide.createIcons();
-        
-        // Update completion badges on load
         updateCompletionBadges();
-        
-        // Initialize quiz
         initQuiz();
     </script>
 </body>
