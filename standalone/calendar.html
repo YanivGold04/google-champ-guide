@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Calendar - Outlook Calendar to Google Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="tool-page">
+    <div class="container">
+        <button class="back-button" onclick="navigateHome()">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </button>
+
+        <div class="tool-header">
+            <i data-lucide="calendar" class="tool-header-icon"></i>
+            <div>
+                <h1>Google Calendar</h1>
+                <p>Outlook Calendar → Google Calendar</p>
+            </div>
+        </div>
+
+        <div class="page-grid">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="card-title">What is Google Calendar?</h2>
+                    <p class="card-description">
+                        Google Calendar offers easy integration with Meet and Zoom, supports multiple calendars with different colors, includes a 'Find a time' feature for group scheduling, and displays world clocks for different time zones.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create an Event</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Calander/Event/event.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Event">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Calander/Event/Event_lab.html" title="Event Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Invite People to Events</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Calander/Invite/invite.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Invite">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Calander/Invite/Invite_lab.html" title="Invite Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Set Reminders</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Calander/Reminder/reminder.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Reminder">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Calander/Reminder/Reminder_lab.html" title="Reminder Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-check">
+                    <h3 class="card-title">Lab Completion Status</h3>
+                    <div class="completion-list">
+                        <div class="completion-item" data-lab-id="Event">
+                            <i data-lucide="x-circle"></i>
+                            <span>Event Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Invite">
+                            <i data-lucide="x-circle"></i>
+                            <span>Invite Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Reminder">
+                            <i data-lucide="x-circle"></i>
+                            <span>Reminder Lab</span>
+                        </div>
+                    </div>
+                    <div class="completion-success" id="completion-success" style="display: none;">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs for Google Calendar completed!</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('calendar')">
+                        Return to Main Page
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Tips & Tricks</h3>
+                    <div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>• Create calendars for different projects</li>
+                            <li>• Set working hours</li>
+                            <li>• Use 'Find a time' for scheduling</li>
+                            <li>• Enable desktop notifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        lucide.createIcons();
+        updateCompletionCheck('calendar');
+        
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'calendar-event': 'Event',
+                    'calendar-invite': 'Invite',
+                    'calendar-reminder': 'Reminder'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('calendar', mappedLab);
+            }
+        });
+    </script>
+</body>
+</html>

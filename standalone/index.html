@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Microsoft to Google Workspace</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    From Microsoft to 
+                    <span class="gradient-text">Google Workspace</span>
+                </h1>
+                <p class="hero-subtitle">
+                    A practical guide with Zoom integration for seamless transition
+                </p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('comparison')">
+                        Start Learning
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                    <button class="btn btn-outline" onclick="scrollToSection('quiz')">
+                        Test Your Knowledge
+                    </button>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature-card">
+                        <i data-lucide="check-circle-2" class="feature-icon"></i>
+                        <div>
+                            <h3>Side-by-Side Comparisons</h3>
+                            <p>Visual guides showing Microsoft vs Google tools</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i data-lucide="check-circle-2" class="feature-icon"></i>
+                        <div>
+                            <h3>Practical Tutorials</h3>
+                            <p>Step-by-step guides for common tasks</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i data-lucide="check-circle-2" class="feature-icon"></i>
+                        <div>
+                            <h3>Interactive Quiz</h3>
+                            <p>Test your knowledge with real scenarios</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table Section -->
+    <section id="comparison" class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Microsoft vs. Google Workspace</h2>
+                <p>Here's how your familiar Microsoft tools map to Google Workspace</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card" onclick="navigateToTool('gmail.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon red">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Email & Communication</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">Outlook</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Gmail</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-gmail">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('drive.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon blue">
+                            <i data-lucide="hard-drive"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Shared File Drive</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">OneDrive</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Drive</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-drive">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('meet.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon purple">
+                            <i data-lucide="video"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Video Conferencing</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">Teams</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Meet / Zoom</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-meet">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('docs.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon blue-dark">
+                            <i data-lucide="file-text"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Document Creation</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">Word</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Docs</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-docs">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('sheets.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon green">
+                            <i data-lucide="table"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Spreadsheets</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">Excel</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Sheets</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-sheets">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('slides.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon yellow">
+                            <i data-lucide="presentation"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Presentations</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">PowerPoint</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Slides</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-slides">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="navigateToTool('calendar.html')">
+                    <div class="tool-content">
+                        <div class="tool-icon blue">
+                            <i data-lucide="calendar"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Scheduling</h3>
+                        </div>
+                        <div class="tool-comparison">
+                            <div class="from-tool">
+                                <span class="label">Microsoft</span>
+                                <span class="name">Outlook Calendar</span>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="to-tool">
+                                <span class="label">Google</span>
+                                <span class="name">Google Calendar</span>
+                            </div>
+                        </div>
+                        <div class="completion-badge" id="badge-calendar">
+                            <i data-lucide="check-circle-2" class="hidden"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Real-world scenarios to test your understanding</p>
+            </div>
+            <div id="quiz-container"></div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Additional Resources</h2>
+                <p>External guides and tutorials for deeper learning</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Official Google Workspace Learning Center</h3>
+                        <p>Comprehensive guides and tutorials from Google</p>
+                        <a href="https://support.google.com/a/users/answer/9259748" target="_blank" class="btn btn-outline">
+                            Visit Resource
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i data-lucide="video"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Google Workspace Training Videos</h3>
+                        <p>Video tutorials for each Google Workspace app</p>
+                        <a href="https://www.youtube.com/@GoogleWorkspace" target="_blank" class="btn btn-outline">
+                            Visit Resource
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Zoom Help Center</h3>
+                        <p>Everything you need to know about using Zoom</p>
+                        <a href="https://support.zoom.us/" target="_blank" class="btn btn-outline">
+                            Visit Resource
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i data-lucide="file-text"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Keyboard Shortcuts Cheat Sheet</h3>
+                        <p>Quick reference for Gmail, Drive, Docs, and more</p>
+                        <a href="https://support.google.com/mail/answer/6594" target="_blank" class="btn btn-outline">
+                            Visit Resource
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <span>Made with</span>
+                    <i data-lucide="heart" class="heart-icon"></i>
+                    <span>to help you transition smoothly</span>
+                </div>
+                <p class="copyright">© 2025 Google Workspace Training Guide. All resources link to official documentation.</p>
+                <div class="footer-links">
+                    <a href="https://workspace.google.com/" target="_blank">Google Workspace</a>
+                    <a href="https://zoom.us/" target="_blank">Zoom</a>
+                    <a href="https://support.google.com/" target="_blank">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="shared.js"></script>
+    <script src="quiz.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Update completion badges on load
+        updateCompletionBadges();
+        
+        // Initialize quiz
+        initQuiz();
+    </script>
+</body>
+</html>

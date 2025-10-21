@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Docs - Word to Docs Transition</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="tool-page">
+    <div class="container">
+        <button class="back-button" onclick="navigateHome()">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </button>
+
+        <div class="tool-header">
+            <i data-lucide="file-text" class="tool-header-icon"></i>
+            <div>
+                <h1>Google Docs</h1>
+                <p>Word → Google Docs</p>
+            </div>
+        </div>
+
+        <div class="page-grid">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="card-title">What is Google Docs?</h2>
+                    <p class="card-description">
+                        Google Docs allows real-time collaboration with multiple users, auto-saves automatically, provides comment and suggestion mode for feedback, and tracks all changes with version history.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create a New Document</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Docs/New_docs/new_docs.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_docs">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Docs/New_docs/New_Docs_lab.html" title="New Docs Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Edit Text and Format</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Docs/Edit_text/edit_text.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Edit_text">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Docs/Edit_text/Docs_Create_Lab.html" title="Edit Text Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Share and Comment</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Docs/Share_comment/share_comment.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Share_comment">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Docs/Share_comment/Share_comment_lab.html" title="Share Comment Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-check">
+                    <h3 class="card-title">Lab Completion Status</h3>
+                    <div class="completion-list">
+                        <div class="completion-item" data-lab-id="New_docs">
+                            <i data-lucide="x-circle"></i>
+                            <span>New Docs Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Edit_text">
+                            <i data-lucide="x-circle"></i>
+                            <span>Edit Text Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Share_comment">
+                            <i data-lucide="x-circle"></i>
+                            <span>Share Comment Lab</span>
+                        </div>
+                    </div>
+                    <div class="completion-success" id="completion-success" style="display: none;">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs for Google Docs completed!</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('docs')">
+                        Return to Main Page
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Tips & Tricks</h3>
+                    <div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Quick Tips</h4>
+                        <ul class="tips-list">
+                            <li>• Use '@' to mention collaborators</li>
+                            <li>• Explore add-ons for more features</li>
+                            <li>• Use 'Suggesting' mode for changes</li>
+                            <li>• Access version history anytime</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        lucide.createIcons();
+        updateCompletionCheck('docs');
+        
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'docs-new_docs': 'New_docs',
+                    'docs-edit_text': 'Edit_text',
+                    'docs-share_comment': 'Share_comment'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('docs', mappedLab);
+            }
+        });
+    </script>
+</body>
+</html>

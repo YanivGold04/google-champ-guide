@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Meet & Zoom - Video Conferencing</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="tool-page">
+    <div class="container">
+        <button class="back-button" onclick="navigateHome()">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </button>
+
+        <div class="tool-header">
+            <i data-lucide="video" class="tool-header-icon"></i>
+            <div>
+                <h1>Google Meet & Zoom</h1>
+                <p>Teams → Google Meet / Zoom</p>
+            </div>
+        </div>
+
+        <div class="page-grid">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="card-title">Google Meet</h2>
+                    <p class="card-description">
+                        Google Meet integrates directly with Google Calendar for easy meeting scheduling. It's browser-based and works seamlessly with all Google Workspace tools.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create a New Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Meet/New_meeting/new_meeting.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_meeting">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Meet/New_meeting/New_Meeting_lab.html" title="New Meeting Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Share Your Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Meet/Share_meet/share_meet.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Share_meet">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Meet/Share_meet/Share_Meet_lab.html" title="Share Meet Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Screen Sharing</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Meet/Screen_share/screen_share.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Screen_share">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Meet/Screen_share/Screen_Share_lab.html" title="Screen Share Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <h2 class="card-title">Zoom</h2>
+                    <p class="card-description">
+                        Zoom offers advanced features for webinars and has a desktop application. It's great for large meetings and training sessions.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create a Zoom Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/New_zoom/new_zoom.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/New_zoom/New_Zoom_lab.html" title="New Zoom Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Share Zoom Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/Share_zoom/share_zoom.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Share_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/Share_zoom/Share_Zoom_lab.html" title="Share Zoom Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Zoom Screen Sharing</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/Screen_share/screen_share.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Screen_share_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/Screen_share/Screen_Share_lab.html" title="Zoom Screen Share Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-check">
+                    <h3 class="card-title">Lab Completion Status</h3>
+                    <div class="completion-list">
+                        <div class="completion-item" data-lab-id="New_meeting">
+                            <i data-lucide="x-circle"></i>
+                            <span>New Meeting Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Share_meet">
+                            <i data-lucide="x-circle"></i>
+                            <span>Share Meet Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Screen_share">
+                            <i data-lucide="x-circle"></i>
+                            <span>Screen Share Lab</span>
+                        </div>
+                    </div>
+                    <div class="completion-success" id="completion-success" style="display: none;">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs completed!</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('meet')">
+                        Return to Main Page
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Tips & Tricks</h3>
+                    <div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>• Schedule from Google Calendar</li>
+                            <li>• Use Zoom for large webinars</li>
+                            <li>• Enable captions for accessibility</li>
+                            <li>• Record meetings for later reference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        lucide.createIcons();
+        updateCompletionCheck('meet');
+        
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'meet-new_meeting': 'New_meeting',
+                    'meet-share_meet': 'Share_meet',
+                    'meet-screen_share': 'Screen_share',
+                    'zoom-new_zoom': 'New_zoom',
+                    'zoom-share_zoom': 'Share_zoom',
+                    'zoom-screen_share': 'Screen_share_zoom'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('meet', mappedLab);
+            }
+        });
+    </script>
+</body>
+</html>

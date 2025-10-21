@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets - Excel to Sheets Transition</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="tool-page">
+    <div class="container">
+        <button class="back-button" onclick="navigateHome()">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </button>
+
+        <div class="tool-header">
+            <i data-lucide="table" class="tool-header-icon"></i>
+            <div>
+                <h1>Google Sheets</h1>
+                <p>Excel → Google Sheets</p>
+            </div>
+        </div>
+
+        <div class="page-grid">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="card-title">What is Google Sheets?</h2>
+                    <p class="card-description">
+                        Google Sheets is cloud-based with real-time collaboration. Most Excel formulas work in Sheets, and it includes built-in data visualization tools and powerful functions like IMPORTRANGE to link data across sheets.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create a New Sheet</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Sheets/New_sheet/new_sheet.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_sheet">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Sheets/New_sheet/New_Sheet_lab.html" title="New Sheet Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Using Formulas</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Sheets/Formula/formula.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Formula">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Sheets/Formula/Formula_lab.html" title="Formula Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create Charts</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Sheets/New_chart/new_chart.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_chart">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Sheets/New_chart/New_Chart_lab.html" title="New Chart Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-check">
+                    <h3 class="card-title">Lab Completion Status</h3>
+                    <div class="completion-list">
+                        <div class="completion-item" data-lab-id="New_sheet">
+                            <i data-lucide="x-circle"></i>
+                            <span>New Sheet Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Formula">
+                            <i data-lucide="x-circle"></i>
+                            <span>Formula Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="New_chart">
+                            <i data-lucide="x-circle"></i>
+                            <span>New Chart Lab</span>
+                        </div>
+                    </div>
+                    <div class="completion-success" id="completion-success" style="display: none;">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs for Google Sheets completed!</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('sheets')">
+                        Return to Main Page
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Tips & Tricks</h3>
+                    <div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Best Practices</h4>
+                        <ul class="tips-list">
+                            <li>• Use Explore feature for insights</li>
+                            <li>• Protect ranges to prevent edits</li>
+                            <li>• Learn QUERY function for analysis</li>
+                            <li>• Use conditional formatting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        lucide.createIcons();
+        updateCompletionCheck('sheets');
+        
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'sheets-new_sheet': 'New_sheet',
+                    'sheets-formula': 'Formula',
+                    'sheets-new_chart': 'New_chart'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('sheets', mappedLab);
+            }
+        });
+    </script>
+</body>
+</html>

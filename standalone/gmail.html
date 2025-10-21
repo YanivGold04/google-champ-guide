@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail - Outlook to Gmail Transition</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="tool-page">
+    <div class="container">
+        <button class="back-button" onclick="navigateHome()">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </button>
+
+        <div class="tool-header">
+            <i data-lucide="mail" class="tool-header-icon"></i>
+            <div>
+                <h1>Gmail</h1>
+                <p>Outlook → Gmail</p>
+            </div>
+        </div>
+
+        <div class="page-grid">
+            <div class="main-content">
+                <!-- Introduction -->
+                <div class="card">
+                    <h2 class="card-title">What is Gmail?</h2>
+                    <p class="card-description">
+                        Gmail is Google's email service that offers a clean, powerful interface with advanced search capabilities,
+                        conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder
+                        structure, Gmail uses labels that can be applied to multiple emails, making organization more flexible.
+                    </p>
+                </div>
+
+                <!-- Compose Lab -->
+                <div class="card">
+                    <h2 class="card-title">Composing and Sending Emails</h2>
+                    <p class="card-description">Learn how to compose and send an email in Gmail</p>
+                    
+                    <div class="video-container">
+                        <video src="../public/images/gmail/compose/compose.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-compose">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/gmail/compose/compose_lab.html" title="Gmail Compose Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trash Lab -->
+                <div class="card">
+                    <h2 class="card-title">Moving Emails to Trash</h2>
+                    <p class="card-description">Learn how to delete emails and manage your trash folder</p>
+                    
+                    <div class="video-container">
+                        <video src="../public/images/gmail/trash/trash.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-trash">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/gmail/trash/trash_lab.html" title="Gmail Trash Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Lab -->
+                <div class="card">
+                    <h2 class="card-title">Searching Emails</h2>
+                    <p class="card-description">Learn how to use Gmail's powerful search features</p>
+                    
+                    <div class="video-container">
+                        <video src="../public/images/gmail/search/search.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-search">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/gmail/search/search_lab.html" title="Gmail Search Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completion Check -->
+                <div class="completion-check">
+                    <h3 class="card-title">Lab Completion Status</h3>
+                    <div class="completion-list">
+                        <div class="completion-item" data-lab-id="compose">
+                            <i data-lucide="x-circle"></i>
+                            <span>Compose Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="trash">
+                            <i data-lucide="x-circle"></i>
+                            <span>Trash Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="search">
+                            <i data-lucide="x-circle"></i>
+                            <span>Search Lab</span>
+                        </div>
+                    </div>
+                    <div class="completion-success" id="completion-success" style="display: none;">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs for Gmail completed!</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('gmail')">
+                        Return to Main Page
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Tips & Tricks</h3>
+                    <div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Keyboard Shortcuts</h4>
+                        <ul class="tips-list">
+                            <li>• 'c' - Compose new email</li>
+                            <li>• 'r' - Reply to email</li>
+                            <li>• 'a' - Reply all</li>
+                            <li>• 'f' - Forward email</li>
+                            <li>• '/' - Search emails</li>
+                            <li>• 'e' - Archive email</li>
+                            <li>• '#' - Delete email</li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Search Operators</h4>
+                        <ul class="tips-list">
+                            <li>• from:name - Find emails from someone</li>
+                            <li>• to:name - Find emails to someone</li>
+                            <li>• has:attachment - Find emails with attachments</li>
+                            <li>• is:unread - Find unread emails</li>
+                            <li>• after:2024/01/01 - Find emails after a date</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Update completion check on load
+        updateCompletionCheck('gmail');
+        
+        // Setup iframe message listeners
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'gmail-compose': 'compose',
+                    'gmail-trash': 'trash',
+                    'gmail-search': 'search'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('gmail', mappedLab);
+            }
+        });
+    </script>
+</body>
+</html>
