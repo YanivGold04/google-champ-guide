@@ -4,15 +4,350 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Slides - PowerPoint to Slides Transition</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .website-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .website-link:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .tool-header-icon {
+            width: 64px;
+            height: 64px;
+            color: #667eea;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            font-size: 1.125rem;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .lab-section {
+            margin-top: 1.5rem;
+        }
+
+        .lab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .lab-header h4 {
+            font-size: 1.25rem;
+            color: #1f2937;
+        }
+
+        .lab-status {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .lab-status.not-started {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .lab-status.completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .completion-check {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .completion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .completion-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .completion-item.completed {
+            background: #d1fae5;
+        }
+
+        .completion-item svg {
+            width: 24px;
+            height: 24px;
+            color: #ef4444;
+        }
+
+        .completion-item.completed svg {
+            color: #10b981;
+        }
+
+        .completion-success {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #d1fae5;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: #065f46;
+        }
+
+        .completion-success svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            color: #4b5563;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .page-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+
+            .tool-header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .tool-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .tool-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .iframe-container {
+                height: 400px;
+            }
+
+            .website-link {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body class="tool-page">
     <div class="container">
-        <button class="back-button" onclick="navigateHome()">
-            <i data-lucide="arrow-left"></i>
-            Back to Home
-        </button>
+        <div>
+            <button class="back-button" onclick="navigateHome()">
+                <i data-lucide="arrow-left"></i>
+                Back to Home
+            </button>
+            <a href="YOUR_WEBSITE_URL_HERE" class="website-link" target="_blank">
+                <i data-lucide="external-link"></i>
+                Visit Original Website
+            </a>
+        </div>
 
         <div class="tool-header">
             <i data-lucide="presentation" class="tool-header-icon"></i>
@@ -122,8 +457,107 @@
         </div>
     </div>
 
-    <script src="shared.js"></script>
     <script>
+        // Shared functions
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function navigateToTool(tool) {
+            window.location.href = `./${tool}.html`;
+        }
+
+        function navigateHome() {
+            window.location.href = './index.html';
+        }
+
+        function getPlatformCompletion(platform) {
+            const completed = sessionStorage.getItem(`${platform}-completed`);
+            return completed === 'true';
+        }
+
+        function markPlatformComplete(platform) {
+            sessionStorage.setItem(`${platform}-completed`, 'true');
+        }
+
+        function getCompletedLabs(platform) {
+            const labs = sessionStorage.getItem(`${platform}-labs`);
+            return labs ? JSON.parse(labs) : [];
+        }
+
+        function markLabComplete(platform, labName) {
+            const scrollY = window.scrollY;
+            const completedLabs = getCompletedLabs(platform);
+            if (!completedLabs.includes(labName)) {
+                completedLabs.push(labName);
+                sessionStorage.setItem(`${platform}-labs`, JSON.stringify(completedLabs));
+            }
+            updateLabStatus(platform, labName);
+            updateCompletionCheck(platform);
+            setTimeout(() => window.scrollTo(0, scrollY), 100);
+        }
+
+        function updateLabStatus(platform, labName) {
+            const completedLabs = getCompletedLabs(platform);
+            const statusElement = document.getElementById(`status-${labName}`);
+            const completionItem = document.querySelector(`.completion-item[data-lab-id="${labName}"]`);
+            
+            if (completedLabs.includes(labName)) {
+                if (statusElement) {
+                    statusElement.textContent = '✅ Completed';
+                    statusElement.classList.remove('not-started');
+                    statusElement.classList.add('completed');
+                }
+                if (completionItem) {
+                    completionItem.classList.add('completed');
+                    const icon = completionItem.querySelector('i');
+                    if (icon) {
+                        icon.setAttribute('data-lucide', 'check-circle-2');
+                    }
+                }
+            }
+        }
+
+        function updateCompletionCheck(platform) {
+            const allLabs = Array.from(document.querySelectorAll('.completion-item')).map(item => 
+                item.getAttribute('data-lab-id')
+            );
+            const completedLabs = getCompletedLabs(platform);
+            
+            allLabs.forEach(labId => updateLabStatus(platform, labId));
+            
+            if (allLabs.length > 0 && allLabs.every(lab => completedLabs.includes(lab))) {
+                showCompletionSuccess();
+                markPlatformComplete(platform);
+            }
+            
+            lucide.createIcons();
+        }
+
+        function showCompletionSuccess() {
+            const successElement = document.getElementById('completion-success');
+            if (successElement) {
+                successElement.style.display = 'flex';
+            }
+        }
+
+        function returnToHome(platform) {
+            const allLabs = Array.from(document.querySelectorAll('.completion-item')).map(item => 
+                item.getAttribute('data-lab-id')
+            );
+            const completedLabs = getCompletedLabs(platform);
+            
+            if (allLabs.every(lab => completedLabs.includes(lab))) {
+                markPlatformComplete(platform);
+            }
+            
+            navigateHome();
+        }
+
+        // Initialize
         lucide.createIcons();
         updateCompletionCheck('slides');
         
