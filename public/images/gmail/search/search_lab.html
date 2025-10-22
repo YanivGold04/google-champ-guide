@@ -1,182 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gmail Search Mission</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    body, #simulator {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-    }
-
-    #simulator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .screen {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
-    .screen.active { display: block; }
-
-    .stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-      display: block;
-      background: #fff;
-    }
-
-    .hotspot { position: absolute; cursor: pointer; }
-
-    .hint {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 5%;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      opacity: 0.9;
-      display: none;
-    }
-
-    .debug .hotspot {
-      background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #00aaff;
-    }
-
-    /* Completion button */
-    #completion-button button {
-      background: #1a73e8;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-      transition: background 0.2s ease;
-    }
-    #completion-button button:hover { background: #1558b0; }
-
-    /* ✅ Fade-in animation for success message */
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <div id="simulator">
-    <div id="hint" class="hint"></div>
-
-    <!-- Step 1 -->
-    <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="search_first.png" alt="Search bar" />
-      <div class="hotspot" style="top:12%; left:19%; width:62%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
-    </div>
-
-    <!-- Step 2 -->
-    <div id="screen2" class="screen">
-      <img class="stage-img" src="search_second.png" alt="Typing search" />
-    </div>
-
-    <!-- Step 3 -->
-    <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="search_third.png" alt="Search results" />
-      <div class="hotspot" style="top:47%; left:23%; width:55%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
-    </div>
-
-    <!-- Step 4 -->
-    <div id="screen4" class="screen" onclick="completeLab(event)">
-      <img class="stage-img" src="search_last.png" alt="Search done" />
-    </div>
-  </div>
-
-  <script>
-    const hints = {
-      1: 'Hint: Click inside the search bar.',
-      3: 'Hint: Click the “All results for immunai” option.'
-    };
-
-    function goTo(n){
-      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-      document.getElementById('screen'+n).classList.add('active');
-      hideHint();
-    }
-
-    function wrong(stage){ showHint(hints[stage]); }
-
-    function showHint(msg){
-      const h=document.getElementById('hint');
-      h.textContent=msg;
-      h.style.display='block';
-      clearTimeout(window.__hintT);
-      window.__hintT=setTimeout(()=>h.style.display='none',1800);
-    }
-
-    function hideHint(){ document.getElementById('hint').style.display='none'; }
-    function evtStop(e){ e.stopPropagation(); }
-
-    // Typing simulation: move from screen2 to screen3 when user types "i"
-    let typed="";
-    window.addEventListener('keydown',(e)=>{
-      const active=document.querySelector('.screen.active');
-      if(active && active.id==="screen2"){
-        typed+=e.key.toLowerCase();
-        if(typed.includes("i")) goTo(3);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail Search Mission</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
       }
-    });
 
-    // Debug toggle with "D" key
-    const sim=document.getElementById('simulator');
-    window.addEventListener('keydown',(e)=>{
-      if(e.key.toLowerCase()==='d') sim.classList.toggle('debug');
-    });
+      body, #simulator {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+      }
 
-    // ✅ Auto-complete when reaching final screen
-    function completeLab(event) {
-      event?.preventDefault();
-      event?.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'search' }, '*');
-      
-      const sim = document.getElementById('simulator');
-      sim.innerHTML = `
-        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Search completed successfully!</div>
-          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
-        </div>
-      `;
-    }
-  </script>
-</body>
+      #simulator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .screen.active { display: block; }
+
+      .stage-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        display: block;
+        background: #fff;
+      }
+
+      .hotspot { position: absolute; cursor: pointer; }
+
+      .hint {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        display: none;
+      }
+
+      .debug .hotspot {
+        background: rgba(0, 128, 255, 0.25);
+        outline: 1px dashed #00aaff;
+      }
+
+      /* Completion button */
+      #completion-button button {
+        background: #1a73e8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 1rem;
+        transition: background 0.2s ease;
+      }
+      #completion-button button:hover { background: #1558b0; }
+
+      /* ✅ Fade-in animation for success message */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="simulator">
+      <div id="hint" class="hint"></div>
+
+      <!-- Step 1 -->
+      <div id="screen1" class="screen active" onclick="wrong(1)">
+        <img class="stage-img" src="search_first.png" alt="Search bar" />
+        <div class="hotspot" style="top:12%; left:19%; width:40%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="screen2" class="screen">
+        <img class="stage-img" src="search_second.png" alt="Typing search" />
+      </div>
+
+      <!-- Step 3 -->
+      <div id="screen3" class="screen" onclick="wrong(3)">
+        <img class="stage-img" src="search_third.png" alt="Search results" />
+        <div class="hotspot" style="top:47%; left:23%; width:40%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div id="screen4" class="screen" onclick="completeLab(event)">
+        <img class="stage-img" src="search_last.png" alt="Search done" />
+      </div>
+    </div>
+
+    <script>
+      const hints = {
+        1: 'Hint: Click inside the search bar.',
+        3: 'Hint: Click the “All results for immunai” option.'
+      };
+
+      function goTo(n){
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+        document.getElementById('screen'+n).classList.add('active');
+        hideHint();
+      }
+
+      function wrong(stage){ showHint(hints[stage]); }
+
+      function showHint(msg){
+        const h=document.getElementById('hint');
+        h.textContent=msg;
+        h.style.display='block';
+        clearTimeout(window.__hintT);
+        window.__hintT=setTimeout(()=>h.style.display='none',1800);
+      }
+
+      function hideHint(){ document.getElementById('hint').style.display='none'; }
+      function evtStop(e){ e.stopPropagation(); }
+
+      // Typing simulation: move from screen2 to screen3 when user types "i"
+      let typed="";
+      window.addEventListener('keydown',(e)=>{
+        const active=document.querySelector('.screen.active');
+        if(active && active.id==="screen2"){
+          typed+=e.key.toLowerCase();
+          if(typed.includes("i")) goTo(3);
+        }
+      });
+
+      // Debug toggle with "D" key
+      const sim=document.getElementById('simulator');
+      window.addEventListener('keydown',(e)=>{
+        if(e.key.toLowerCase()==='d') sim.classList.toggle('debug');
+      });
+
+      // ✅ Auto-complete when reaching final screen
+      function completeLab(event) {
+        event?.preventDefault();
+        event?.stopPropagation();
+        window.parent.postMessage({ type: 'lab-complete', lab: 'search' }, '*');
+
+        const sim = document.getElementById('simulator');
+        sim.innerHTML = `
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+            <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Search completed successfully!</div>
+            <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+          </div>
+        `;
+      }
+    </script>
+  </body>
 </html>
