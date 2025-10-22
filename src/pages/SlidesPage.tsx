@@ -75,6 +75,13 @@ const SlidesPage = () => {
                   collaboratively. It supports real-time editing, imports PowerPoint files seamlessly, and enables presenting 
                   from any device with a web browser. Slides integrates with Google Drive and offers built-in templates and themes.
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://workspace.google.com/products/slides/', '_blank')}
+                >
+                  Open Google Slides →
+                </Button>
               </CardContent>
             </Card>
 

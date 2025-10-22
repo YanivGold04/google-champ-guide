@@ -75,6 +75,13 @@ const SheetsPage = () => {
                   It enables real-time collaboration, automatic saving, and powerful data analysis tools. Sheets integrates 
                   with other Google Workspace apps and offers unique functions like IMPORTRANGE for linking data across spreadsheets.
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://workspace.google.com/products/sheets/', '_blank')}
+                >
+                  Open Google Sheets →
+                </Button>
               </CardContent>
             </Card>
 

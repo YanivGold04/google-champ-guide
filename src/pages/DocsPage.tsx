@@ -75,6 +75,13 @@ const DocsPage = () => {
                   the same document simultaneously, with changes appearing instantly. Documents are auto-saved, and version 
                   history tracks all changes. Google Docs works in any browser and integrates seamlessly with Google Drive.
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://docs.google.com/document/u/0/', '_blank')}
+                >
+                  Open Google Docs →
+                </Button>
               </CardContent>
             </Card>
 

@@ -77,6 +77,13 @@ const GmailPage = () => {
                   conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder
                   structure, Gmail uses labels that can be applied to multiple emails, making organization more flexible.
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')}
+                >
+                  Open Gmail →
+                </Button>
               </CardContent>
             </Card>
 

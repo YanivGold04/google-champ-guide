@@ -161,17 +161,35 @@ const MeetPage = () => {
                 </CardHeader>
                 <CardContent>
                   {selectedPlatform === "zoom" ? (
-                    <p className="text-muted-foreground">
-                      Zoom is a powerful video conferencing platform that offers advanced features like webinars, 
-                      breakout rooms, extensive customization options, virtual backgrounds, and robust meeting controls. 
-                      It's perfect for large webinars, training sessions, and meetings requiring advanced features.
-                    </p>
+                    <>
+                      <p className="text-muted-foreground">
+                        Zoom is a powerful video conferencing platform that offers advanced features like webinars, 
+                        breakout rooms, extensive customization options, virtual backgrounds, and robust meeting controls. 
+                        It's perfect for large webinars, training sessions, and meetings requiring advanced features.
+                      </p>
+                      <Button 
+                        variant="link" 
+                        className="mt-4 px-0"
+                        onClick={() => window.open('https://www.zoom.com/', '_blank')}
+                      >
+                        Open Zoom →
+                      </Button>
+                    </>
                   ) : (
-                    <p className="text-muted-foreground">
-                      Google Meet is Google's video conferencing solution that integrates directly with Google Calendar and Gmail. 
-                      It's perfect for quick meetings, team collaboration, one-on-ones, and scheduled calendar events. 
-                      Simple, intuitive, and seamlessly integrated with Google Workspace.
-                    </p>
+                    <>
+                      <p className="text-muted-foreground">
+                        Google Meet is Google's video conferencing solution that integrates directly with Google Calendar and Gmail. 
+                        It's perfect for quick meetings, team collaboration, one-on-ones, and scheduled calendar events. 
+                        Simple, intuitive, and seamlessly integrated with Google Workspace.
+                      </p>
+                      <Button 
+                        variant="link" 
+                        className="mt-4 px-0"
+                        onClick={() => window.open('https://meet.google.com/landing', '_blank')}
+                      >
+                        Open Google Meet →
+                      </Button>
+                    </>
                   )}
                 </CardContent>
               </Card>

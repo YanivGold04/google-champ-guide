@@ -76,6 +76,13 @@ const CalendarPage = () => {
                   and automatically add video conferencing links to events. Calendar syncs across all devices and offers smart 
                   scheduling features like "Find a time."
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://calendar.google.com/calendar/u/0/r', '_blank')}
+                >
+                  Open Google Calendar →
+                </Button>
               </CardContent>
             </Card>
 

@@ -75,6 +75,13 @@ const DrivePage = () => {
                   It offers real-time collaboration, automatic version history, and easy sharing with granular permission controls. 
                   Files are organized in folders and can be accessed from any device with internet connectivity.
                 </p>
+                <Button 
+                  variant="link" 
+                  className="mt-4 px-0"
+                  onClick={() => window.open('https://drive.google.com/drive/my-drive', '_blank')}
+                >
+                  Open Google Drive →
+                </Button>
               </CardContent>
             </Card>
 
