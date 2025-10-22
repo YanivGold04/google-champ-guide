@@ -4,48 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Meet & Zoom - Video Conferencing</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --background: #f9fafb; --foreground: #111827; --card: #ffffff; --primary: #3b82f6; --secondary: #10b981; --muted: #f3f4f6; --muted-foreground: #6b7280; --border: #e5e7eb; --radius: 0.75rem; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: var(--background); color: var(--foreground); line-height: 1.6; min-height: 100vh; padding: 2rem 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .back-button { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: transparent; border: none; color: var(--foreground); cursor: pointer; font-size: 1rem; margin-bottom: 2rem; transition: opacity 0.3s ease; }
-        .back-button:hover { opacity: 0.7; }
-        .tool-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
-        .tool-header-icon { color: var(--primary); width: 48px; height: 48px; }
-        .tool-header h1 { font-size: 2.5rem; font-weight: 700; }
-        .tool-header p { font-size: 1.25rem; color: var(--muted-foreground); }
-        .page-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
-        .main-content { display: flex; flex-direction: column; gap: 2rem; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-        .card-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-        .card-description { color: var(--muted-foreground); margin-bottom: 1rem; }
-        .lab-section { margin-top: 1.5rem; }
-        .lab-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .lab-status { font-size: 0.875rem; font-weight: 600; }
-        .lab-status.completed { color: var(--secondary); }
-        .lab-status.not-started { color: var(--muted-foreground); }
-        .video-container, .iframe-container { border-radius: 1rem; overflow: hidden; background: white; }
-        .video-container video { width: 100%; height: auto; display: block; }
-        .iframe-container iframe { width: 100%; height: 650px; border: none; display: block; }
-        .sidebar { position: sticky; top: 2rem; height: fit-content; }
-        .tips-list { list-style: none; padding: 0; }
-        .tips-list li { padding: 0.5rem 0; color: var(--muted-foreground); font-size: 0.875rem; }
-        .completion-check { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-        .completion-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
-        .completion-item { display: flex; align-items: center; gap: 0.5rem; }
-        .completion-item i { width: 20px; height: 20px; }
-        .completion-success { color: var(--secondary); padding: 1rem; border-top: 1px solid var(--border); margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; font-size: 1rem; }
-        .btn-primary { background-color: var(--primary); color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35); }
-        @media (max-width: 768px) { .page-grid { grid-template-columns: 1fr; } }
-    </style>
 </head>
-<body>
+<body class="tool-page">
     <div class="container">
-        <button class="back-button" onclick="window.location.href='index.html'">
+        <button class="back-button" onclick="navigateHome()">
             <i data-lucide="arrow-left"></i>
             Back to Home
         </button>
@@ -61,18 +25,10 @@
         <div class="page-grid">
             <div class="main-content">
                 <div class="card">
-                    <h2 class="card-title">Google Meet & Zoom</h2>
-                    <p class="card-description">Google Meet integrates directly with Google Calendar for easy meeting scheduling. It's browser-based and works seamlessly with all Google Workspace tools. Zoom offers extensive third-party integrations and is excellent for large webinars.</p>
-                    <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="https://meet.google.com/landing" class="btn btn-primary" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                            Open Google Meet
-                        </a>
-                        <a href="https://www.zoom.com/" class="btn btn-primary" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                            Open Zoom
-                        </a>
-                    </div>
+                    <h2 class="card-title">Google Meet</h2>
+                    <p class="card-description">
+                        Google Meet integrates directly with Google Calendar for easy meeting scheduling. It's browser-based and works seamlessly with all Google Workspace tools.
+                    </p>
                 </div>
 
                 <div class="card">
@@ -123,17 +79,84 @@
                     </div>
                 </div>
 
+                <div class="card" style="margin-top: 2rem;">
+                    <h2 class="card-title">Zoom</h2>
+                    <p class="card-description">
+                        Zoom offers advanced features for webinars and has a desktop application. It's great for large meetings and training sessions.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Create a Zoom Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/New_zoom/new_zoom.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-New_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/New_zoom/New_Zoom_lab.html" title="New Zoom Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Share Zoom Meeting</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/Share_zoom/share_zoom.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Share_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/Share_zoom/Share_Zoom_lab.html" title="Share Zoom Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Zoom Screen Sharing</h2>
+                    <div class="video-container">
+                        <video src="../public/images/Zoom/Screen_share/screen_share.mp4" autoplay loop muted playsinline preload="auto"></video>
+                    </div>
+                    <div class="lab-section">
+                        <div class="lab-header">
+                            <h4>Try it yourself - Interactive Lab</h4>
+                            <span class="lab-status not-started" id="status-Screen_share_zoom">❌ Not started</span>
+                        </div>
+                        <div class="iframe-container">
+                            <iframe src="../public/images/Zoom/Screen_share/Screen_Share_lab.html" title="Zoom Screen Share Lab"></iframe>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="completion-check">
                     <h3 class="card-title">Lab Completion Status</h3>
                     <div class="completion-list">
-                        <div class="completion-item" data-lab-id="New_meeting"><i data-lucide="x-circle"></i><span>New Meeting Lab</span></div>
-                        <div class="completion-item" data-lab-id="Share_meet"><i data-lucide="x-circle"></i><span>Share Meet Lab</span></div>
-                        <div class="completion-item" data-lab-id="Screen_share"><i data-lucide="x-circle"></i><span>Screen Share Lab</span></div>
+                        <div class="completion-item" data-lab-id="New_meeting">
+                            <i data-lucide="x-circle"></i>
+                            <span>New Meeting Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Share_meet">
+                            <i data-lucide="x-circle"></i>
+                            <span>Share Meet Lab</span>
+                        </div>
+                        <div class="completion-item" data-lab-id="Screen_share">
+                            <i data-lucide="x-circle"></i>
+                            <span>Screen Share Lab</span>
+                        </div>
                     </div>
                     <div class="completion-success" id="completion-success" style="display: none;">
-                        <i data-lucide="check-circle-2"></i><span>✅ All labs completed!</span>
+                        <i data-lucide="check-circle-2"></i>
+                        <span>✅ All labs completed!</span>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('meet')">Return to Main Page</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="returnToHome('meet')">
+                        Return to Main Page
+                    </button>
                 </div>
             </div>
 
@@ -154,14 +177,26 @@
         </div>
     </div>
 
+    <script src="shared.js"></script>
     <script>
-        function getCompletedLabs(p) { const s = sessionStorage.getItem(`${p}-labs-completed`); return s ? new Set(JSON.parse(s)) : new Set(); }
-        function markLabComplete(p, l) { const c = getCompletedLabs(p); c.add(l); sessionStorage.setItem(`${p}-labs-completed`, JSON.stringify([...c])); updateLabStatus(p, l); updateCompletionCheck(p); }
-        function updateLabStatus(p, l) { const s = document.getElementById(`status-${l}`); if (s) { s.textContent = '✅ Completed'; s.classList.remove('not-started'); s.classList.add('completed'); } }
-        function updateCompletionCheck(p) { const c = getCompletedLabs(p); const items = document.querySelectorAll('.completion-item'); items.forEach((item) => { const l = item.dataset.labId; const i = item.querySelector('i'); if (c.has(l)) { i.setAttribute('data-lucide', 'check-circle-2'); i.style.color = 'var(--secondary)'; } else { i.setAttribute('data-lucide', 'x-circle'); i.style.color = 'var(--muted-foreground)'; } }); if (typeof lucide !== 'undefined') { lucide.createIcons(); } if (c.size >= items.length) { const s = document.getElementById('completion-success'); if (s) { s.style.display = 'flex'; } } }
-        function returnToHome(p) { const c = JSON.parse(sessionStorage.getItem('platform-completions') || '{}'); c[p] = true; sessionStorage.setItem('platform-completions', JSON.stringify(c)); window.location.href = 'index.html'; }
-        lucide.createIcons(); updateCompletionCheck('meet');
-        window.addEventListener('message', function(e) { if (e.data?.type === 'lab-complete' && e.data?.lab) { const n = e.data.lab; const m = { 'meet-new_meeting': 'New_meeting', 'meet-share_meet': 'Share_meet', 'meet-screen_share': 'Screen_share' }; markLabComplete('meet', m[n] || n); } });
+        lucide.createIcons();
+        updateCompletionCheck('meet');
+        
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'lab-complete' && event.data?.lab) {
+                const labName = event.data.lab;
+                const labMap = {
+                    'meet-new_meeting': 'New_meeting',
+                    'meet-share_meet': 'Share_meet',
+                    'meet-screen_share': 'Screen_share',
+                    'zoom-new_zoom': 'New_zoom',
+                    'zoom-share_zoom': 'Share_zoom',
+                    'zoom-screen_share': 'Screen_share_zoom'
+                };
+                const mappedLab = labMap[labName] || labName;
+                markLabComplete('meet', mappedLab);
+            }
+        });
     </script>
 </body>
 </html>

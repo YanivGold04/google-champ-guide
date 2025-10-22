@@ -4,82 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gmail - Outlook to Gmail Transition</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --background: #f9fafb; --foreground: #111827; --card: #ffffff; --primary: #3b82f6;
-            --secondary: #10b981; --muted: #f3f4f6; --muted-foreground: #6b7280;
-            --border: #e5e7eb; --radius: 0.75rem;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background-color: var(--background); color: var(--foreground); line-height: 1.6;
-            min-height: 100vh; padding: 2rem 0;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .back-button {
-            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
-            background: transparent; border: none; color: var(--foreground); cursor: pointer;
-            font-size: 1rem; margin-bottom: 2rem; transition: opacity 0.3s ease;
-        }
-        .back-button:hover { opacity: 0.7; }
-        .tool-header {
-            display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
-        }
-        .tool-header-icon { color: var(--primary); width: 48px; height: 48px; }
-        .tool-header h1 { font-size: 2.5rem; font-weight: 700; }
-        .tool-header p { font-size: 1.25rem; color: var(--muted-foreground); }
-        .page-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
-        .main-content { display: flex; flex-direction: column; gap: 2rem; }
-        .card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem;
-        }
-        .card-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-        .card-description { color: var(--muted-foreground); margin-bottom: 1rem; }
-        .lab-section { margin-top: 1.5rem; }
-        .lab-header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;
-        }
-        .lab-status { font-size: 0.875rem; font-weight: 600; }
-        .lab-status.completed { color: var(--secondary); }
-        .lab-status.not-started { color: var(--muted-foreground); }
-        .video-container, .iframe-container {
-            border-radius: 1rem; overflow: hidden; background: white;
-        }
-        .video-container video { width: 100%; height: auto; display: block; }
-        .iframe-container iframe { width: 100%; height: 650px; border: none; display: block; }
-        .sidebar { position: sticky; top: 2rem; height: fit-content; }
-        .tips-list { list-style: none; padding: 0; }
-        .tips-list li { padding: 0.5rem 0; color: var(--muted-foreground); font-size: 0.875rem; }
-        .completion-check {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem;
-        }
-        .completion-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
-        .completion-item { display: flex; align-items: center; gap: 0.5rem; }
-        .completion-item i { width: 20px; height: 20px; }
-        .completion-success {
-            color: var(--secondary); padding: 1rem; border-top: 1px solid var(--border);
-            margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;
-        }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem;
-            border-radius: var(--radius); font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease; border: none; font-size: 1rem;
-        }
-        .btn-primary {
-            background-color: var(--primary); color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
-        }
-        @media (max-width: 768px) { .page-grid { grid-template-columns: 1fr; } }
-    </style>
 </head>
-<body>
+<body class="tool-page">
     <div class="container">
         <button class="back-button" onclick="navigateHome()">
             <i data-lucide="arrow-left"></i>
@@ -96,6 +24,7 @@
 
         <div class="page-grid">
             <div class="main-content">
+                <!-- Introduction -->
                 <div class="card">
                     <h2 class="card-title">What is Gmail?</h2>
                     <p class="card-description">
@@ -103,12 +32,9 @@
                         conversation threading, and seamless integration with other Google Workspace tools. Unlike Outlook's folder
                         structure, Gmail uses labels that can be applied to multiple emails, making organization more flexible.
                     </p>
-                    <a href="https://mail.google.com/mail/u/0/#inbox" class="btn btn-primary" target="_blank" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                        Open Gmail
-                    </a>
                 </div>
 
+                <!-- Compose Lab -->
                 <div class="card">
                     <h2 class="card-title">Composing and Sending Emails</h2>
                     <p class="card-description">Learn how to compose and send an email in Gmail</p>
@@ -128,6 +54,7 @@
                     </div>
                 </div>
 
+                <!-- Trash Lab -->
                 <div class="card">
                     <h2 class="card-title">Moving Emails to Trash</h2>
                     <p class="card-description">Learn how to delete emails and manage your trash folder</p>
@@ -147,6 +74,7 @@
                     </div>
                 </div>
 
+                <!-- Search Lab -->
                 <div class="card">
                     <h2 class="card-title">Searching Emails</h2>
                     <p class="card-description">Learn how to use Gmail's powerful search features</p>
@@ -166,6 +94,7 @@
                     </div>
                 </div>
 
+                <!-- Completion Check -->
                 <div class="completion-check">
                     <h3 class="card-title">Lab Completion Status</h3>
                     <div class="completion-list">
@@ -192,6 +121,7 @@
                 </div>
             </div>
 
+            <!-- Sidebar -->
             <div class="sidebar">
                 <div class="card">
                     <h3 class="card-title">Tips & Tricks</h3>
@@ -222,76 +152,15 @@
         </div>
     </div>
 
+    <script src="shared.js"></script>
     <script>
-        function navigateHome() { window.location.href = 'index.html'; }
-        
-        function getCompletedLabs(platform) {
-            const stored = sessionStorage.getItem(`${platform}-labs-completed`);
-            return stored ? new Set(JSON.parse(stored)) : new Set();
-        }
-        
-        function markLabComplete(platform, labId) {
-            const completedLabs = getCompletedLabs(platform);
-            completedLabs.add(labId);
-            sessionStorage.setItem(`${platform}-labs-completed`, JSON.stringify([...completedLabs]));
-            
-            updateLabStatus(platform, labId);
-            updateCompletionCheck(platform);
-        }
-        
-        function updateLabStatus(platform, labId) {
-            const statusElement = document.getElementById(`status-${labId}`);
-            if (statusElement) {
-                statusElement.textContent = '✅ Completed';
-                statusElement.classList.remove('not-started');
-                statusElement.classList.add('completed');
-            }
-        }
-        
-        function updateCompletionCheck(platform) {
-            const completedLabs = getCompletedLabs(platform);
-            const labItems = document.querySelectorAll('.completion-item');
-            
-            labItems.forEach((item) => {
-                const labId = item.dataset.labId;
-                const icon = item.querySelector('i');
-                
-                if (completedLabs.has(labId)) {
-                    icon.setAttribute('data-lucide', 'check-circle-2');
-                    icon.style.color = 'var(--secondary)';
-                } else {
-                    icon.setAttribute('data-lucide', 'x-circle');
-                    icon.style.color = 'var(--muted-foreground)';
-                }
-            });
-            
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            
-            const expectedLabs = document.querySelectorAll('.completion-item').length;
-            if (completedLabs.size >= expectedLabs) {
-                const successElement = document.getElementById('completion-success');
-                if (successElement) {
-                    successElement.style.display = 'flex';
-                }
-            }
-        }
-        
-        function markPlatformComplete(platform) {
-            const completions = JSON.parse(sessionStorage.getItem('platform-completions') || '{}');
-            completions[platform] = true;
-            sessionStorage.setItem('platform-completions', JSON.stringify(completions));
-        }
-        
-        function returnToHome(platform) {
-            markPlatformComplete(platform);
-            navigateHome();
-        }
-        
+        // Initialize Lucide icons
         lucide.createIcons();
+        
+        // Update completion check on load
         updateCompletionCheck('gmail');
         
+        // Setup iframe message listeners
         window.addEventListener('message', function(event) {
             if (event.data?.type === 'lab-complete' && event.data?.lab) {
                 const labName = event.data.lab;
