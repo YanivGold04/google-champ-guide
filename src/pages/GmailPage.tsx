@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Footer from "@/components/Footer";
 import LabCompletionCheck from "@/components/LabCompletionCheck";
 import { useLabCompletion } from "@/hooks/useLabCompletion";
+import { CoordinatePicker } from "@/components/CoordinatePicker";
 
 const GmailPage = () => {
   const navigate = useNavigate();
@@ -337,6 +338,7 @@ const GmailPage = () => {
         </div>
       </div>
       <Footer />
+      <CoordinatePicker />
     </div>
   );
 };
