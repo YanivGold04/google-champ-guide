@@ -1,181 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gmail Compose Lab (Re-structured)</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail Compose Lab (Re-structured)</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
 
-    body, #simulator {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-    }
+      body, #simulator {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+      }
 
-    #simulator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+      #simulator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
 
-    .screen {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
-    .screen.active { display: block; }
+      .screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .screen.active { display: block; }
 
-    .stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-      display: block;
-      background: #fff;
-    }
+      .stage-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        display: block;
+        background: #fff;
+      }
 
-    .hotspot { position: absolute; cursor: pointer; }
+      .hotspot { position: absolute; cursor: pointer; }
 
-    .hint {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 5%;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      opacity: 0.9;
-      display: none;
-    }
+      .hint {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        display: none;
+      .hint { z-index: 9999; }
+      }
 
-    .debug .hotspot {
-      background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #00aaff;
-    }
+      .debug .hotspot {
+        background: rgba(0, 128, 255, 0.25);
+        outline: 1px dashed #00aaff;
+      }
 
-    #completion-button button {
-      background: #1a73e8;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-      transition: background 0.2s ease;
-    }
-    #completion-button button:hover { background: #1558b0; }
+      #completion-button button {
+        background: #1a73e8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 1rem;
+        transition: background 0.2s ease;
+      }
+      #completion-button button:hover { background: #1558b0; }
 
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
-    }
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <div id="simulator">
-    <div id="hint" class="hint"></div>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="simulator">
+      <div id="hint" class="hint"></div>
 
-    <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="Compose.png" alt="Inbox">
-      <div class="hotspot" style="top:17%; left:5%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
+      <div id="screen1" class="screen active" onclick="wrong(1)">
+        <img class="stage-img" src="Compose.png" alt="Inbox" />
+        <div class="hotspot" style="top:17%; left:5%; width:12%; height:8%;" onclick="evtStop(event); goTo(2)"></div>
+      </div>
+
+      <div id="screen2" class="screen" onclick="wrong(2)">
+        <img class="stage-img" src="mailbox.png" alt="mailbox" />
+        <div class="hotspot" style="top:36%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
+      </div>
+
+      <div id="screen3" class="screen" onclick="wrong(3)">
+        <img class="stage-img" src="example@immunai.com.png" alt="To filled" />
+        <div class="hotspot" style="top:40%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
+      </div>
+
+      <div id="screen4" class="screen" onclick="wrong(4)">
+        <img class="stage-img" src="Test.png" alt="Subject filled" />
+        <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
+      </div>
+
+      <div id="screen5" class="screen" onclick="wrong(5)">
+        <img class="stage-img" src="textbox.png" alt="Body filled" />
+        <div
+          class="hotspot"
+          style="bottom:10%; left:56%; width:8%; height:8%;"
+          onclick="evtStop(event); completeLab(event)"
+        ></div>
+      </div>
     </div>
 
-    <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="mailbox.png" alt="mailbox">
-      <div class="hotspot" style="top:36%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
-    </div>
+    <script>
+      const hints = {
+        1: 'Hint: Click the Compose button on the left.',
+        2: 'Hint: Click the "To" field in the new message panel.',
+        3: 'Hint: Click the Subject field.',
+        4: 'Hint: Click inside the large message box.',
+        5: 'Hint: Click the blue Send button.'
+      };
 
-    <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="example@immunai.com.png" alt="To filled">
-      <div class="hotspot" style="top:40%; left:60%; width:28%; height:6%;" onclick="evtStop(event); goTo(4)"></div>
-    </div>
+      function goTo(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + n).classList.add('active');
+        hideHint();
+      }
 
-    <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="Test.png" alt="Subject filled">
-      <div class="hotspot" style="top:49%; left:60%; width:32%; height:30%;" onclick="evtStop(event); goTo(5)"></div>
-    </div>
+      function wrong(stage) { showHint(hints[stage]); }
 
-    <div id="screen5" class="screen" onclick="wrong(5)">
-      <img class="stage-img" src="textbox.png" alt="Body filled">
-      <div class="hotspot" style="bottom:10%; left:56%; width:8%; height:8%;" onclick="evtStop(event); completeLab(event)"></div>
-    </div>
+      function showHint(msg) {
+        const h = document.getElementById('hint');
+        h.textContent = msg;
+        h.style.display = 'block';
+        clearTimeout(window.__hintT);
+        window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
+      }
 
-    </div>
+      function hideHint() { document.getElementById('hint').style.display = 'none'; }
+      function evtStop(e) { e.stopPropagation(); }
 
-  <script>
-    const hints = {
-      1: 'Hint: Click the Compose button on the left.',
-      2: 'Hint: Click the "To" field in the new message panel.',
-      3: 'Hint: Click the Subject field.',
-      4: 'Hint: Click inside the large message box.',
-      5: 'Hint: Click the blue Send button.'
-    };
+      // ✅ Final completion
+      function completeLab(event) {
+        event?.preventDefault();
+        event?.stopPropagation();
+        window.parent.postMessage({ type: 'lab-complete', lab: 'compose' }, '*');
 
-    function goTo(n) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen' + n).classList.add('active');
-      hideHint();
-    }
+        // Replace image with "progress saved" message, using the message from compose_lab.html
+        const sim = document.getElementById('simulator');
+        sim.innerHTML = `
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+            <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Your email has been sent!</div>
+            <div style="margin-top:.5rem;">To: example@immunai.com</div>
+            <div>Subject: Test</div>
+            <div>Message: Hello World</div>
+            <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+          </div>
+        `;
+      }
 
-    function wrong(stage) { showHint(hints[stage]); }
-
-    function showHint(msg) {
-      const h = document.getElementById('hint');
-      h.textContent = msg;
-      h.style.display = 'block';
-      clearTimeout(window.__hintT);
-      window.__hintT = setTimeout(() => (h.style.display = 'none'), 1800);
-    }
-
-    function hideHint() { document.getElementById('hint').style.display = 'none'; }
-    function evtStop(e) { e.stopPropagation(); }
-
-    // ✅ Final completion
-    function completeLab(event) {
-      event?.preventDefault();
-      event?.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'compose' }, '*');
-
-      // Replace image with "progress saved" message, using the message from compose_lab.html
+      // Debug overlay toggle
       const sim = document.getElementById('simulator');
-      sim.innerHTML = `
-        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Your email has been sent!</div>
-          <div style="margin-top:.5rem;">To: example@immunai.com</div>
-          <div>Subject: Test</div>
-          <div>Message: Hello World</div>
-          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
-        </div>
-      `;
-    }
-
-    // Debug overlay toggle
-    const sim = document.getElementById('simulator');
-    window.addEventListener('keydown', e => {
-      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
-    });
-  </script>
-</body>
+      window.addEventListener('keydown', e => {
+        if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+      });
+    </script>
+  </body>
 </html>
