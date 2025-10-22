@@ -157,7 +157,7 @@
     function completeLab(event) {
       event?.preventDefault();
       event?.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'meet-share' }, '*');
+      window.parent.postMessage({ type: 'lab-complete', lab: 'meet-screen' }, '*');
 
       // Replace image with success message
       const sim = document.getElementById('simulator');

@@ -123,6 +123,8 @@
     function completeLab(event) {
       event.preventDefault();
       event.stopPropagation();
+      window.parent.postMessage({ type: 'lab-complete', lab: 'slides-transition' }, '*');
+      
       const sim = document.getElementById('simulator');
       sim.innerHTML = `
         <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
