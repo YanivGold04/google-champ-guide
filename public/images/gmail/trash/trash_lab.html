@@ -1,181 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gmail Trash Mission</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail Trash Mission</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
 
-    body, #simulator {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-    }
+      body, #simulator {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+      }
 
-    #simulator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+      #simulator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
 
-    .screen {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
-    .screen.active { display: block; }
+      .screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .screen.active { display: block; }
 
-    .stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-      background: #fff;
-    }
+      .stage-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        background: #fff;
+      }
 
-    .hotspot { position: absolute; cursor: pointer; }
+      .hotspot { position: absolute; cursor: pointer; }
 
-    .hint .hint { z-index: 9999; }
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 5%;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      opacity: 0.9;
-      display: none;
-    }
+      .hint .hint { z-index: 9999; }
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        display: none;
+      }
 
-    /* Debug outline toggle (press D) */
-    .debug .hotspot {
-      background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #00aaff;
-    }
+      /* Debug outline toggle (press D) */
+      .debug .hotspot {
+        background: rgba(0, 128, 255, 0.25);
+        outline: 1px dashed #00aaff;
+      }
 
-    /* Completion button */
-    #completion-button button {
-      background: #1a73e8;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-      transition: background 0.2s ease;
-    }
-    #completion-button button:hover { background: #1558b0; }
+      /* Completion button */
+      #completion-button button {
+        background: #1a73e8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 1rem;
+        transition: background 0.2s ease;
+      }
+      #completion-button button:hover { background: #1558b0; }
 
-    /* ✅ Fade-in animation for success message */
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
-    }
+      /* ✅ Fade-in animation for success message */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <div id="simulator">
-    <div id="hint" class="hint"></div>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="simulator">
+      <div id="hint" class="hint"></div>
 
-    <!-- Step 1 -->
-    <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="First.png" alt="Inbox">
-      <div class="hotspot" style="top:23.9%; left:21.5%; width:4.8%; height:3%;" onclick="evtStop(event); goTo(2)"></div>
+      <!-- Step 1 -->
+      <div id="screen1" class="screen active" onclick="wrong(1)">
+        <img class="stage-img" src="First.png" alt="Inbox" />
+        <div
+          class="hotspot"
+          style="top:24.17%; left:20.25%; width:33.75%; height:18.17%;"
+          onclick="evtStop(event); goTo(2)"
+        ></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="screen2" class="screen" onclick="wrong(2)">
+        <img class="stage-img" src="Select.png" alt="Selected email" />
+        <div
+          class="hotspot"
+          style="top:17%; left:31.7%; width:4.3%; height:6.8%;"
+          onclick="evtStop(event); goTo(3)"
+        ></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="screen3" class="screen" onclick="wrong(3)">
+        <img class="stage-img" src="More.png" alt="Sidebar expanded" />
+        <div
+          class="hotspot"
+          style="top:39.9%; left:6%; width:13.3%; height:9%;"
+          onclick="evtStop(event); goTo(4)"
+        ></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div id="screen4" class="screen" onclick="wrong(4)">
+        <img class="stage-img" src="Select_Trash.png" alt="Trash section" />
+        <div
+          class="hotspot"
+          style="top:57.8%; left:5.1%; width:11.5%; height:9%;"
+          onclick="evtStop(event); goTo(5)"
+        ></div>
+      </div>
+
+      <!-- Step 5 -->
+      <div id="screen5" class="screen" onclick="completeLab(event)">
+        <img class="stage-img" src="Last.png" alt="Last step" />
+      </div>
     </div>
 
-    <!-- Step 2 -->
-    <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="Select.png" alt="Selected email">
-      <div class="hotspot" style="top:17%; left:31.7%; width:4.3%; height:6.8%;" onclick="evtStop(event); goTo(3)"></div>
-    </div>
+    <script>
+      const hints = {
+        1: 'Hint: Select the checkbox near the star of the second email.',
+        2: 'Hint: Click the Trash icon under the search bar.',
+        3: 'Hint: Click the More section in the sidebar.',
+        4: 'Hint: Click the Trash label in the sidebar.'
+      };
 
-    <!-- Step 3 -->
-    <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="More.png" alt="Sidebar expanded">
-      <div class="hotspot" style="top:39.9%; left:6%; width:13.3%; height:9%;" onclick="evtStop(event); goTo(4)"></div>
-    </div>
+      function goTo(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + n).classList.add('active');
+        hideHint();
+      }
 
-    <!-- Step 4 -->
-    <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="Select_Trash.png" alt="Trash section">
-      <div class="hotspot" style="top:57.8%; left:5.1%; width:11.5%; height:9%;" onclick="evtStop(event); goTo(5)"></div>
-    </div>
+      function wrong(stage) { showHint(hints[stage]); }
 
-    <!-- Step 5 -->
-    <div id="screen5" class="screen" onclick="completeLab(event)">
-      <img class="stage-img" src="Last.png" alt="Last step">
-    </div>
-  </div>
+      function showHint(msg) {
+        const h = document.getElementById('hint');
+        h.textContent = msg;
+        h.style.display = 'block';
+        clearTimeout(window.__hintT);
+        window.__hintT = setTimeout(() => h.style.display = 'none', 1800);
+      }
 
-  <script>
-    const hints = {
-      1: 'Hint: Select the checkbox near the star of the second email.',
-      2: 'Hint: Click the Trash icon under the search bar.',
-      3: 'Hint: Click the More section in the sidebar.',
-      4: 'Hint: Click the Trash label in the sidebar.'
-    };
+      function hideHint() { document.getElementById('hint').style.display = 'none'; }
+      function evtStop(e) { e.stopPropagation(); }
 
-    function goTo(n) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen' + n).classList.add('active');
-      hideHint();
-    }
+      // ✅ Auto-complete when reaching final screen
+      function completeLab(event) {
+        event?.preventDefault();
+        event?.stopPropagation();
+        window.parent.postMessage({ type: 'lab-complete', lab: 'trash' }, '*');
 
-    function wrong(stage) { showHint(hints[stage]); }
+        const sim = document.getElementById('simulator');
+        sim.innerHTML = `
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+            <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Email successfully moved to Trash!</div>
+            <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+          </div>
+        `;
+      }
 
-    function showHint(msg) {
-      const h = document.getElementById('hint');
-      h.textContent = msg;
-      h.style.display = 'block';
-      clearTimeout(window.__hintT);
-      window.__hintT = setTimeout(() => h.style.display = 'none', 1800);
-    }
-
-    function hideHint() { document.getElementById('hint').style.display = 'none'; }
-    function evtStop(e) { e.stopPropagation(); }
-
-    // ✅ Auto-complete when reaching final screen
-    function completeLab(event) {
-      event?.preventDefault();
-      event?.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'trash' }, '*');
-      
+      // Debug toggle (press D)
       const sim = document.getElementById('simulator');
-      sim.innerHTML = `
-        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Email successfully moved to Trash!</div>
-          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
-        </div>
-      `;
-    }
-
-    // Debug toggle (press D)
-    const sim = document.getElementById('simulator');
-    window.addEventListener('keydown', e => {
-      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
-    });
-  </script>
-</body>
+      window.addEventListener('keydown', e => {
+        if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+      });
+    </script>
+  </body>
 </html>
