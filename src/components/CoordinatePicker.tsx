@@ -10,6 +10,9 @@ interface Rectangle {
   height: number;
 }
 
+const REFERENCE_WIDTH = 2940;
+const REFERENCE_HEIGHT = 1482;
+
 export const CoordinatePicker = () => {
   const [isActive, setIsActive] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -24,30 +27,63 @@ export const CoordinatePicker = () => {
     }
   }, [isActive]);
 
+  const getScaleFactor = () => {
+    const pageWidth = document.documentElement.scrollWidth;
+    const pageHeight = document.documentElement.scrollHeight;
+    
+    const scaleX = REFERENCE_WIDTH / pageWidth;
+    const scaleY = REFERENCE_HEIGHT / pageHeight;
+    
+    return { scaleX, scaleY };
+  };
+
   const getAbsoluteCoordinates = (clientX: number, clientY: number) => {
-    const x = clientX + window.scrollX;
-    const y = clientY + window.scrollY;
-    return { x: Math.round(x), y: Math.round(y) };
+    const screenX = clientX + window.scrollX;
+    const screenY = clientY + window.scrollY;
+    
+    const { scaleX, scaleY } = getScaleFactor();
+    
+    const x = Math.round(screenX * scaleX);
+    const y = Math.round(screenY * scaleY);
+    
+    return { x, y };
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!isActive) return;
-    const { x, y } = getAbsoluteCoordinates(e.clientX, e.clientY);
-    setStartPos({ x, y });
+    const screenX = e.clientX + window.scrollX;
+    const screenY = e.clientY + window.scrollY;
+    setStartPos({ x: screenX, y: screenY });
     setIsDrawing(true);
+    
+    const { x, y } = getAbsoluteCoordinates(e.clientX, e.clientY);
     setCurrentRect({ left: x, top: y, width: 0, height: 0 });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDrawing || !isActive) return;
+    const screenX = e.clientX + window.scrollX;
+    const screenY = e.clientY + window.scrollY;
+    
     const { x, y } = getAbsoluteCoordinates(e.clientX, e.clientY);
     
-    const left = Math.min(startPos.x, x);
-    const top = Math.min(startPos.y, y);
-    const width = Math.abs(x - startPos.x);
-    const height = Math.abs(y - startPos.y);
+    const left = Math.min(startPos.x, screenX);
+    const top = Math.min(startPos.y, screenY);
+    const screenWidth = Math.abs(screenX - startPos.x);
+    const screenHeight = Math.abs(screenY - startPos.y);
     
-    setCurrentRect({ left, top, width, height });
+    const { scaleX, scaleY } = getScaleFactor();
+    const scaledLeft = Math.round(left * scaleX);
+    const scaledTop = Math.round(top * scaleY);
+    const scaledWidth = Math.round(screenWidth * scaleX);
+    const scaledHeight = Math.round(screenHeight * scaleY);
+    
+    setCurrentRect({ 
+      left: scaledLeft, 
+      top: scaledTop, 
+      width: scaledWidth, 
+      height: scaledHeight 
+    });
   };
 
   const handleMouseUp = () => {
@@ -93,23 +129,31 @@ export const CoordinatePicker = () => {
         style={{ pointerEvents: 'all' }}
       >
         {/* Selection rectangle */}
-        {currentRect && currentRect.width > 0 && currentRect.height > 0 && (
-          <div
-            className="absolute border-2 border-blue-500 bg-blue-500/20"
-            style={{
-              left: `${currentRect.left - window.scrollX}px`,
-              top: `${currentRect.top - window.scrollY}px`,
-              width: `${currentRect.width}px`,
-              height: `${currentRect.height}px`,
-              pointerEvents: 'none',
-            }}
-          >
-            {/* Live coordinates display */}
-            <div className="absolute -top-8 left-0 bg-blue-500 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
-              X: {currentRect.left}, Y: {currentRect.top} | W: {currentRect.width} × H: {currentRect.height}
+        {currentRect && currentRect.width > 0 && currentRect.height > 0 && (() => {
+          const { scaleX, scaleY } = getScaleFactor();
+          const displayLeft = currentRect.left / scaleX;
+          const displayTop = currentRect.top / scaleY;
+          const displayWidth = currentRect.width / scaleX;
+          const displayHeight = currentRect.height / scaleY;
+          
+          return (
+            <div
+              className="absolute border-2 border-blue-500 bg-blue-500/20"
+              style={{
+                left: `${displayLeft - window.scrollX}px`,
+                top: `${displayTop - window.scrollY}px`,
+                width: `${displayWidth}px`,
+                height: `${displayHeight}px`,
+                pointerEvents: 'none',
+              }}
+            >
+              {/* Live coordinates display */}
+              <div className="absolute -top-8 left-0 bg-blue-500 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                X: {currentRect.left}, Y: {currentRect.top} | W: {currentRect.width} × H: {currentRect.height}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
       </div>
 
       {/* Control panel */}
