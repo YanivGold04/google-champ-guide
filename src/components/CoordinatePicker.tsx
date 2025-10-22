@@ -94,7 +94,11 @@ export const CoordinatePicker = () => {
 
   const getStyleString = () => {
     if (!currentRect) return '';
-    return `style="position:absolute; left:${currentRect.left}px; top:${currentRect.top}px; width:${currentRect.width}px; height:${currentRect.height}px;"`;
+    const leftPercent = ((currentRect.left / REFERENCE_WIDTH) * 100).toFixed(2);
+    const topPercent = ((currentRect.top / REFERENCE_HEIGHT) * 100).toFixed(2);
+    const widthPercent = ((currentRect.width / REFERENCE_WIDTH) * 100).toFixed(2);
+    const heightPercent = ((currentRect.height / REFERENCE_HEIGHT) * 100).toFixed(2);
+    return `style="top:${topPercent}%; left:${leftPercent}%; width:${widthPercent}%; height:${heightPercent}%;"`;
   };
 
   const copyToClipboard = () => {
