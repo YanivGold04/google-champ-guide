@@ -49,7 +49,7 @@
 
     .hotspot { position: absolute; cursor: pointer; }
 
-    .hint {
+    .hint .hint { z-index: 9999; }
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -102,13 +102,13 @@
     <!-- Step 1 -->
     <div id="screen1" class="screen active" onclick="wrong(1)">
       <img class="stage-img" src="First.png" alt="Inbox">
-      <div class="hotspot" style="top:23.9%; left:21.5%; width:4.8%; height:7.4%;" onclick="evtStop(event); goTo(2)"></div>
+      <div class="hotspot" style="top:23.9%; left:21.5%; width:4.8%; height:3%;" onclick="evtStop(event); goTo(2)"></div>
     </div>
 
     <!-- Step 2 -->
     <div id="screen2" class="screen" onclick="wrong(2)">
       <img class="stage-img" src="Select.png" alt="Selected email">
-      <div class="hotspot" style="top:14.8%; left:31.7%; width:4.3%; height:6.8%;" onclick="evtStop(event); goTo(3)"></div>
+      <div class="hotspot" style="top:17%; left:31.7%; width:4.3%; height:6.8%;" onclick="evtStop(event); goTo(3)"></div>
     </div>
 
     <!-- Step 3 -->
