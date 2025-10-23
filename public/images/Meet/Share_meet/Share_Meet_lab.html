@@ -63,7 +63,7 @@
         opacity: 0.9;
         display: none;
       }
-
+      .hint { z-index: 9999; }
       .debug .hotspot {
         background: rgba(0, 128, 255, 0.25);
         outline: 1px dashed #00aaff;
@@ -87,61 +87,101 @@
       <!-- Step 1 -->
       <div id="screen1" class="screen active" onclick="wrong(1)">
         <img class="stage-img" src="1.png" alt="Step 1 - Open Meet" />
-        <div class="hotspot" style="top:30%; left:44%; width:14%; height:6%;" onclick="evtStop(event); goTo(2)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 34.44%; left: 38.31%; width: 10.25%; height: 7.64%;"
+          onclick="evtStop(event); goTo(2)"
+        ></div>
       </div>
 
       <!-- Step 2 -->
       <div id="screen2" class="screen" onclick="wrong(2)">
         <img class="stage-img" src="2.png" alt="Step 2 - Start meeting" />
-        <div class="hotspot" style="top:42%; left:47%; width:20%; height:6%;" onclick="evtStop(event); goTo(3)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 40.86%; left: 38.20%; width: 17.48%; height: 5.41%;"
+          onclick="evtStop(event); goTo(3)"
+        ></div>
       </div>
 
       <!-- Step 3 -->
       <div id="screen3" class="screen" onclick="wrong(3)">
         <img class="stage-img" src="3.png" alt="Step 3 - Meeting window open" />
-        <div class="hotspot" style="top:100%; left:60%; width:8%; height:8%;" onclick="evtStop(event); goTo(4)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 13.25%; left: 4.32%; width: 43.49%; height: 7.64%;"
+          onclick="evtStop(event); goTo(4)"
+        ></div>
       </div>
 
       <!-- Step 4 -->
       <div id="screen4" class="screen" onclick="wrong(4)">
         <img class="stage-img" src="4.png" alt="Step 4 - People panel open" />
-        <div class="hotspot" style="top:19%; left:72%; width:10%; height:5%;" onclick="evtStop(event); goTo(5)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 32.32%; left: 49.53%; width: 22.99%; height: 6.53%;"
+          onclick="evtStop(event); goTo(5)"
+        ></div>
       </div>
 
       <!-- Step 5 -->
       <div id="screen5" class="screen" onclick="wrong(5)">
         <img class="stage-img" src="5.png" alt="Step 5 - Add people button" />
-        <div class="hotspot" style="top:42%; left:43%; width:15%; height:6%;" onclick="evtStop(event); goTo(6)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 36.73%; left: 49.42%; width: 20.83%; height: 7.64%;"
+          onclick="evtStop(event); goTo(6)"
+        ></div>
       </div>
 
       <!-- Step 6 -->
       <div id="screen6" class="screen" onclick="wrong(6)">
         <img class="stage-img" src="6.png" alt="Step 6 - Type email" />
-        <div class="hotspot" style="top:43%; left:41%; width:18%; height:7%;" onclick="evtStop(event); goTo(7)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 3.25%; left: 48.78%; width: 7.34%; height: 8.20%;"
+          onclick="evtStop(event); goTo(7)"
+        ></div>
       </div>
 
       <!-- Step 7 -->
       <div id="screen7" class="screen" onclick="wrong(7)">
         <img class="stage-img" src="7.png" alt="Step 7 - Select contact" />
-        <div class="hotspot" style="top:49%; left:41%; width:16%; height:6%;" onclick="evtStop(event); goTo(8)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 51.58%; left: 61.40%; width: 6.58%; height: 7.27%;"
+          onclick="evtStop(event); goTo(8)"
+        ></div>
       </div>
 
       <!-- Step 8 -->
       <div id="screen8" class="screen" onclick="wrong(8)">
         <img class="stage-img" src="8.png" alt="Step 8 - Send invite" />
-        <div class="hotspot" style="top:85%; left:56%; width:13%; height:6%;" onclick="evtStop(event); goTo(9)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 53.81%; left: 63.02%; width: 11.12%; height: 8.95%;"
+          onclick="evtStop(event); goTo(9)"
+        ></div>
       </div>
 
       <!-- Step 9 -->
       <div id="screen9" class="screen" onclick="wrong(9)">
         <img class="stage-img" src="9.png" alt="Step 9 - Confirm invite" />
-        <div class="hotspot" style="top:75%; left:54%; width:10%; height:6%;" onclick="evtStop(event); goTo(10)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 29.41%; left: 36.91%; width: 14.46%; height: 7.27%;"
+          onclick="evtStop(event); goTo(10)"
+        ></div>
       </div>
 
       <!-- Step 10 -->
       <div id="screen10" class="screen" onclick="wrong(10)">
         <img class="stage-img" src="10.png" alt="Step 10 - Invite sent" />
-        <div class="hotspot" style="top:93%; left:49%; width:7%; height:6%;" onclick="evtStop(event); goTo(11)"></div>
+        <div
+          class="hotspot"
+          style="position: absolute; top: 54.56%; left: 66.48%; width: 19.96%; height: 9.69%;"
+          onclick="evtStop(event); goTo(11)"
+        ></div>
       </div>
 
       <!-- Step 11: Final -->
