@@ -180,7 +180,7 @@
       function completeLab(event) {
         event?.preventDefault();
         event?.stopPropagation();
-        window.parent.postMessage({ type: 'lab-complete', lab: 'zoom-share' }, '*');
+        window.parent.postMessage({ type: 'lab-complete', lab: 'zoom-screen' }, '*');
 
         const sim = document.getElementById('simulator');
         sim.innerHTML = `
