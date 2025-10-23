@@ -123,21 +123,16 @@
         ></div>
       </div>
 
-      <!-- Step 5 -->
-      <div id="screen5" class="screen" onclick="wrong(5)">
-        <img class="stage-img" src="5.png" alt="Enter Second Formula" />
-        <div
-          class="hotspot"
-          style="position: absolute; top: 10.65%; left: -0.11%; width: 4.64%; height: 3.91%;"
-          onclick="evtStop(event); goTo(6)"
-        ></div>
-      </div>
+    <!-- Step 5 (now final step) -->
+<div id="screen5" class="screen" onclick="wrong(5)">
+  <img class="stage-img" src="5.png" alt="Enter Second Formula" />
+  <div
+    class="hotspot"
+    style="position: absolute; top: 10.65%; left: -0.11%; width: 4.64%; height: 5.91%;"
+    onclick="evtStop(event); completeLab(event)"
+  ></div>
+</div>
 
-      <!-- Step 6 -->
-      <div id="screen6" class="screen" onclick="completeLab(event)">
-        <img class="stage-img" src="6.png" alt="Result Complete" />
-      </div>
-    </div>
 
     <script>
       const hints = {
