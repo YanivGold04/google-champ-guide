@@ -1,193 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Theme Lab - Google Slides</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theme Lab - Google Slides</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
 
-    body, #simulator {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-    }
+      body, #simulator {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+      }
 
-    #simulator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+      #simulator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
 
-    .screen {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
-    .screen.active { display: block; }
+      .screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .screen.active { display: block; }
 
-    .stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-      display: block;
-      background: #fff;
-    }
+      .stage-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        display: block;
+        background: #fff;
+      }
 
-    .hotspot { position: absolute; cursor: pointer; }
+      .hotspot { position: absolute; cursor: pointer; }
 
-    .hint {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 5%;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      opacity: 0.9;
-      display: none;
-    }
+      .hint {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        display: none;
+      }
+      .hint { z-index: 9999; }
+      .debug .hotspot {
+        background: rgba(0, 128, 255, 0.25);
+        outline: 1px dashed #00aaff;
+      }
 
-    .debug .hotspot {
-      background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #00aaff;
-    }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="simulator">
+      <div id="hint" class="hint"></div>
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
-    }
-  </style>
-</head>
-<body>
-  <div id="simulator">
-    <div id="hint" class="hint"></div>
+      <!-- Step 1 -->
+      <div id="screen1" class="screen active" onclick="wrong(1)">
+        <img class="stage-img" src="1.png" alt="Google Slides main screen" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 10.82%; left: 50.29%; width: 5.18%; height: 4.66%;"
+          onclick="evtStop(event); goTo(2)"
+        ></div>
+      </div>
 
-    <!-- Step 1 -->
-    <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="1.png" alt="Google Slides main screen" />
-      <div class="hotspot" style="top:130px; left:120px; width:200px; height:180px;" onclick="evtStop(event); goTo(2)"></div>
+      <!-- Step 2 -->
+      <div id="screen2" class="screen" onclick="wrong(2)">
+        <img class="stage-img" src="2.png" alt="New presentation opened" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 62.35%; left: 74.24%; width: 18.88%; height: 20.49%;"
+          onclick="evtStop(event); goTo(3)"
+        ></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="screen3" class="screen" onclick="wrong(3)">
+        <img class="stage-img" src="3.png" alt="Theme sidebar opened" />
+        <div
+          class="position: absolute; top: 10.82%; left: 45.43%; width: 4.96%; height: 4.84%;"
+          onclick="evtStop(event); goTo(4)"
+        ></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div id="screen4" class="screen" onclick="wrong(4)">
+        <img class="stage-img" src="4.png" alt="Theme applied" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 25.34%; left: 46.51%; width: 9.06%; height: 10.43%;"
+          onclick="evtStop(event); goTo(5)"
+        ></div>
+      </div>
+
+      <!-- Step 5 -->
+      <div id="screen5" class="screen" onclick="wrong(5)">
+        <img class="stage-img" src="5.png" alt="Layout dropdown" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 10.38%; left: 38.53%; width: 7.55%; height: 4.10%;"
+          onclick="evtStop(event); goTo(6)"
+        ></div>
+      </div>
+
+      <!-- Step 6 -->
+      <div id="screen6" class="screen" onclick="wrong(6)">
+        <img class="stage-img" src="6.png" alt="Layouts shown" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 39.17%; left: 56.65%; width: 4.10%; height: 5.40%;"
+          onclick="evtStop(event); goTo(7)"
+        ></div>
+      </div>
+
+      <!-- Step 7 -->
+      <div id="screen7" class="screen" onclick="wrong(7)">
+        <img class="stage-img" src="7.png" alt="Background options" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 65.12%; left: 68.20%; width: 2.05%; height: 4.10%;"
+          onclick="evtStop(event); goTo(8)"
+        ></div>
+      </div>
+
+      <!-- Step 8 -->
+      <div id="screen8" class="screen" onclick="wrong(8)">
+        <img class="stage-img" src="8.png" alt="Background color menu" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 56.55%; left: 54.28%; width: 6.80%; height: 6.33%;"
+          onclick="evtStop(event); goTo(9)"
+        ></div>
+      </div>
+
+      <!-- Step 9 -->
+      <div id="screen9" class="screen" onclick="completeLab(event)">
+        <img class="stage-img" src="9.png" alt="Final theme and background set" />
+      </div>
     </div>
 
-    <!-- Step 2 -->
-    <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="2.png" alt="New presentation opened" />
-      <div class="hotspot" style="top:85px; left:680px; width:100px; height:40px;" onclick="evtStop(event); goTo(3)"></div>
-    </div>
+    <script>
+      const hints = {
+        1: 'Hint: Click the Theme button on the toolbar.',
+        2: 'Hint: Select the "Streamline" theme (the third).',
+        3: 'Hint: Click Layout to change the slide style.',
+        4: 'Hint: Choose the "Title and two columns" layout.',
+        5: 'Hint: Click Background to customize colors or images.',
+        6: 'Hint: Click the color box to pick a background color.',
+        7: 'Hint: Select the color "Blue".',
+        8: 'Hint: Select "Done".',
+        9: 'Great job! You successfully applied a theme and customized the background.'
+      };
 
-    <!-- Step 3 -->
-    <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="3.png" alt="Theme sidebar opened" />
-      <div class="hotspot" style="top:230px; left:1020px; width:200px; height:120px;" onclick="evtStop(event); goTo(4)"></div>
-    </div>
+      function goTo(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + n).classList.add('active');
+        hideHint();
+      }
 
-    <!-- Step 4 -->
-    <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="4.png" alt="Theme applied" />
-      <div class="hotspot" style="top:85px; left:560px; width:120px; height:40px;" onclick="evtStop(event); goTo(5)"></div>
-    </div>
+      function wrong(stage) { showHint(hints[stage]); }
 
-    <!-- Step 5 -->
-    <div id="screen5" class="screen" onclick="wrong(5)">
-      <img class="stage-img" src="5.png" alt="Layout dropdown" />
-      <div class="hotspot" style="top:120px; left:660px; width:120px; height:40px;" onclick="evtStop(event); goTo(6)"></div>
-    </div>
+      function showHint(msg) {
+        const h = document.getElementById('hint');
+        h.textContent = msg;
+        h.style.display = 'block';
+        clearTimeout(window.__hintT);
+        window.__hintT = setTimeout(() => (h.style.display = 'none'), 2000);
+      }
 
-    <!-- Step 6 -->
-    <div id="screen6" class="screen" onclick="wrong(6)">
-      <img class="stage-img" src="6.png" alt="Layouts shown" />
-      <div class="hotspot" style="top:300px; left:560px; width:220px; height:180px;" onclick="evtStop(event); goTo(7)"></div>
-    </div>
+      function hideHint() { document.getElementById('hint').style.display = 'none'; }
+      function evtStop(e) { e.stopPropagation(); }
 
-    <!-- Step 7 -->
-    <div id="screen7" class="screen" onclick="wrong(7)">
-      <img class="stage-img" src="7.png" alt="Background options" />
-      <div class="hotspot" style="top:85px; left:740px; width:160px; height:40px;" onclick="evtStop(event); goTo(8)"></div>
-    </div>
+      function completeLab(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        window.parent.postMessage({ type: 'lab-complete', lab: 'slides-theme' }, '*');
 
-    <!-- Step 8 -->
-    <div id="screen8" class="screen" onclick="wrong(8)">
-      <img class="stage-img" src="8.png" alt="Background color menu" />
-      <div class="hotspot" style="top:360px; left:800px; width:220px; height:120px;" onclick="evtStop(event); goTo(9)"></div>
-    </div>
+        const sim = document.getElementById('simulator');
+        sim.innerHTML = `
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+            <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Theme Customized!</div>
+            <div style="margin-top:.5rem;">You applied a new theme and background color in Google Slides.</div>
+            <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+          </div>
+        `;
+      }
 
-    <!-- Step 9 -->
-    <div id="screen9" class="screen" onclick="completeLab(event)">
-      <img class="stage-img" src="9.png" alt="Final theme and background set" />
-    </div>
-  </div>
-
-  <script>
-    const hints = {
-      1: 'Hint: Click the Blank presentation to start.',
-      2: 'Hint: Click the Theme button on the toolbar.',
-      3: 'Hint: Select a theme you like from the right panel.',
-      4: 'Hint: Click Layout to change the slide style.',
-      5: 'Hint: Choose a layout from the dropdown.',
-      6: 'Hint: Click Background to customize colors or images.',
-      7: 'Hint: Click the color box to pick a background color.',
-      8: 'Hint: Select your preferred color and press Done.',
-      9: 'Great job! You successfully applied a theme and customized the background.'
-    };
-
-    function goTo(n) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen' + n).classList.add('active');
-      hideHint();
-    }
-
-    function wrong(stage) { showHint(hints[stage]); }
-
-    function showHint(msg) {
-      const h = document.getElementById('hint');
-      h.textContent = msg;
-      h.style.display = 'block';
-      clearTimeout(window.__hintT);
-      window.__hintT = setTimeout(() => (h.style.display = 'none'), 2000);
-    }
-
-    function hideHint() { document.getElementById('hint').style.display = 'none'; }
-    function evtStop(e) { e.stopPropagation(); }
-
-    function completeLab(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'slides-theme' }, '*');
-      
       const sim = document.getElementById('simulator');
-      sim.innerHTML = `
-        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Theme Customized!</div>
-          <div style="margin-top:.5rem;">You applied a new theme and background color in Google Slides.</div>
-          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
-        </div>
-      `;
-    }
-
-    const sim = document.getElementById('simulator');
-    window.addEventListener('keydown', e => {
-      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
-    });
-  </script>
-</body>
+      window.addEventListener('keydown', e => {
+        if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+      });
+    </script>
+  </body>
 </html>
