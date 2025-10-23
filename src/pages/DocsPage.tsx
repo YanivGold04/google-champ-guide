@@ -89,44 +89,7 @@ const DocsPage = () => {
             <div className="space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Lab 1: Editing Text</CardTitle>
-                  <CardDescription>Learn how to create and format documents in Google Docs</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="rounded-2xl overflow-hidden bg-muted">
-                    <video 
-                      className="w-full h-auto"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      src="/images/Docs/Edit_text/edit_text.mp4"
-                    >
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
-                      <span className={`text-sm font-medium ${completedLabs.has("Edit_text") ? "text-green-600" : "text-muted-foreground"}`}>
-                        {completedLabs.has("Edit_text") ? "✅ Completed" : "❌ Not started"}
-                      </span>
-                    </div>
-                    <div className="rounded-2xl overflow-hidden bg-muted">
-                      <iframe
-                        src="/images/Docs/Edit_text/Docs_Create_Lab.html"
-                        className="w-full h-[650px] border-0"
-                        title="Editing Text Lab"
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Lab 2: Creating New Docs</CardTitle>
+                  <CardTitle>Lab 1: Creating New Docs</CardTitle>
                   <CardDescription>Learn how to create new documents from templates</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -155,6 +118,43 @@ const DocsPage = () => {
                         src="/images/Docs/New_docs/New_Docs_lab.html"
                         className="w-full h-[650px] border-0"
                         title="Creating New Docs Lab"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lab 2: Editing Text</CardTitle>
+                  <CardDescription>Learn how to create and format documents in Google Docs</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-2xl overflow-hidden bg-muted">
+                    <video 
+                      className="w-full h-auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      src="/images/Docs/Edit_text/edit_text.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-foreground">Try it yourself - Interactive Lab</h4>
+                      <span className={`text-sm font-medium ${completedLabs.has("Edit_text") ? "text-green-600" : "text-muted-foreground"}`}>
+                        {completedLabs.has("Edit_text") ? "✅ Completed" : "❌ Not started"}
+                      </span>
+                    </div>
+                    <div className="rounded-2xl overflow-hidden bg-muted">
+                      <iframe
+                        src="/images/Docs/Edit_text/Docs_Create_Lab.html"
+                        className="w-full h-[650px] border-0"
+                        title="Editing Text Lab"
                       />
                     </div>
                   </div>
@@ -205,7 +205,7 @@ const DocsPage = () => {
               completedLabs={completedLabs}
               isComplete={isComplete}
               onComplete={markPlatformComplete}
-              labNames={["Edit_text", "New_docs", "Share_comment"]}
+              labNames={["New_docs", "Edit_text", "Share_comment"]}
             />
 
             <Card>
