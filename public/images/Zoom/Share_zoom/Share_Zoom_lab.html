@@ -101,7 +101,7 @@
         <!-- Choose slides tab -->
         <div
           class="hotspot"
-          style="position: absolute; top: 42.05%; left: 32.59%; width: 34.53%; height: 9.32%;"
+          style="position: absolute; top: 45.05%; left: 32.59%; width: 34.53%; height: 9.32%;"
           onclick="evtStop(event); goTo(3)"
         ></div>
       </div>
@@ -123,7 +123,7 @@
         <!-- Click Stop Share -->
         <div
           class="hotspot"
-          style="position: absolute; top: 83.63%; left: 50.61%; width: 6.37%; height: 6.53%;"
+          style="position: absolute; top: 81.63%; left: 50.61%; width: 6.37%; height: 6.53%;"
           onclick="evtStop(event); goTo(5)"
         ></div>
       </div>
@@ -145,27 +145,22 @@
         <!-- Click Invite -->
         <div
           class="hotspot"
-          style="position: absolute; top: 43.73%; left: 19.64%; width: 32.81%; height: 6.15%;"
+          style="position: absolute; top: 46.73%; left: 19.64%; width: 32.81%; height: 6.15%;"
           onclick="evtStop(event); goTo(7)"
         ></div>
       </div>
 
-      <!-- Step 7 -->
-      <div id="screen7" class="screen" onclick="wrong(7)">
-        <img class="stage-img" src="8.png" alt="Contacts list open" />
-        <!-- Click close or finish -->
-        <div
-          class="hotspot"
-          style="position: absolute; top: 73.56%; left: 66.58%; width: 11.33%; height: 8.20%;"
-          onclick="evtStop(event); goTo(8)"
-        ></div>
-      </div>
+<!-- Step 7 -->
+<div id="screen7" class="screen" onclick="wrong(7)">
+  <img class="stage-img" src="8.png" alt="Contacts list open" />
+  <!-- Click close or finish -->
+  <div
+    class="hotspot"
+    style="position: absolute; top: 73.56%; left: 66.58%; width: 11.33%; height: 8.20%;"
+    onclick="evtStop(event); completeLab(event)"
+  ></div>
+</div>
 
-      <!-- Step 8: Completion -->
-      <div id="screen8" class="screen" onclick="completeLab(event)">
-        <img class="stage-img" src="8.png" alt="Meeting done" />
-      </div>
-    </div>
 
     <script>
       const hints = {
