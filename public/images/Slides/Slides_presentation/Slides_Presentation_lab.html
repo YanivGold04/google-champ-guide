@@ -1,172 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slides Presentation Lab - Google Slides</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slides Presentation Lab - Google Slides</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
 
-    body, #simulator {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #fff;
-    }
+      body, #simulator {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+      }
 
-    #simulator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+      #simulator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
 
-    .screen {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
-    .screen.active { display: block; }
+      .screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .screen.active { display: block; }
 
-    .stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-      display: block;
-      background: #fff;
-    }
+      .stage-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        display: block;
+        background: #fff;
+      }
 
-    .hotspot { position: absolute; cursor: pointer; }
+      .hotspot { position: absolute; cursor: pointer; }
 
-    .hint {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 5%;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      opacity: 0.9;
-      display: none;
-    }
+      .hint {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0.9;
+        display: none;
+      }
+      .hint { z-index: 9999; }
+      .debug .hotspot {
+        background: rgba(0, 128, 255, 0.25);
+        outline: 1px dashed #00aaff;
+      }
 
-    .debug .hotspot {
-      background: rgba(0, 128, 255, 0.25);
-      outline: 1px dashed #00aaff;
-    }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="simulator">
+      <div id="hint" class="hint"></div>
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
-    }
-  </style>
-</head>
-<body>
-  <div id="simulator">
-    <div id="hint" class="hint"></div>
+      <!-- Step 1 -->
+      <div id="screen1" class="screen active" onclick="wrong(1)">
+        <img class="stage-img" src="1.png" alt="Slides Home" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 10.72%; left: 10.25%; width: 12.30%; height: 13.04%;"
+          onclick="evtStop(event); goTo(2)"
+        ></div>
+      </div>
 
-    <!-- Step 1 -->
-    <div id="screen1" class="screen active" onclick="wrong(1)">
-      <img class="stage-img" src="1.png" alt="Slides Home" />
-      <div class="hotspot" style="top:130px; left:140px; width:200px; height:200px;" onclick="evtStop(event); goTo(2)"></div>
+      <!-- Step 2 -->
+      <div id="screen2" class="screen" onclick="wrong(2)">
+        <img class="stage-img" src="2.png" alt="Blank Presentation" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 3.82%; left: 3.35%; width: 3.35%; height: 5.03%;"
+          onclick="evtStop(event); goTo(3)"
+        ></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="screen3" class="screen" onclick="wrong(3)">
+        <img class="stage-img" src="3.png" alt="New Slide Added" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 20.03%; left: 22.12%; width: 66.69%; height: 7.45%;"
+          onclick="evtStop(event); goTo(4)"
+        ></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div id="screen4" class="screen" onclick="wrong(4)">
+        <img class="stage-img" src="4.png" alt="Enter Title" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 30.28%; left: 22.34%; width: 66.69%; height: 47.14%;"
+          onclick="evtStop(event); goTo(5)"
+        ></div>
+      </div>
+
+      <!-- Step 5 -->
+      <div id="screen5" class="screen" onclick="wrong(5)">
+        <img class="stage-img" src="5.png" alt="Add Text" />
+        <div
+          class="hotspot"
+          style="position: absolute; top: 7%; left: 0.00%; width: 4.42%; height: 5.96%;"
+          onclick="evtStop(event); goTo(6)"
+        ></div>
+      </div>
+
+      <!-- Step 6 -->
+      <div id="screen6" class="screen" onclick="completeLab(event)">
+        <img class="stage-img" src="6.png" alt="Saved Presentation" />
+      </div>
     </div>
 
-    <!-- Step 2 -->
-    <div id="screen2" class="screen" onclick="wrong(2)">
-      <img class="stage-img" src="2.png" alt="Blank Presentation" />
-      <div class="hotspot" style="top:200px; left:380px; width:200px; height:80px;" onclick="evtStop(event); goTo(3)"></div>
-    </div>
+    <script>
+      const hints = {
+        1: 'Hint: Click on “Blank presentation” to start a new project.',
+        2: 'Hint: Add a new slide using the + button under "File".',
+        3: 'Hint: Select the title box.',
+        4: 'Hint: Select the writing box.',
+        5: 'Hint: Return to the main menu.',
+        6: 'Great job! Your Google Slides presentation is saved automatically.'
+      };
 
-    <!-- Step 3 -->
-    <div id="screen3" class="screen" onclick="wrong(3)">
-      <img class="stage-img" src="3.png" alt="New Slide Added" />
-      <div class="hotspot" style="top:80px; left:220px; width:160px; height:80px;" onclick="evtStop(event); goTo(4)"></div>
-    </div>
+      function goTo(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + n).classList.add('active');
+        hideHint();
+      }
 
-    <!-- Step 4 -->
-    <div id="screen4" class="screen" onclick="wrong(4)">
-      <img class="stage-img" src="4.png" alt="Enter Title" />
-      <div class="hotspot" style="top:200px; left:400px; width:500px; height:100px;" onclick="evtStop(event); goTo(5)"></div>
-    </div>
+      function wrong(stage) { showHint(hints[stage]); }
 
-    <!-- Step 5 -->
-    <div id="screen5" class="screen" onclick="wrong(5)">
-      <img class="stage-img" src="5.png" alt="Add Text" />
-      <div class="hotspot" style="top:350px; left:420px; width:400px; height:150px;" onclick="evtStop(event); goTo(6)"></div>
-    </div>
+      function showHint(msg) {
+        const h = document.getElementById('hint');
+        h.textContent = msg;
+        h.style.display = 'block';
+        clearTimeout(window.__hintT);
+        window.__hintT = setTimeout(() => (h.style.display = 'none'), 2000);
+      }
 
-    <!-- Step 6 -->
-    <div id="screen6" class="screen" onclick="completeLab(event)">
-      <img class="stage-img" src="6.png" alt="Saved Presentation" />
-    </div>
-  </div>
+      function hideHint() { document.getElementById('hint').style.display = 'none'; }
+      function evtStop(e) { e.stopPropagation(); }
 
-  <script>
-    const hints = {
-      1: 'Hint: Click on “Blank presentation” to start a new project.',
-      2: 'Hint: Add a new slide using the + button or menu.',
-      3: 'Hint: Select the title box and type your slide title.',
-      4: 'Hint: Type your slide title here.',
-      5: 'Hint: Add supporting text or details below the title.',
-      6: 'Great job! Your Google Slides presentation is saved automatically.'
-    };
+      function completeLab(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        window.parent.postMessage({ type: 'lab-complete', lab: 'slides-presentation' }, '*');
 
-    function goTo(n) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen' + n).classList.add('active');
-      hideHint();
-    }
+        const sim = document.getElementById('simulator');
+        sim.innerHTML = `
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
+            <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Presentation Completed!</div>
+            <div style="margin-top:.5rem;">You successfully created and edited a Google Slides presentation.</div>
+            <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
+          </div>
+        `;
+      }
 
-    function wrong(stage) { showHint(hints[stage]); }
-
-    function showHint(msg) {
-      const h = document.getElementById('hint');
-      h.textContent = msg;
-      h.style.display = 'block';
-      clearTimeout(window.__hintT);
-      window.__hintT = setTimeout(() => (h.style.display = 'none'), 2000);
-    }
-
-    function hideHint() { document.getElementById('hint').style.display = 'none'; }
-    function evtStop(e) { e.stopPropagation(); }
-
-    function completeLab(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      window.parent.postMessage({ type: 'lab-complete', lab: 'slides-presentation' }, '*');
-      
       const sim = document.getElementById('simulator');
-      sim.innerHTML = `
-        <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff;">
-          <div style="font-size:1.8rem; color:green;" class="fade-in">✅ Presentation Completed!</div>
-          <div style="margin-top:.5rem;">You successfully created and edited a Google Slides presentation.</div>
-          <div style="color:#1a73e8; font-weight:bold; margin-top:1rem;">✅ Progress saved!</div>
-        </div>
-      `;
-    }
-
-    const sim = document.getElementById('simulator');
-    window.addEventListener('keydown', e => {
-      if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
-    });
-  </script>
-</body>
+      window.addEventListener('keydown', e => {
+        if (e.key.toLowerCase() === 'd') sim.classList.toggle('debug');
+      });
+    </script>
+  </body>
 </html>
