@@ -50,7 +50,7 @@ const MeetPage = () => {
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [markLabComplete]);
+  }, [markLabComplete, selectedPlatform]);
 
   return (
     <div className="min-h-screen bg-background">
