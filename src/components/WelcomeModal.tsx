@@ -68,9 +68,12 @@ const WelcomeModal = () => {
           </div>
 
           <div className="bg-muted/50 p-4 rounded-lg border">
-            <p className="text-sm font-medium mb-2">💡 Pro Tip</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm font-medium mb-2">💡 Pro Tips</p>
+            <p className="text-sm text-muted-foreground mb-2">
               Use the navigation bar at the top to jump between tools, and check your progress dashboard anytime!
+            </p>
+            <p className="text-sm text-muted-foreground font-semibold">
+              ⌨️ Press "D" during any lab for helpful hints and guidance!
             </p>
           </div>
         </div>
