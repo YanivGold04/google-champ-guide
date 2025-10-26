@@ -4,6 +4,9 @@ import { ArrowLeft, CheckCircle2, Circle, Trophy, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import Navigation from "@/components/Navigation";
+import AchievementBadge from "@/components/AchievementBadge";
+import Footer from "@/components/Footer";
 
 interface LabProgress {
   completed: number;
@@ -69,8 +72,64 @@ const ProgressPage = () => {
 
   const overallProgress = totalLabs > 0 ? Math.round((totalCompleted / totalLabs) * 100) : 0;
 
+  // Calculate achievements
+  const achievements = [
+    {
+      title: "First Steps",
+      description: "Complete your first lab",
+      isUnlocked: totalCompleted >= 1,
+      icon: "star" as const,
+      rarity: "common" as const,
+    },
+    {
+      title: "Email Master",
+      description: "Complete all Gmail labs",
+      isUnlocked: progress["Gmail"]?.completed === 3,
+      icon: "medal" as const,
+      rarity: "rare" as const,
+    },
+    {
+      title: "Storage Expert",
+      description: "Complete all Drive labs",
+      isUnlocked: progress["Drive"]?.completed === 3,
+      icon: "medal" as const,
+      rarity: "rare" as const,
+    },
+    {
+      title: "Meeting Pro",
+      description: "Complete all Meet labs",
+      isUnlocked: progress["Meet"]?.completed === 3,
+      icon: "medal" as const,
+      rarity: "rare" as const,
+    },
+    {
+      title: "Halfway Hero",
+      description: "Complete 50% of all labs",
+      isUnlocked: overallProgress >= 50,
+      icon: "trophy" as const,
+      rarity: "epic" as const,
+    },
+    {
+      title: "Google Workspace Champion",
+      description: "Complete all labs across all tools",
+      isUnlocked: overallProgress === 100,
+      icon: "crown" as const,
+      rarity: "legendary" as const,
+    },
+    {
+      title: "Quick Learner",
+      description: "Complete 3 labs in a single day",
+      isUnlocked: totalCompleted >= 3,
+      icon: "zap" as const,
+      rarity: "epic" as const,
+    },
+  ];
+
+  const unlockedCount = achievements.filter(a => a.isUnlocked).length;
+
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <div className="container mx-auto px-4 py-8">
         <Link to="/">
           <Button variant="ghost" className="mb-6 hover:bg-muted">
@@ -171,8 +230,31 @@ const ProgressPage = () => {
               );
             })}
           </div>
+
+          {/* Achievements Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Achievements</h2>
+                <p className="text-muted-foreground">
+                  {unlockedCount} of {achievements.length} unlocked
+                </p>
+              </div>
+              <div className="text-right">
+                <div className="text-3xl font-bold text-primary">{unlockedCount}</div>
+                <div className="text-sm text-muted-foreground">Badges Earned</div>
+              </div>
+            </div>
+            
+            <div className="grid gap-4 md:grid-cols-2">
+              {achievements.map((achievement, index) => (
+                <AchievementBadge key={index} {...achievement} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

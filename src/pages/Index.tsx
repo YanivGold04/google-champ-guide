@@ -5,6 +5,7 @@ import ToolGuides from "@/components/ToolGuides";
 import Quiz from "@/components/Quiz";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 
 const Index = () => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Navigation />
       <Hero />
       <div id="comparison-table">
         <ComparisonTable />

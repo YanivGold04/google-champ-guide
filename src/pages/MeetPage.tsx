@@ -4,6 +4,7 @@ import { ArrowLeft, Video, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 import LabCompletionCheck from "@/components/LabCompletionCheck";
 import { useLabCompletion } from "@/hooks/useLabCompletion";
 
@@ -54,6 +55,7 @@ const MeetPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <div className="container mx-auto px-4 py-8">
         <Button 
           variant="ghost" 
