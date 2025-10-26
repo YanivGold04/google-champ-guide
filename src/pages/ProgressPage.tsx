@@ -21,7 +21,7 @@ interface PlatformProgress {
 const platforms = [
   { name: "Gmail", path: "/gmail", labs: ["compose", "search", "trash"] },
   { name: "Drive", path: "/drive", labs: ["MyDrive", "Move", "Share"] },
-  { name: "Meet", path: "/meet", labs: ["New_meeting", "Screen_share", "Share_meet"] },
+  { name: "Meet", path: "/meet", labs: ["New_meeting", "Screen_share", "Share_meet", "New_zoom", "Share_zoom"] },
   { name: "Docs", path: "/docs", labs: ["New_docs", "Edit_text", "Share_comment"] },
   { name: "Sheets", path: "/sheets", labs: ["New_sheet", "Formula", "New_chart"] },
   { name: "Slides", path: "/slides", labs: ["Slides_presentation", "Theme", "Transition"] },
@@ -98,7 +98,7 @@ const ProgressPage = () => {
     {
       title: "Meeting Pro",
       description: "Complete all Meet labs",
-      isUnlocked: progress["Meet"]?.completed === 3,
+      isUnlocked: progress["Meet"]?.completed === 5,
       icon: "medal" as const,
       rarity: "rare" as const,
     },
