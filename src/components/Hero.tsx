@@ -1,5 +1,6 @@
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -35,6 +36,16 @@ const Hero = () => {
               Start Learning
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
+            <Link to="/progress">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="hover:-translate-y-1 transition-all group"
+              >
+                <TrendingUp className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                Track Progress
+              </Button>
+            </Link>
             <Button 
               size="lg" 
               variant="outline"

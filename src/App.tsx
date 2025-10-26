@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ProgressPage from "./pages/ProgressPage";
 import GmailPage from "./pages/GmailPage";
 import DrivePage from "./pages/DrivePage";
 import MeetPage from "./pages/MeetPage";
@@ -27,6 +28,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/progress" element={<ProgressPage />} />
             <Route path="/gmail" element={<GmailPage />} />
             <Route path="/drive" element={<DrivePage />} />
             <Route path="/meet" element={<MeetPage />} />
