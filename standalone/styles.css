@@ -585,6 +585,11 @@ body {
     margin-bottom: 1rem;
 }
 
+.lab-header h4 {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
 .lab-status {
     font-size: 0.875rem;
     font-weight: 600;
